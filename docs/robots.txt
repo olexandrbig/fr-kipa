@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: 
+Sitemap: https://olexandrbig.github.io/fr-demo//sitemap.xml

@@ -1,0 +1,131 @@
+{
+   "operations":[
+      {
+         "id":"4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
+         "version":"1.0.0",
+         "name":"Get file(s) from (S)FTP server",
+         "description":"Retrieves one or more files specified by full path from FTP server",
+         "lastUpdated":"2018-12-10T13:49:51.141Z",
+         "builtIn":true,
+         "groupId":"7020fba8-f581-41e8-a5a3-022c7ef10a95",
+         "sequenceInGroup":1,
+         "category":"FILE",
+         "resultDescription":"",
+         "isContainerOp":false,
+         "searchTags":[
+            "FTP",
+            "file",
+            "pull file from ftp",
+            "retrieve file from FTP"
+         ]
+      },
+      {
+         "id":"4cc8bca6-07c3-4bd7-b035-9047a6bfeea3",
+         "version":"1.0.0",
+         "name":"List files in (S)FTP directory",
+         "description":"Lists the contents of the remote working directory",
+         "lastUpdated":"2018-12-10T13:49:51.141Z",
+         "builtIn":true,
+         "groupId":"7020fba8-f581-41e8-a5a3-022c7ef10a95",
+         "sequenceInGroup":3,
+         "category":"FILE",
+         "resultDescription":"List of file details",
+         "isContainerOp":false,
+         "searchTags":[
+            "ftp",
+            "list files in directory"
+         ]
+      },
+      {
+         "id":"4cc8bca6-07c3-4bd7-b035-9047a6bfeea4",
+         "version":"1.0.0",
+         "name":"Put FTP file",
+         "description":"Puts file into remote (S)FTP directory",
+         "lastUpdated":"2018-12-10T13:49:51.141Z",
+         "builtIn":true,
+         "groupId":"7020fba8-f581-41e8-a5a3-022c7ef10a95",
+         "sequenceInGroup":2,
+         "category":"FILE",
+         "resultDescription":"List of file details of transfered files",
+         "isContainerOp":false,
+         "searchTags":[
+            "ftp",
+            "list files in directory"
+         ]
+      },
+      {
+         "id":"4cc8bca6-07c3-4bd7-b035-9047a6bfeea5",
+         "version":"1.0.0",
+         "name":"delete remote FTP file",
+         "description":"Deletes a file from the remote working directory",
+         "lastUpdated":"2018-12-10T13:49:51.141Z",
+         "builtIn":true,
+         "groupId":"7020fba8-f581-41e8-a5a3-022c7ef10a95",
+         "sequenceInGroup":4,
+         "category":"FILE",
+         "resultDescription":"Information on deleted file",
+         "isContainerOp":false,
+         "searchTags":[
+            "ftp",
+            "delete file in (S)ftp remote directory"
+         ]
+      },
+      {
+         "id":"be35e877-f176-4af3-b48f-a2fa72f3fb38",
+         "version":"1.0.0",
+         "name":"Groovy Map",
+         "description":"Map data using grooy",
+         "lastUpdated":"2018-12-10T13:49:51.141Z",
+         "builtIn":true,
+         "groupId":"aef2cf7e-14b6-4f99-9ca5-e85d17d1ab24",
+         "sequenceInGroup":1,
+         "category":"MAPPING",
+         "resultDescription":"Data transformation of one data structue into another",
+         "isContainerOp":false,
+         "searchTags":[
+            "Map data",
+            "data mapping",
+            "data transformation",
+            "groovy"
+         ]
+      },
+      {
+         "id":"be35e877-f176-4af3-b48f-a2fa72f3fb38",
+         "version":"1.0.0",
+         "name":"Retrieve messages",
+         "description":"Retrieve messages from Kafka topic",
+         "lastUpdated":"2018-12-10T13:49:51.141Z",
+         "builtIn":true,
+         "groupId":"5faf3d6c-f0e8-4540-b903-c656820ffc43",
+         "sequenceInGroup":1,
+         "category":"KAFKA",
+         "resultDescription":"List of messages in data pipeline",
+         "isContainerOp":false,
+         "searchTags":[
+            "messaging",
+            "read messages",
+            "kafka",
+            "read message"
+         ]
+      },
+      {
+         "id":"be35e877-f176-4af3-b48f-a2fa72f3fb39",
+         "version":"1.0.0",
+         "name":"Send messages",
+         "description":"Send messages to Kafka topic",
+         "lastUpdated":"2018-12-10T13:49:51.141Z",
+         "builtIn":true,
+         "groupId":"5faf3d6c-f0e8-4540-b903-c656820ffc43",
+         "sequenceInGroup":2,
+         "category":"KAFKA",
+         "resultDescription":"One or many messsages are sent to Kafka topic",
+         "isContainerOp":false,
+         "searchTags":[
+            "messaging",
+            "send messages",
+            "kafka",
+            "send message"
+         ]
+      }
+   ]
+}
