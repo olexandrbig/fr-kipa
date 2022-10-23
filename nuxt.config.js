@@ -1,6 +1,6 @@
 const locale = process.env.NUXT_LOCALE || 'en'
 const locales = ['en']
-const base = process.env.APP_BASE_URL || 'https://olexandrbig.github.io/fr-demo/'
+const base = process.env.APP_BASE_URL || 'https://olexandrbig.github.io/fr-kipa/'
 
 export default {
   router: {
