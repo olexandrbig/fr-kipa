@@ -1,3 +1,4 @@
+const AVAILABLE_OPERATIONS = require('../static/json/operations.json').operations
 const PACKAGE_VERSION = require('../package.json').version
 
 export const state = () => ({
@@ -6,10 +7,13 @@ export const state = () => ({
   ],
   locale: 'en',
   appVersion: PACKAGE_VERSION,
+  appOperations: [],
+  availableOperations: AVAILABLE_OPERATIONS,
   appData: [{
+    link: '/',
     code: 'm1',
-    name: 'Module 1',
-    icon: 'book-open',
+    name: 'Designer',
+    icon: 'boxes-stacked',
     views: [
       {
         code: 'OVERVIEW',
@@ -45,36 +49,6 @@ export const state = () => ({
         type: 'pageE'
       }
     ]
-  }, {
-    code: 'm2',
-    name: 'Module 2',
-    icon: 'crown',
-    views: [
-      {
-        code: 'OVERVIEW',
-        name: 'Overview',
-        icon: 'th-large',
-        type: 'pageA'
-      },
-      {
-        code: 'DRAFTS',
-        name: 'Drafts',
-        icon: 'pencil-ruler',
-        type: 'pageE'
-      }
-    ]
-  }, {
-    code: 'm3',
-    name: 'Module 3',
-    icon: 'university',
-    views: [
-      {
-        code: 'OVERVIEW',
-        name: 'Overview',
-        icon: 'th-large',
-        type: 'pageA'
-      }
-    ]
   }],
   tabs: ['m1:OVERVIEW', 'm1:PRODUCT:VERSIONS'],
   activeModule: 'm1',
@@ -97,10 +71,22 @@ export const mutations = {
   },
   SET_ACTIVE_VIEW (state, tabId) {
     state.activeView = tabId
+  },
+  ADD_ACTIVE_OPERATION (state, operation) {
+    state.appOperations.push(operation)
+  },
+  REMOVE_ACTIVE_OPERATION (state, operationId) {
+    state.appOperations = state.appOperations.filter(tab => tab.id !== operationId)
   }
 }
 
 export const actions = {
+  addOperation ({ commit, state }, operation) {
+    commit('ADD_ACTIVE_OPERATION', operation)
+  },
+  removeOperation ({ commit, state }, operationId) {
+    commit('REMOVE_ACTIVE_OPERATION', operationId)
+  },
   activateModule ({ commit, state }, tabId) {
     commit('SET_ACTIVE_MODULE', tabId)
   },

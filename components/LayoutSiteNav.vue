@@ -6,13 +6,13 @@
     <ul class="site-modules">
       <li class="site-module">
         <a class="module-link pointer" @click="featureIsNotAvailable()">
-          <span class="module-icon"><fa :icon="['fas','search']" /></span>
+          <span class="module-icon"><fa :icon="['fas','magnifying-glass']" /></span>
         </a>
       </li>
       <li v-for="module in appData" :key="module.code" :class="isActiveModuleClass(module.code)" class="site-module">
-        <a class="module-link pointer" @click="activateModule(module.code)">
+        <nuxt-link :to="`${module.link}`" class="module-link pointer" @click="activateModule(module.code)">
           <span class="module-icon"><fa :icon="['fas', module.icon]" /></span>
-        </a>
+        </nuxt-link>
       </li>
     </ul>
     <ul class="site-modules site-modules-bottom">
@@ -23,12 +23,12 @@
       </li>
       <li class="site-module">
         <a class="module-link pointer" @click="featureIsNotAvailable()">
-          <span class="module-icon"><fa :icon="['fas','heartbeat']" /></span>
+          <span class="module-icon"><fa :icon="['fas','heart-pulse']" /></span>
         </a>
       </li>
       <li class="site-module">
         <a class="module-link pointer" @click="featureIsNotAvailable()">
-          <span class="module-icon"><fa :icon="['fas','sign-out-alt']" /></span>
+          <span class="module-icon"><fa :icon="['fas','right-from-bracket']" /></span>
         </a>
       </li>
     </ul>
@@ -77,9 +77,9 @@ export default {
   width: 60px;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #7e1548;
-  background: linear-gradient(0deg, #7e1548 0%, #3f3363 100%);
+  background: #ffffff;
   position: relative;
+  border-right: 1px solid #1155cb;
 }
 .site-modules{
   list-style: none;
@@ -94,7 +94,7 @@ export default {
   left: 0;
 }
 .site-modules-bottom .site-module:first-child{
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #1155cb;
 }
 .site-modules-bottom .site-module:last-child{
   border-bottom: none;
@@ -103,13 +103,13 @@ export default {
   display: inline-block;
   background: transparent;
   float: left;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #1155cb;
   position: relative;
   width: 100%;
 }
 .module-link{
   text-decoration: none;
-  color: #ffffff;
+  color: #1155cb;
   line-height: 30px;
   padding: 10px 20px;
   display: inline-block;

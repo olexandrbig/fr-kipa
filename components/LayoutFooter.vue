@@ -36,11 +36,11 @@ export default {
   margin-bottom: 0;
 }
 .site-footer{
-  background: #7e1548;
-  background: linear-gradient(90deg, #7e1548 0%, #3f3363 100%);
+  background: #ffffff;
+  border-top: 1px solid #1155cb;
 }
 .site-footer a{
-  color: #ffffff;
+  color: #1155cb;
 }
 .site-footer a:hover{
   text-decoration: none;

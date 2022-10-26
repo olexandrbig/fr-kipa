@@ -84,7 +84,7 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   background: #ffffff;
-  border-right: 1px solid #cccccc;
+  border-right: 1px solid #1155cb;
 }
 .module-nav-title{
   text-transform: uppercase;
@@ -105,7 +105,7 @@ export default {
   display: inline-block;
   background: #ffffff;
   float: left;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #1155cb;
   position: relative;
   width: 100%;
 }
@@ -121,7 +121,7 @@ export default {
 }
 .feature-link{
   text-decoration: none;
-  color: #555555;
+  color: #043558;
   line-height: 30px;
   padding: 10px 20px;
   display: inline-block;

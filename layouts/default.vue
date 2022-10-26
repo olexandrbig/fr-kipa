@@ -2,7 +2,7 @@
   <div class="app-root">
     <div class="page-wrap">
       <LayoutSiteNav />
-      <LayoutModuleNav />
+      <LayoutOperationsNav />
       <LayoutActiveView>
         <nuxt />
       </LayoutActiveView>
@@ -14,14 +14,14 @@
 <script>
 import LayoutActiveView from '~/components/LayoutActiveView.vue'
 import LayoutFooter from '~/components/LayoutFooter.vue'
-import LayoutModuleNav from '~/components/LayoutModuleNav.vue'
+import LayoutOperationsNav from '~/components/LayoutOperationsNav.vue'
 import LayoutSiteNav from '~/components/LayoutSiteNav.vue'
 export default {
   name: 'Default',
   components: {
     LayoutActiveView,
     LayoutFooter,
-    LayoutModuleNav,
+    LayoutOperationsNav,
     LayoutSiteNav
   }
 }

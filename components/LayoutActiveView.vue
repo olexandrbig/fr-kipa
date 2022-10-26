@@ -1,6 +1,5 @@
 <template>
   <section class="active-view">
-    <LayoutActiveTabs />
     <ClientOnly>
       <div class="module-details" :style="{height:`${mainHeight()}px`}">
         <div class="module-details-gap">
@@ -12,12 +11,8 @@
 </template>
 
 <script>
-import LayoutActiveTabs from '~/components/LayoutActiveTabs.vue'
 export default {
   name: 'LayoutActiveView',
-  components: {
-    LayoutActiveTabs
-  },
   methods: {
     mainHeight () {
       if (process.client) {
@@ -37,7 +32,6 @@ export default {
   min-height: 100%;
 }
 .module-details{
-  border-top: 1px solid #cccccc;
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;

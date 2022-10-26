@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/fr-kipa/edit", {data:[{}],fetch:{},mutations:[]});

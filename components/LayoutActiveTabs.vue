@@ -84,8 +84,8 @@ export default {
   background: #ffffff;
   padding: 0 10px;
   float: left;
-  border-right: 1px solid #cccccc;
-  border-left: 1px solid #cccccc;
+  border-right: 1px solid #1155cb;
+  border-left: 1px solid #1155cb;
   position: relative;
 }
 .active-tab-link{
@@ -116,7 +116,7 @@ export default {
   color: #333333;
 }
 .active-tab-icon{
-  color: #777777;
+  color: #043558;
   vertical-align: middle;
 }
 .active-tab-close{
