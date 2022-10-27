@@ -6,8 +6,9 @@
           <div class="operation-title">
             <span class="feature-icon pull-right">
               <fa
+                :icon="['fas', 'ellipsis-vertical']"
                 @click="removeOperation(operation.id)"
-                :icon="['fas', 'ellipsis-vertical']" />
+              />
             </span>
             <span class="feature-icon"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
             <span>{{ operation.name }}</span>

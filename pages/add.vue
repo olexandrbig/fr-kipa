@@ -18,10 +18,11 @@
       >
       <ul class="available-operations">
         <li
-            v-for="operation in availableOperations"
-            :key="operation.id"
-            class="available-operation pointer"
-            @click="addOperation({operation, after: $route.query.after})">
+          v-for="operation in availableOperations"
+          :key="operation.id"
+          class="available-operation pointer"
+          @click="addOperation({operation, after: $route.query.after})"
+        >
           <p>
             <span class="feature-icon" :title="operation.category"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
             <span>{{ operation.name }} {{ operation.version }}</span>
