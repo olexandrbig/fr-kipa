@@ -39,6 +39,6 @@ export default {
   padding: 10px 20px;
 }
 .module-details-gap{
-  min-height: 1500px;
+  /*min-height: 1500px;*/
 }
 </style>

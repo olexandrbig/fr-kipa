@@ -52,10 +52,11 @@ export default {
       component: 'fa', // customize component name
       imports: [{
         set: '@fortawesome/free-solid-svg-icons',
-        icons: ['faLightbulb', 'faTimes', 'faChevronDown', 'faChevronUp', 'faChevronRight', 'faMagnifyingGlass', 'faPencilAlt',
+        icons: ['faLightbulb', 'faTimes', 'faChevronDown', 'faChevronUp', 'faChevronRight', 'faMagnifyingGlass', 'faPencil',
           'faBookOpen', 'faCrown', 'faUniversity', 'faUsers', 'faHeartPulse', 'faRightFromBracket', 'faList', 'faPlus',
           'faTasks', 'faBalanceScale', 'faBoxesStacked', 'faThLarge', 'faPencilRuler', 'faFlag', 'faWind', 'faDirections',
-          'faFolderTree', 'faSliders', 'faAtom', 'faRotateLeft', 'faCircleInfo', 'faTag', 'faTags']
+          'faFolderTree', 'faSliders', 'faAtom', 'faRotateLeft', 'faCircleInfo', 'faTag', 'faTags', 'faEllipsisVertical',
+          'faArrowDownLong']
       },
       {
         set: '@fortawesome/free-brands-svg-icons',

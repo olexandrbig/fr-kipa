@@ -1,3 +1,5 @@
+import { Utils } from '@/services/Utils'
+
 const AVAILABLE_OPERATIONS = require('../static/json/operations.json').operations
 const PACKAGE_VERSION = require('../package.json').version
 
@@ -8,7 +10,8 @@ export const state = () => ({
   locale: 'en',
   appVersion: PACKAGE_VERSION,
   appOperations: [],
-  availableOperations: AVAILABLE_OPERATIONS,
+  allOperations: AVAILABLE_OPERATIONS,
+  availableOperations: [],
   appData: [{
     link: '/',
     code: 'm1',
@@ -55,6 +58,12 @@ export const state = () => ({
   activeView: 'm1:PRODUCT:VERSIONS'
 })
 
+export const getters = {
+  availableOperations (state) {
+    return state.availableOperations
+  }
+}
+
 export const mutations = {
   SET_ACTIVE_MODULE (state, tabId) {
     state.activeModule = tabId
@@ -72,8 +81,14 @@ export const mutations = {
   SET_ACTIVE_VIEW (state, tabId) {
     state.activeView = tabId
   },
-  ADD_ACTIVE_OPERATION (state, operation) {
-    state.appOperations.push(operation)
+  SET_AVAILABLE_OPERATIONS (state, list) {
+    state.availableOperations = list
+  },
+  ADD_ACTIVE_OPERATION (state, { operation, after }) {
+    const total = state.appOperations.length
+    const item = Utils.getObjectCopy(operation)
+    item.id = total
+    state.appOperations.splice((after || total), 0, item)
   },
   REMOVE_ACTIVE_OPERATION (state, operationId) {
     state.appOperations = state.appOperations.filter(tab => tab.id !== operationId)
@@ -81,8 +96,8 @@ export const mutations = {
 }
 
 export const actions = {
-  addOperation ({ commit, state }, operation) {
-    commit('ADD_ACTIVE_OPERATION', operation)
+  addOperation ({ commit, state }, { operation, after }) {
+    commit('ADD_ACTIVE_OPERATION', { operation, after })
   },
   removeOperation ({ commit, state }, operationId) {
     commit('REMOVE_ACTIVE_OPERATION', operationId)
@@ -101,5 +116,18 @@ export const actions = {
       commit('REMOVE_ACTIVE', tabId)
     }
     commit('REMOVE_TAB', tabId)
+  },
+  getAvailableOperations ({ commit, state }, { search }) {
+    const filter = search && search.toLowerCase()
+    const list = filter
+      ? state.allOperations.filter((operator) => {
+        return (operator.name && operator.name.toLowerCase().includes(filter)) ||
+          (operator.version && operator.version.toLowerCase().includes(filter)) ||
+          (operator.tags && operator.tags.find((tag) => {
+            return tag.toLowerCase().includes(filter)
+          }).length)
+      })
+      : state.allOperations
+    commit('SET_AVAILABLE_OPERATIONS', list)
   }
 }

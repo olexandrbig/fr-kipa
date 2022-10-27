@@ -2,7 +2,7 @@
   <div>
     <div class="clearfix relative">
       <h2 class="view-title">
-        <fa :icon="['fas', 'pencil-alt']" /> Edit operation
+        <fa :icon="['fas', 'pencil']" /> Edit operation
       </h2>
       <p>Modify operation properties</p>
     </div>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { Utils } from '@/services/Utils'
 
 export default {
   scrollToTop: true,
@@ -19,6 +20,9 @@ export default {
     }
   },
   methods: {
+    categoryToIcon (category) {
+      return Utils.categoryToIcon(category)
+    },
     featureIsNotAvailable () {
       this.$toast.error('This feature is not yet available')
     }

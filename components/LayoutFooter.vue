@@ -34,6 +34,7 @@ export default {
 .footer-company-description{
   margin-top: 8px;
   margin-bottom: 0;
+  color: #1155cb;
 }
 .site-footer{
   background: #ffffff;
