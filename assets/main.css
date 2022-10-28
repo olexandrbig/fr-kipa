@@ -140,10 +140,10 @@ select.form-control-borderless{
 
 /* Grid */
 .pull-left{
-  float: left;
+  float: left!important;
 }
 .pull-right{
-  float: right;
+  float: right!important;
 }
 .clearfix:after {
   visibility: hidden;
@@ -237,6 +237,9 @@ select.form-control-borderless{
 }
 .m-t-20 {
   margin-top: 20px;
+}
+.m-t-30 {
+  margin-top: 30px;
 }
 .m-lr-5 {
   margin-left: 5px;

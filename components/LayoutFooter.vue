@@ -1,12 +1,12 @@
 <template>
   <footer class="site-footer">
     <div class="grid">
-      <div class="col-2-3">
+      <div class="col-1-3">
         <p class="footer-company-description">
           © {{ fullYear }} All rights reserved
         </p>
       </div>
-      <div class="col-1-3">
+      <div class="col-1-3 pull-right">
         <p class="footer-company-description text-right">
           v{{ version }}
         </p>

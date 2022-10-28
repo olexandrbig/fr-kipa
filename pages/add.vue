@@ -16,34 +16,39 @@
         placeholder="Find operation"
         @input="$fetch"
       >
-      <ul class="available-operations">
+      <ul v-if="availableOperations.length" class="available-operations">
         <li
           v-for="operation in availableOperations"
           :key="operation.id"
           class="available-operation pointer"
           @click="addOperation({operation, after: $route.query.after})"
         >
-          <p>
-            <span class="feature-icon" :title="operation.category"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
-            <span>{{ operation.name }} {{ operation.version }}</span>
-          </p>
-          <p v-if="operation.description">
-            <small>
-              <fa :icon="['fas','circle-info']" /> {{ operation.description }}
-            </small>
-          </p>
-          <p v-if="operation.resultDescription">
-            <small>
-              <fa :icon="['fas','rotate-left']" /> {{ operation.resultDescription }}
-            </small>
-          </p>
-          <p v-if="operation.searchTags">
-            <small>
-              <fa :icon="['fas','tags']" /> {{ operation.searchTags.join(', ') }}
-            </small>
-          </p>
+          <div class="operation-item">
+            <div class="operation-title">
+              <span class="feature-icon" :title="operation.category"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
+              <span>{{ operation.name }} ({{ operation.version }})</span>
+            </div>
+            <p v-if="operation.description" class="operation-text">
+              <small>
+                <fa :icon="['fas','circle-info']" /> {{ operation.description }}
+              </small>
+            </p>
+            <p v-if="operation.resultDescription" class="operation-text">
+              <small>
+                <fa :icon="['fas','rotate-left']" /> {{ operation.resultDescription }}
+              </small>
+            </p>
+            <p v-if="operation.searchTags" class="operation-text">
+              <small>
+                <fa :icon="['fas','tags']" /> {{ operation.searchTags.join(', ') }}
+              </small>
+            </p>
+          </div>
         </li>
       </ul>
+      <div v-else>
+        <fa :icon="['fas','circle-info']" /> No result found for specified request
+      </div>
     </div>
   </div>
 </template>
@@ -89,6 +94,6 @@ export default {
   padding: 0;
 }
 .available-operation{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 </style>

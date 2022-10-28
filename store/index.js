@@ -1,4 +1,5 @@
 import { Utils } from '@/services/Utils'
+import { v4 as uuidv4 } from 'uuid'
 
 const AVAILABLE_OPERATIONS = require('../static/json/operations.json').operations
 const PACKAGE_VERSION = require('../package.json').version
@@ -87,7 +88,7 @@ export const mutations = {
   ADD_ACTIVE_OPERATION (state, { operation, after }) {
     const total = state.appOperations.length
     const item = Utils.getObjectCopy(operation)
-    item.id = total
+    item.id = uuidv4()
     state.appOperations.splice((after || total), 0, item)
   },
   REMOVE_ACTIVE_OPERATION (state, operationId) {

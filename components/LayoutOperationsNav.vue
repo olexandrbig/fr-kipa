@@ -2,7 +2,7 @@
   <aside class="operation-nav" :style="{height:`${mainHeight()}px`}">
     <ul class="operation-features text-center">
       <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
-        <nuxt-link :to="`/edit?id=${operation.id}`" class="operation-item pointer">
+        <nuxt-link :to="`/edit?id=${operation.id}`" class="operation-item w-80 m-t-30 pointer">
           <div class="operation-title">
             <span class="feature-icon pull-right">
               <fa
@@ -115,9 +115,8 @@ add-action-icon{
   line-height: 30px;
   padding: 5px;
   display: inline-block;
-  width: 80%;
+  width: 100%;
   border: 1px solid #1155cb;
-  margin-top: 30px;
   text-align: left;
 }
 .operation-next{
@@ -164,6 +163,12 @@ add-action-icon{
 }
 .operation-sublist .operation-item{
   padding-left: 40px;
+}
+.operation-text{
+  line-height: 15px;
+}
+.w-80{
+  width: 80%;
 }
 .feature-icon{
   font-size: 1.3em;

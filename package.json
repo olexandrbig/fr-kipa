@@ -1,6 +1,6 @@
 {
   "name": "admin-area",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -25,6 +25,7 @@
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
     "nuxt-fontawesome": "^0.4.0",
+    "uuid": "^9.0.0",
     "vue-chartjs": "^3.5.1",
     "vue-i18n": "^8.25.0",
     "vue-underscore": "^0.1.4"
