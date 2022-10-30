@@ -1,0 +1,31 @@
+[
+  {
+    "id": "123",
+    "name": "enabled",
+    "type": "BOOLEAN",
+    "isOptional": false,
+    "description": "Specifies whether this component is active or not",
+    "camelk_name": "cron.enabled"
+  },
+  {
+    "id": "123",
+    "name": "schedule",
+    "type": "STRING",
+    "isOptional": false,
+    "description": "Scheduler defined in CRON Syntax",
+    "camelk_name": "cron.schedule"
+  },
+  {
+    "id": "123",
+    "name": "concurrencyPolicy",
+    "type": "ENUM",
+    "isOptional": false,
+    "enums": [
+      "Allow",
+      "Forbid",
+      "Replace"
+    ],
+    "defaultValue": "Forbid",
+    "camelk_name": "cron.concurrency-policy"
+  }
+]
