@@ -80,14 +80,15 @@
       "groupId": "aef2cf7e-14b6-4f99-9ca5-e85d17d1ab24",
       "sequenceInGroup": 1,
       "category": "MAPPING",
-      "resultDescription": "Data transformation of one data structue into another",
+      "resultDescription": "Data transformation of one data strx§uctue into another",
       "isParent": false,
       "searchTags": [
         "Map data",
         "data mapping",
         "data transformation",
         "groovy"
-      ]
+      ],
+      "attributeSpecification" : "/operations/model/mapGroovyScript/get.json"
     },
     {
       "id": "be35e877-f176-4af3-b48f-a2fa72f3fb38",
@@ -148,7 +149,7 @@
         "recurrence",
         "reoccurence"
       ],
-      "attributeSpecification" : "/operations/model/cron_camel_k/1.0/"
+      "attributeSpecification" : "/operations/model/cron_camel_k/get.json"
     }
   ]
 }
