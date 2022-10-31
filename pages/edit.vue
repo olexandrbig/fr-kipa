@@ -4,7 +4,9 @@
       <h2 class="view-title">
         <fa :icon="['fas', 'pencil']" /> Edit operation
       </h2>
-      <p class="m-b-20">Modify operation properties</p>
+      <p class="m-b-20">
+        Modify operation properties
+      </p>
       <div v-if="operation" class="operation-item">
         <div class="operation-title">
           <span class="feature-icon" :title="operation.category"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>

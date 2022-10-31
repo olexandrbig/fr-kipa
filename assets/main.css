@@ -522,3 +522,50 @@ tr:nth-child(even) {
 .table-borderless tr:last-child {
   border-bottom: none;
 }
+
+.dropdown-menu {
+  top: 100%;
+  right: -5px;
+  position: absolute;
+  z-index: 10;
+  height: auto;
+  min-width: auto;
+  margin-top: 10px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid grey;
+  background-clip: padding-box;
+}
+.dropdown-menu-link {
+  display: flex;
+  align-items: normal;
+  justify-content: flex-end;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 5px 10px;
+}
+.dropdown-menu-nav{
+  list-style: none;
+  padding: 0;
+  text-align: right;
+}
+.dropdown-menu-link:hover {
+  color: #344C84;
+  background-color: rgba(79, 79, 79, 0.1);
+}
+.dropdown-menu-text {
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 500ms;
+}
+
+.dropdown-enter,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}

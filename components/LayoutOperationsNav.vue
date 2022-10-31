@@ -3,15 +3,50 @@
     <ul class="operation-features text-center">
       <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
         <nuxt-link :to="`/edit?id=${operation.id}`" class="operation-item w-80 m-t-30 pointer">
-          <div class="operation-title">
-            <span class="feature-icon pull-right">
+          <div class="operation-title relative">
+            <span class="pull-right">
               <fa
-                :icon="['fas', 'ellipsis-vertical']"
-                @click="removeOperation(operation.id)"
+                v-if="isActiveMenu(operation.id)"
+                key="on"
+                :class="'feature-icon'"
+                :icon="['fas', 'xmark']"
+                @click="deactivateMenu(operation.id)"
               />
+              <fa
+                v-else
+                key="off"
+                :class="'feature-icon'"
+                :icon="['fas', 'ellipsis-vertical']"
+                @click="activateMenu(operation.id)"
+              />
+              <transition name="dropdown">
+                <div
+                  v-if="isActiveMenu(operation.id)"
+                  class="dropdown-menu"
+                  :class="{ active: isActiveMenu(operation.id) }"
+                >
+                  <ul class="dropdown-menu-nav">
+                    <li class="dropdown-menu-item">
+                      <a href class="dropdown-menu-link" title="Move up">
+                        <div class="dropdown-menu-text">Move up</div>
+                      </a>
+                    </li>
+                    <li class="dropdown-menu-item">
+                      <a href class="dropdown-menu-link" title="Move down">
+                        <div class="dropdown-menu-text">Move down</div>
+                      </a>
+                    </li>
+                    <li class="dropdown-menu-item">
+                      <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(operation.id)">
+                        <div class="dropdown-menu-text">Remove</div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </transition>
             </span>
             <span class="feature-icon"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
-            <span>{{ operation.name }}</span>
+            <span class="text-ellipsis">{{ operation.name }}</span>
           </div>
           <span class="operation-next">
             <fa :icon="['fas', 'arrow-down-long']" />
@@ -40,6 +75,11 @@ import { Utils } from '@/services/Utils'
 
 export default {
   name: 'LayoutOperationsNav',
+  data () {
+    return {
+      activeMenus: []
+    }
+  },
   computed: {
     activeModuleCode () {
       return this.$store.state.activeModule
@@ -52,6 +92,17 @@ export default {
     ...mapActions({
       removeOperation: 'removeOperation'
     }),
+    isActiveMenu (id) {
+      return this.activeMenus.includes(id)
+    },
+    deactivateMenu (id) {
+      this.activeMenus = this.activeMenus.filter((item) => {
+        return item !== id
+      })
+    },
+    activateMenu (id) {
+      this.activeMenus.push(id)
+    },
     categoryToIcon (category) {
       return Utils.categoryToIcon(category)
     },
@@ -106,7 +157,6 @@ add-action-icon{
   width: 100%;
 }
 .operation-features > .operation-feature > .operation-item {
-  text-transform: uppercase;
   font-weight: 700;
 }
 .operation-item{
@@ -173,8 +223,13 @@ add-action-icon{
 .feature-icon{
   font-size: 1.3em;
   vertical-align: middle;
-  width: 20px;
+  width: 20px!important;
   text-align: center;
   display: inline-block;
+}
+.text-ellipsis{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 </style>

@@ -1,5 +1,5 @@
-import { Utils } from '@/services/Utils'
 import { v4 as uuidv4 } from 'uuid'
+import { Utils } from '@/services/Utils'
 
 const AVAILABLE_OPERATIONS = require('../static/json/operations.json').operations
 const PACKAGE_VERSION = require('../package.json').version
