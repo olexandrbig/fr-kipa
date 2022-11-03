@@ -46,7 +46,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/?standalone=true",
+  "start_url": "/fr-kipa/?standalone=true",
   "display": "standalone",
   "background_color": "#ffffff",
   "lang": "en"

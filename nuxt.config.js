@@ -4,6 +4,7 @@ const base = process.env.APP_BASE_URL || 'https://olexandrbig.github.io/fr-kipa/
 
 export default {
   router: {
+    base: '/fr-kipa/',
     mode: 'history'
   },
   // Target: https://go.nuxtjs.dev/config-target
