@@ -2,7 +2,7 @@
   <aside class="operation-nav" :style="{height:`${mainHeight()}px`}">
     <ul class="operation-features text-center">
       <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
-        <nuxt-link :to="`/edit?id=${operation.id}`" class="operation-item w-80 m-t-30 pointer">
+        <nuxt-link :to="`edit?id=${operation.id}`" class="operation-item w-80 m-t-30 pointer">
           <div class="operation-title relative">
             <span class="pull-right">
               <fa
@@ -51,7 +51,7 @@
           <span class="operation-next">
             <fa :icon="['fas', 'arrow-down-long']" />
             <span class="operation-next-add">
-              <nuxt-link class="add-action" :to="`/add?after=${index+1}`">
+              <nuxt-link class="add-action" :to="`add?after=${index+1}`">
                 <fa :icon="['fas', 'plus']" class="add-action-icon" />
               </nuxt-link>
             </span>
