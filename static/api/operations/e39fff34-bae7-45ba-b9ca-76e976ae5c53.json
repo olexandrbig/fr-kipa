@@ -1,0 +1,12 @@
+{
+	"__version" : "1.0.0",
+	"__name": "loop",
+	"name" : "Loop over list of file names and path",
+	"description" : "processes the new invoices",
+	"collectionName" : "listOfFiles",
+	"operatopns" : [
+		{ "sequence" : 0, "operation" : "b8674fc8-e16e-4ec1-a09c-514dddb09964" },
+		{ "sequence" : 1, "operation" : "2f7c32fb-f6a1-4592-bfca-02f0dbdb5c86" },
+		{ "sequence" : 2, "operation" : "154a9474-2ac9-472d-a9ad-f56f2200eccd" },
+	]
+}
