@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ab5893a0-450e-48d6-b99e-8b0abbaaab85",
+    "type": "SFTP",
+    "name": "Pareto FTP Server India",
+    "stage": "Dev",
+    "updatedOn": "2018-12-10T13:49:51.141Z",
+    "createdOn": "2018-12-10T13:49:51.141Z",
+    "createdBy": "flangel",
+    "updatedBy": "flangel",
+    "lastSuccessfulConnection": "2018-12-10T13:49:51.141Z",
+    "inUse": true,
+    "host": "dev.pareto.com",
+    "port": 21,
+    "securityCredentialType": "BASICAUTH",
+    "securityCredentialId": "b3c5cfc2-1f87-463a-9a51-e195b2e5f3e5"
+  },
+  {
+    "id": "ab5893a0-450e-48d6-b99e-8b0abbaaab86",
+    "type": "SFTP",
+    "name": "Pareto FTP Server India",
+    "stage": "QA",
+    "updatedOn": "2018-12-10T13:49:51.141Z",
+    "createdOn": "2018-12-10T13:49:51.141Z",
+    "createdBy": "flangel",
+    "updatedBy": "flangel",
+    "lastSuccessfulConnection": "2018-12-10T13:49:51.141Z",
+    "inUse": true,
+    "host": "qa.pareto.com",
+    "port": 21,
+    "securityCredentialType": "BASICAUTH",
+    "securityCredentialId": "a1dfff9d-84a8-4661-9758-965d07ff14ae"
+  },
+  {
+    "id": "fefff31a-c305-43e7-a71f-6a0bcfaab51a",
+    "type": "SFTP",
+    "name": "ServiceNow QA system",
+    "stage": "QA",
+    "updatedOn": "2018-12-10T13:49:51.141Z",
+    "createdOn": "2018-12-10T13:49:51.141Z",
+    "createdBy": "flangel",
+    "updatedBy": "flangel",
+    "lastSuccessfulConnection": "2018-12-10T13:49:51.141Z",
+    "inUse": true,
+    "host": "mycompany.servicenow.com",
+    "port": 443,
+    "securityCredentialType": "OAUTH2",
+    "securityCredentialId": "a1dfff9d-84a8-4661-9758-965d07ff14ae"
+  }
+]
