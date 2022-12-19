@@ -1,6 +1,11 @@
-const locale = process.env.NUXT_LOCALE || 'en'
+import bodyParser from 'body-parser'
+
+import dotenv from 'dotenv'
+dotenv.config()
+
+const locale = process.env.NUXT_LOCALE
 const locales = ['en']
-const base = process.env.APP_BASE_URL || 'https://olexandrbig.github.io/fr-kipa/'
+const base = process.env.NUXT_APP_URL
 
 export default {
   router: {
@@ -48,6 +53,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
+    '@nuxtjs/dotenv',
     '@nuxtjs/eslint-module',
     ['nuxt-fontawesome', {
       component: 'fa', // customize component name
@@ -73,6 +79,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    ['@nuxtjs/dotenv', { systemvars: true }],
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
@@ -107,12 +114,14 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: base
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: locale
     }
   },
 
@@ -121,8 +130,29 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    cssSourceMap: false,
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        automaticNameDelimiter: '.',
+        name: true,
+        cacheGroups: {},
+        minSize: 100000,
+        maxSize: 100000
+      }
+    },
+    maxChunkSize: 100000,
+    extend (config) {
+      config.devtool = false
+      config.resolve.alias.vue = 'vue/dist/vue.common'
+    },
     publicPath: base
   },
+  serverMiddleware: [
+    bodyParser.json(),
+    // Api middleware
+    '~/health'
+  ],
 
   messages: {
     loading: 'Loading...',

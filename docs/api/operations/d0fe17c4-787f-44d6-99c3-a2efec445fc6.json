@@ -1,0 +1,15 @@
+{
+	"__version" : "1.0.0",
+	"__name": "exceptionHandler",
+	"name" : "Handles ftp exception",
+	"description" : "Handles india ftp exception",
+	"exceptions" : ["com.mycompany.MyBusinessException","com.ftp.cannotreachhostException"],
+	"handled" : true,
+	"continued" : false,
+	"operations" : [
+		{ "sequence" : 0, "operation" : "0d1aa9d5-51b7-49f0-86d9-3e92a4bcc5ab" },
+		{ "sequence" : 1, "operation" : "192684fc-a41f-4d67-8f67-611ec14d6896" },
+		{ "sequence" : 2, "operation" : "0d1aa9d5-51b7-49f0-86d9-3e92a4bcc5ab" }
+	]
+}
+

@@ -1,0 +1,25 @@
+{
+  "properties" : [
+    {
+      "id": "3048c1c0-3075-4440-b8b8-57dcb8de2d6b",
+      "name": "name",
+      "type": "STRING",
+      "isOptional": false,
+      "description": "name of the loop"
+    } ,
+    {
+      "id": "9ce69b54-1c4b-4797-a087-e1ff46836c97",
+      "name": "description",
+      "type": "STRING",
+      "isOptional": true,
+      "description": "description of the loop"
+    },
+    {
+      "id": "114cc6b8-4b49-4814-8e26-26b71dbb1632",
+      "name": "collectionName",
+      "description" : "name of the collection to iterate over",
+      "type": "STRING",
+      "isOptional": false
+    }
+  ]
+}
