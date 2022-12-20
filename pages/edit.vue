@@ -7,6 +7,11 @@
       <p class="m-b-20">
         Modify operation properties
       </p>
+      <div class="m-b-20">
+        <div v-for="property in operationsModel.properties" :key="property.name" class="m-b-10">
+          <input v-if="property.type === 'STRING'" v-model="formData[property.name]" class="form-control" :placeholder="`${property.description}${(!property.isOptional?' *':'')}`" :required="!property.isOptional">
+        </div>
+      </div>
       <div v-if="operation" class="operation-item">
         <div class="operation-title">
           <span class="feature-icon" :title="operation.category"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
@@ -36,16 +41,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { Utils } from '@/services/Utils'
 
 export default {
   scrollToTop: true,
+  async asyncData ({ store, route }) {
+    await store.dispatch('getApiDetails', { path: '/api/operations/model/loop/' })
+  },
+  data: () => ({
+    formData: {}
+  }),
   head () {
     return {
       title: 'Add trigger'
     }
   },
   computed: {
+    ...mapGetters({
+      operationsModel: 'operationsModel'
+    }),
     operation () {
       const operationId = this.$route.query.id
       return this.$store.state.appOperations.find((item) => {

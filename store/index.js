@@ -56,12 +56,16 @@ export const state = () => ({
   }],
   tabs: ['m1:OVERVIEW', 'm1:PRODUCT:VERSIONS'],
   activeModule: 'm1',
-  activeView: 'm1:PRODUCT:VERSIONS'
+  activeView: 'm1:PRODUCT:VERSIONS',
+  operationsModel: {}
 })
 
 export const getters = {
   availableOperations (state) {
     return state.availableOperations
+  },
+  operationsModel (state) {
+    return state.operationsModel
   }
 }
 
@@ -93,6 +97,9 @@ export const mutations = {
   },
   REMOVE_ACTIVE_OPERATION (state, operationId) {
     state.appOperations = state.appOperations.filter(tab => tab.id !== operationId)
+  },
+  SET_OPERATIONS_MODEL (state, data) {
+    state.operationsModel = data
   }
 }
 
@@ -130,5 +137,15 @@ export const actions = {
       })
       : state.allOperations
     commit('SET_AVAILABLE_OPERATIONS', list)
+  },
+  async getApiDetails ({ commit, state }, { path }) {
+    commit('SET_OPERATIONS_MODEL', false)
+    try {
+      const data = await this.$axios.$get(`${path}get.json`)
+      commit('SET_OPERATIONS_MODEL', data)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
