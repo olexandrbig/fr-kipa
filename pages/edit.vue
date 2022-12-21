@@ -49,7 +49,7 @@ export default {
   },
   scrollToTop: true,
   async asyncData ({ store, route }) {
-    await store.dispatch('getApiDetails', { path: '/api/operations/model/cron_camel_k/' })
+    await store.dispatch('getApiDetails', { path: 'api/operations/model/cron_camel_k/' })
   },
   data: () => ({
     formData: {}
