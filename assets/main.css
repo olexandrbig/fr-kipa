@@ -121,6 +121,11 @@ select.form-control{
   line-height: 39px;
   height: 41px;
 }
+select.form-control-native{
+  -webkit-appearance: initial;
+  -moz-appearance: initial;
+  appearance: auto;
+}
 .form-control-borderless,
 select.form-control-borderless{
   border: none;
