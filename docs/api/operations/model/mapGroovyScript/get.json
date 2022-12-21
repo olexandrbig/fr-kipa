@@ -1,17 +1,19 @@
-[
-  {
-    "id": "7b277ab4-ed36-4b5a-93c1-74f0a9e6469d",
-    "name": "name",
-    "type": "STRING",
-    "isOptional": false,
-    "description": "Name of the groovy map function",
-  },
-  {
-    "id": "ccf8e1ec-4172-45b3-bb9a-51bbce2b681a",
-    "name": "code",
-    "type": "STRING",
-    "isOptional": false,
-    "description": "Groovy script code",
-    "camelk_name": "cron.schedule"
-  }
-]
+{
+  "properties": [
+    {
+      "id": "7b277ab4-ed36-4b5a-93c1-74f0a9e6469d",
+      "name": "name",
+      "type": "STRING",
+      "isOptional": false,
+      "description": "Name of the groovy map function"
+    },
+    {
+      "id": "ccf8e1ec-4172-45b3-bb9a-51bbce2b681a",
+      "name": "code",
+      "type": "STRING",
+      "isOptional": false,
+      "description": "Groovy script code",
+      "camelk_name": "cron.schedule"
+    }
+  ]
+}

@@ -1,31 +1,33 @@
-[
-  {
-    "id": "5bdc634e-14f4-48e6-9b78-ee8f163df24d",
-    "name": "enabled",
-    "type": "BOOLEAN",
-    "isOptional": false,
-    "description": "Specifies whether this component is active or not",
-    "camelk_name": "cron.enabled"
-  },
-  {
-    "id": "22556ce1-1129-431a-932e-8a4360d6effb",
-    "name": "schedule",
-    "type": "STRING",
-    "isOptional": false,
-    "description": "Scheduler defined in CRON Syntax",
-    "camelk_name": "cron.schedule"
-  },
-  {
-    "id": "17c40e59-cefb-4d30-8cf7-c09aca77f720",
-    "name": "concurrencyPolicy",
-    "type": "ENUM",
-    "isOptional": false,
-    "enums": [
-      "Allow",
-      "Forbid",
-      "Replace"
-    ],
-    "defaultValue": "Forbid",
-    "camelk_name": "cron.concurrency-policy"
-  }
-]
+{
+  "properties": [
+    {
+      "id": "5bdc634e-14f4-48e6-9b78-ee8f163df24d",
+      "name": "enabled",
+      "type": "BOOLEAN",
+      "isOptional": false,
+      "description": "Specifies whether this component is active or not",
+      "camelk_name": "cron.enabled"
+    },
+    {
+      "id": "22556ce1-1129-431a-932e-8a4360d6effb",
+      "name": "schedule",
+      "type": "STRING",
+      "isOptional": false,
+      "description": "Scheduler defined in CRON Syntax",
+      "camelk_name": "cron.schedule"
+    },
+    {
+      "id": "17c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "concurrencyPolicy",
+      "type": "ENUM",
+      "isOptional": false,
+      "enums": [
+        "Allow",
+        "Forbid",
+        "Replace"
+      ],
+      "defaultValue": "Forbid",
+      "camelk_name": "cron.concurrency-policy"
+    }
+  ]
+}

@@ -8,7 +8,7 @@
         Modify operation properties
       </p>
       <div class="m-b-20">
-        <FormBuilder :model="formData" :fields="operationsModel.properties"></FormBuilder>
+        <FormBuilder :model="formData" :fields="operationsModel.properties" />
       </div>
       <div v-if="operation" class="operation-item">
         <div class="operation-title">
@@ -44,10 +44,10 @@ import { Utils } from '@/services/Utils'
 import FormBuilder from '~/components/FormBuilder.vue'
 
 export default {
-  scrollToTop: true,
   components: {
     FormBuilder
   },
+  scrollToTop: true,
   async asyncData ({ store, route }) {
     await store.dispatch('getApiDetails', { path: '/api/operations/model/cron_camel_k/' })
   },
