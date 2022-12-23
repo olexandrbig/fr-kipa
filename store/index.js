@@ -100,6 +100,9 @@ export const mutations = {
   },
   SET_OPERATIONS_MODEL (state, data) {
     state.operationsModel = data
+  },
+  SET_STORE_VALUE (state, { entryId, value }) {
+    state[entryId] = value
   }
 }
 
@@ -143,9 +146,18 @@ export const actions = {
     try {
       const data = await this.$axios.$get(`${path}get.json`)
       commit('SET_OPERATIONS_MODEL', data)
+      // eslint-disable-next-line no-console
       console.log(data)
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error)
     }
+  },
+  updateStore ({ commit, state }, { entryId, value }) {
+    commit('SET_STORE_VALUE', { entryId, value })
+  },
+  saveOperation ({ commit, state }, { entryId }) {
+    // eslint-disable-next-line no-console
+    console.log(state[entryId])
   }
 }

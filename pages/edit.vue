@@ -7,9 +7,14 @@
       <p class="m-b-20">
         Modify operation properties
       </p>
-      <div class="m-b-20">
-        <FormBuilder :model="formData" :fields="operationsModel.properties" />
-      </div>
+      <form class="m-b-20" @submit.prevent="saveOperation({ entryId: storePropName })">
+        <FormBuilder :model="formData" :fields="operationsModel.properties" :entry="storePropName" />
+        <div>
+          <button class="btn btn-primary" type="submit">
+            Save
+          </button>
+        </div>
+      </form>
       <div v-if="operation" class="operation-item">
         <div class="operation-title">
           <span class="feature-icon" :title="operation.category"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
@@ -39,7 +44,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { Utils } from '@/services/Utils'
 import FormBuilder from '~/components/FormBuilder.vue'
 
@@ -52,7 +57,8 @@ export default {
     await store.dispatch('getApiDetails', { path: 'api/operations/model/cron_camel_k/' })
   },
   data: () => ({
-    formData: {}
+    formData: {},
+    storePropName: 'editView'
   }),
   head () {
     return {
@@ -71,6 +77,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      saveOperation: 'saveOperation'
+    }),
     categoryToIcon (category) {
       return Utils.categoryToIcon(category)
     },
