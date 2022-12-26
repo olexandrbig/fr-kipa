@@ -10,7 +10,7 @@
     {
       "id": "ccf8e1ec-4172-45b3-bb9a-51bbce2b681a",
       "name": "code",
-      "type": "STRING",
+      "type": "SCRIPT",
       "isOptional": false,
       "description": "Groovy script code",
       "camelk_name": "cron.schedule"

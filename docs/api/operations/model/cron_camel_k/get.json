@@ -4,7 +4,7 @@
       "id": "5bdc634e-14f4-48e6-9b78-ee8f163df24d",
       "name": "enabled",
       "type": "BOOLEAN",
-      "isOptional": false,
+      "isOptional": true,
       "description": "Specifies whether this component is active or not",
       "camelk_name": "cron.enabled"
     },

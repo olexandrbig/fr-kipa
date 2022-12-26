@@ -4,18 +4,7 @@
       <h2 class="view-title">
         <fa :icon="['fas', 'pencil']" /> Edit operation
       </h2>
-      <p class="m-b-20">
-        Modify operation properties
-      </p>
-      <form v-if="getFields().length" class="m-b-20" @submit.prevent="saveOperation({ entryId: storePropName })">
-        <FormBuilder :model="formData" :fields="getFields()" :entry="storePropName" />
-        <div>
-          <button class="btn btn-primary" type="submit">
-            Save
-          </button>
-        </div>
-      </form>
-      <div v-if="operation" class="operation-item">
+      <div v-if="operation" class="operation-item m-b-20">
         <div class="operation-title">
           <span class="feature-icon" :title="operation.category"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
           <span>{{ operation.name }} ({{ operation.version }})</span>
@@ -39,6 +28,17 @@
       <div v-else>
         <fa :icon="['fas','circle-info']" /> Operation is not found
       </div>
+      <form v-if="getFields().length" class="m-b-20" @submit.prevent="saveOperation({ entryId: storePropName })">
+        <p class="m-b-20">
+          Modify operation properties
+        </p>
+        <FormBuilder :model="formData" :fields="getFields()" :entry="storePropName" />
+        <div>
+          <button class="btn btn-primary" type="submit">
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>

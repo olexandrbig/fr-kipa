@@ -10,6 +10,14 @@
         type="text"
         @change="updateStore({ entryId:entry, value:formData })"
       >
+      <textarea
+        v-if="property.type === 'SCRIPT'"
+        v-model="formData[property.name]"
+        class="form-control"
+        :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
+        :required="!property.isOptional"
+        @change="updateStore({ entryId:entry, value:formData })"
+      ></textarea>
       <label v-if="property.type === 'BOOLEAN'" class="form-control">
         <input
           v-model="formData[property.name]"
