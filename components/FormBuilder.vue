@@ -1,6 +1,6 @@
 <template>
-  <div class="form-builder">
-    <div v-for="property in fields" :key="property.name" v-init="formData[property.name] = formData[property.name] ? formData[property.name] : property.defaultValue" class="m-b-10">
+  <div v-if="fields && fields.length" class="form-builder">
+    <div v-for="property in fields" :key="property.name" class="m-b-10">
       <input
         v-if="property.type === 'STRING'"
         v-model="formData[property.name]"
@@ -58,13 +58,25 @@ export default {
   data: () => ({
     formData: {}
   }),
-  created () {
-    this.formData = Utils.getObjectCopy(this.model)
+  async fetch () {
+    this.formData = await Utils.getObjectCopy(this.model)
+    this.fields.forEach((item) => {
+      this.initDefault(item)
+    })
+  },
+  watch: {
+    model: '$fetch'
   },
   methods: {
     ...mapActions({
       updateStore: 'updateStore'
-    })
+    }),
+    initDefault (property) {
+      console.log(property)
+      if (property && !this.formData[property.name]) {
+        this.formData[property.name] = this.formData && this.formData[property.name] ? this.formData[property.name] : property.defaultValue
+      }
+    }
   }
 }
 </script>

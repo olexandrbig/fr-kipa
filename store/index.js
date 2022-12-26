@@ -65,7 +65,7 @@ export const getters = {
     return state.availableOperations
   },
   operationsModel (state) {
-    return state.operationsModel
+    return state.operationsModel ? state.operationsModel : { properties: [] }
   }
 }
 

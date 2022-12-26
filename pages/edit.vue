@@ -7,8 +7,8 @@
       <p class="m-b-20">
         Modify operation properties
       </p>
-      <form class="m-b-20" @submit.prevent="saveOperation({ entryId: storePropName })">
-        <FormBuilder :model="formData" :fields="operationsModel.properties" :entry="storePropName" />
+      <form v-if="getFields().length" class="m-b-20" @submit.prevent="saveOperation({ entryId: storePropName })">
+        <FormBuilder :model="formData" :fields="getFields()" :entry="storePropName" />
         <div>
           <button class="btn btn-primary" type="submit">
             Save
@@ -53,8 +53,16 @@ export default {
     FormBuilder
   },
   scrollToTop: true,
-  async asyncData ({ store, route }) {
-    await store.dispatch('getApiDetails', { path: 'api/operations/model/cron_camel_k/' })
+  async asyncData ({ store, route, redirect }) {
+    const operationId = route.query.id
+    const operation = store.state.appOperations.find((item) => {
+      return item.id === operationId
+    })
+    if (operation) {
+      await store.dispatch('getApiDetails', { path: `api/operations/model/${operation.key}/` })
+    } else {
+      redirect('/')
+    }
   },
   data: () => ({
     formData: {},
@@ -76,10 +84,14 @@ export default {
       })
     }
   },
+  watchQuery: ['id'],
   methods: {
     ...mapActions({
       saveOperation: 'saveOperation'
     }),
+    getFields () {
+      return (this.operationsModel && this.operationsModel.properties) || []
+    },
     categoryToIcon (category) {
       return Utils.categoryToIcon(category)
     },
