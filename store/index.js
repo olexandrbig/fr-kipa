@@ -57,7 +57,8 @@ export const state = () => ({
   tabs: ['m1:OVERVIEW', 'm1:PRODUCT:VERSIONS'],
   activeModule: 'm1',
   activeView: 'm1:PRODUCT:VERSIONS',
-  operationsModel: {}
+  operationsModel: {},
+  operationCache: {}
 })
 
 export const getters = {
@@ -93,10 +94,15 @@ export const mutations = {
     const total = state.appOperations.length
     const item = Utils.getObjectCopy(operation)
     item.id = uuidv4()
+    item.properties = {}
     state.appOperations.splice((after || total), 0, item)
   },
   REMOVE_ACTIVE_OPERATION (state, operationId) {
     state.appOperations = state.appOperations.filter(tab => tab.id !== operationId)
+  },
+  UPDATE_ACTIVE_OPERATION (state, { id, data }) {
+    const current = state.appOperations.find(tab => tab.id === id)
+    current.properties = data
   },
   SET_OPERATIONS_MODEL (state, data) {
     state.operationsModel = data
@@ -143,21 +149,23 @@ export const actions = {
   },
   async getApiDetails ({ commit, state }, { path }) {
     commit('SET_OPERATIONS_MODEL', false)
-    try {
-      const data = await this.$axios.$get(`${path}get.json`)
-      commit('SET_OPERATIONS_MODEL', data)
-      // eslint-disable-next-line no-console
-      console.log(data)
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error)
+    if (!state.operationCache[path]) {
+      try {
+        const data = await this.$axios.$get(`${path}get.json`)
+        commit('SET_OPERATIONS_MODEL', data)
+        state.operationCache[path] = data
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error)
+      }
+    } else {
+      await commit('SET_OPERATIONS_MODEL', state.operationCache[path])
     }
   },
   updateStore ({ commit, state }, { entryId, value }) {
     commit('SET_STORE_VALUE', { entryId, value })
   },
-  saveOperation ({ commit, state }, { entryId }) {
-    // eslint-disable-next-line no-console
-    console.log(state[entryId])
+  saveOperation ({ commit, state }, { entryId, id }) {
+    commit('UPDATE_ACTIVE_OPERATION', { id, data: state[entryId] })
   }
 }

@@ -28,11 +28,11 @@
       <div v-else>
         <fa :icon="['fas','circle-info']" /> Operation is not found
       </div>
-      <form v-if="getFields().length" class="m-b-20" @submit.prevent="saveOperation({ entryId: storePropName })">
+      <form v-if="getFields().length" class="m-b-20" @submit.prevent="saveOperation({ entryId: storePropName, id:operation.id })">
         <p class="m-b-20">
-          Modify operation properties
+          <b>Modify operation properties</b>
         </p>
-        <FormBuilder :model="formData" :fields="getFields()" :entry="storePropName" />
+        <FormBuilder :model="getFormData()" :fields="getFields()" :entry="storePropName" />
         <div>
           <button class="btn btn-primary" type="submit">
             Save
@@ -91,6 +91,9 @@ export default {
     }),
     getFields () {
       return (this.operationsModel && this.operationsModel.properties) || []
+    },
+    getFormData () {
+      return (this.operation && this.operation.properties) || {}
     },
     categoryToIcon (category) {
       return Utils.categoryToIcon(category)

@@ -17,7 +17,7 @@
         :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
         :required="!property.isOptional"
         @change="updateStore({ entryId:entry, value:formData })"
-      ></textarea>
+      />
       <label v-if="property.type === 'BOOLEAN'" class="form-control">
         <input
           v-model="formData[property.name]"
@@ -67,6 +67,7 @@ export default {
     formData: {}
   }),
   async fetch () {
+    this.formData = {}
     this.formData = await Utils.getObjectCopy(this.model)
     this.fields.forEach((item) => {
       this.initDefault(item)
@@ -80,8 +81,7 @@ export default {
       updateStore: 'updateStore'
     }),
     initDefault (property) {
-      console.log(property)
-      if (property && !this.formData[property.name]) {
+      if (property && this.formData && !this.formData[property.name]) {
         this.formData[property.name] = this.formData && this.formData[property.name] ? this.formData[property.name] : property.defaultValue
       }
     }
