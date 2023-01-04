@@ -1,7 +1,8 @@
 <template>
   <aside class="operation-nav" :style="{height:`${mainHeight()}px`}">
     <ul class="operation-features text-center">
-      <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
+      <draggable v-model='activeOperations'>
+        <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
         <nuxt-link :to="`edit?id=${operation.id}`" class="operation-item w-80 m-t-30 pointer">
           <div class="operation-title relative">
             <span class="pull-right">
@@ -27,16 +28,6 @@
                 >
                   <ul class="dropdown-menu-nav">
                     <li class="dropdown-menu-item">
-                      <a href class="dropdown-menu-link" title="Move up">
-                        <div class="dropdown-menu-text">Move up</div>
-                      </a>
-                    </li>
-                    <li class="dropdown-menu-item">
-                      <a href class="dropdown-menu-link" title="Move down">
-                        <div class="dropdown-menu-text">Move down</div>
-                      </a>
-                    </li>
-                    <li class="dropdown-menu-item">
                       <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(operation.id)">
                         <div class="dropdown-menu-text">Remove</div>
                       </a>
@@ -58,6 +49,7 @@
           </span>
         </nuxt-link>
       </li>
+      </draggable>
     </ul>
     <ul class="operation-features text-center">
       <li>
@@ -84,8 +76,14 @@ export default {
     activeModuleCode () {
       return this.$store.state.activeModule
     },
-    activeOperations () {
-      return this.$store.state.appOperations
+    activeOperations: {
+      get () {
+        return this.$store.state.appOperations
+      },
+      set (value) {
+        this.$store.commit('SET_STORE_VALUE', { entryId: 'appOperations', value })
+        this.$toast.success('Operations re-ordered')
+      }
     }
   },
   methods: {

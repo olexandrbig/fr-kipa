@@ -118,6 +118,7 @@ export const actions = {
   },
   removeOperation ({ commit, state }, operationId) {
     commit('REMOVE_ACTIVE_OPERATION', operationId)
+    this.$toast.success('Operation removed')
   },
   activateModule ({ commit, state }, tabId) {
     commit('SET_ACTIVE_MODULE', tabId)
@@ -167,5 +168,6 @@ export const actions = {
   },
   saveOperation ({ commit, state }, { entryId, id }) {
     commit('UPDATE_ACTIVE_OPERATION', { id, data: state[entryId] })
+    this.$toast.success('Operation updated')
   }
 }

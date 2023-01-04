@@ -44,7 +44,8 @@ export default {
   plugins: [
     { src: '~/plugins/vue-underscore', mode: 'client' },
     { src: '~/plugins/vue-i18n' },
-    { src: '~/plugins/vue-chart', mode: 'client' }
+    { src: '~/plugins/vue-chart', mode: 'client' },
+    { src: '~/plugins/vuedraggable.js' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
