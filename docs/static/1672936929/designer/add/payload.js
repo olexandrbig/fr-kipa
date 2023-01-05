@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/designer/add", {data:[{}],fetch:{},mutations:[]});

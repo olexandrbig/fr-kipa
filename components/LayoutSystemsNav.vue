@@ -3,7 +3,7 @@
     <ul class="operation-features text-center">
       <draggable v-model="activeOperations">
         <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
-          <nuxt-link :to="`/designer/edit?id=${operation.id}`" class="operation-item w-80 m-t-30 pointer">
+          <nuxt-link :to="`/systems/edit?id=${operation.id}`" class="operation-item w-80 m-t-30 pointer">
             <div class="operation-title relative">
               <span class="pull-right">
                 <fa
@@ -42,7 +42,7 @@
             <span class="operation-next">
               <fa :icon="['fas', 'arrow-down-long']" />
               <span class="operation-next-add">
-                <nuxt-link class="add-action" :to="`/designer/add?after=${index+1}`">
+                <nuxt-link class="add-action" :to="`/systems/add?after=${index+1}`">
                   <fa :icon="['fas', 'plus']" class="add-action-icon" />
                 </nuxt-link>
               </span>
@@ -53,7 +53,7 @@
     </ul>
     <ul class="operation-features text-center">
       <li>
-        <nuxt-link class="add-action" to="/designer/add">
+        <nuxt-link class="add-action" to="/systems/add">
           <fa :icon="['fas', 'plus']" class="add-action-icon" />
         </nuxt-link>
       </li>
@@ -66,7 +66,7 @@ import { mapActions } from 'vuex'
 import { Utils } from '@/services/Utils'
 
 export default {
-  name: 'LayoutOperationsNav',
+  name: 'LayoutSystemsNav',
   data () {
     return {
       activeMenus: []

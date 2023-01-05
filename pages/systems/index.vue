@@ -2,8 +2,9 @@
   <div>
     <div class="clearfix relative">
       <h2 class="view-title">
-        <fa :icon="['fas', 'house']" /> Main page
+        <fa :icon="['fas', 'sitemap']" /> Systems
       </h2>
+      <p>Welcome to systems list. Start building your application by clicking "Create system"</p>
     </div>
   </div>
 </template>
@@ -11,13 +12,10 @@
 <script>
 
 export default {
+  layout: 'systems',
   scrollToTop: true,
-  asyncData ({ app, redirect, params }) {
-    redirect('/designer/add')
-    return {}
-  },
   head () {
-    const entity = 'index'
+    const entity = 'systems'
     const page = `${entity}`
     const title = this.$t(`${page}.title`)
     const description = this.$t(`${page}.description`)

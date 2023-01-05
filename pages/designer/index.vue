@@ -2,8 +2,9 @@
   <div>
     <div class="clearfix relative">
       <h2 class="view-title">
-        <fa :icon="['fas', 'house']" /> Main page
+        <fa :icon="['fas', 'pen-nib']" /> Designer
       </h2>
+      <p>Welcome to workflow designer. Start building your application by clicking "Chose an operation"</p>
     </div>
   </div>
 </template>
@@ -12,12 +13,8 @@
 
 export default {
   scrollToTop: true,
-  asyncData ({ app, redirect, params }) {
-    redirect('/designer/add')
-    return {}
-  },
   head () {
-    const entity = 'index'
+    const entity = 'designer'
     const page = `${entity}`
     const title = this.$t(`${page}.title`)
     const description = this.$t(`${page}.description`)

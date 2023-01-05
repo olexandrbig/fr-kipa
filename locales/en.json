@@ -1,6 +1,14 @@
 {
   "index": {
     "title": "Main page",
-    "description": "Main page"
+    "description": "Description"
+  },
+  "designer": {
+    "title": "Design operations flow",
+    "description": "Description"
+  },
+  "systems": {
+    "title": "Manager systems",
+    "description": "Description"
   }
 }

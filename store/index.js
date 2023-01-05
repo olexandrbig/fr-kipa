@@ -14,45 +14,17 @@ export const state = () => ({
   allOperations: AVAILABLE_OPERATIONS,
   availableOperations: [],
   appData: [{
-    link: '/',
-    code: 'm1',
+    link: '/designer',
+    code: 'designer',
     name: 'Designer',
-    icon: 'boxes-stacked',
-    views: [
-      {
-        code: 'OVERVIEW',
-        name: 'Overview',
-        icon: 'th-large',
-        type: 'pageA'
-      },
-      {
-        code: 'PRODUCT',
-        name: 'Product data',
-        icon: 'boxes',
-        views: [{
-          code: 'PRODUCT:VARIANTS',
-          name: 'Variants',
-          icon: 'list',
-          type: 'pageB'
-        }, {
-          code: 'PRODUCT:VERSIONS',
-          name: 'Versions',
-          icon: 'tasks',
-          type: 'pageC'
-        }, {
-          code: 'PRODUCT:BALANCE',
-          name: 'Balance',
-          icon: 'balance-scale',
-          type: 'pageD'
-        }]
-      },
-      {
-        code: 'DRAFTS',
-        name: 'Drafts',
-        icon: 'pencil-ruler',
-        type: 'pageE'
-      }
-    ]
+    icon: 'pen-nib',
+    views: []
+  }, {
+    link: '/systems',
+    code: 'systems',
+    name: 'Systems',
+    icon: 'sitemap',
+    views: []
   }],
   tabs: ['m1:OVERVIEW', 'm1:PRODUCT:VERSIONS'],
   activeModule: 'm1',

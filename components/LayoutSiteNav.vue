@@ -4,11 +4,6 @@
       <Logo class="site-logo" />
     </div>
     <ul class="site-modules">
-      <li class="site-module">
-        <a class="module-link pointer" @click="featureIsNotAvailable()">
-          <span class="module-icon"><fa :icon="['fas','magnifying-glass']" /></span>
-        </a>
-      </li>
       <li v-for="module in appData" :key="module.code" :class="isActiveModuleClass(module.code)" class="site-module">
         <nuxt-link :to="`${module.link}`" class="module-link pointer" @click="activateModule(module.code)">
           <span class="module-icon"><fa :icon="['fas', module.icon]" /></span>
