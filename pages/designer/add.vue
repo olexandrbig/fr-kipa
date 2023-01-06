@@ -21,7 +21,7 @@
           v-for="operation in availableOperations"
           :key="operation.id"
           class="available-operation pointer"
-          @click="addOperation({operation, after: $route.query.after})"
+          @click="addOperation({operation, after: $route.query.after, inside: $route.query.inside})"
         >
           <div class="operation-item">
             <div class="operation-title">

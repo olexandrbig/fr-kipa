@@ -55,10 +55,16 @@ export default {
   scrollToTop: true,
   async asyncData ({ store, route, redirect }) {
     const operationId = route.query.id
-    const operation = store.state.appOperations.find((item) => {
-      return item.id === operationId
+    const parentId = route.query.parent
+    let operation = store.state.appOperations.find((item) => {
+      return item.id === operationId || item.id === parentId
     })
     if (operation) {
+      if (parentId && operation && operation.id === parentId) {
+        operation = operation.operations.find((item) => {
+          return item.id === operationId
+        })
+      }
       await store.dispatch('getApiDetails', { path: `api/operations/model/${operation.key}/` })
     } else {
       redirect('/')
@@ -78,10 +84,17 @@ export default {
       operationsModel: 'operationsModel'
     }),
     operation () {
+      const parentId = this.$route.query.parent
       const operationId = this.$route.query.id
-      return this.$store.state.appOperations.find((item) => {
-        return item.id === operationId
+      let operation = this.$store.state.appOperations.find((item) => {
+        return item.id === operationId || item.id === parentId
       })
+      if (parentId && operation && operation.id === parentId) {
+        operation = operation.operations.find((item) => {
+          return item.id === operationId
+        })
+      }
+      return operation
     }
   },
   watchQuery: ['id'],

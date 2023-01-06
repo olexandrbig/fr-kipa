@@ -13,6 +13,8 @@ export function categoryToIcon (category) {
       return 'folder-tree'
     case 'MAPPING':
       return 'sliders'
+    case 'LOOP':
+      return 'repeat'
     case 'KAFKA':
       return 'atom'
     default:

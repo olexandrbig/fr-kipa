@@ -62,12 +62,20 @@ export const mutations = {
   SET_AVAILABLE_OPERATIONS (state, list) {
     state.availableOperations = list
   },
-  ADD_ACTIVE_OPERATION (state, { operation, after }) {
+  ADD_ACTIVE_OPERATION (state, { operation, after, inside }) {
     const total = state.appOperations.length
     const item = Utils.getObjectCopy(operation)
     item.id = uuidv4()
     item.properties = {}
-    state.appOperations.splice((after || total), 0, item)
+    if (inside && state.appOperations[inside]) {
+      if (!state.appOperations[inside].operations) {
+        state.appOperations[inside].operations = []
+      }
+      const total = state.appOperations[inside].operations
+      state.appOperations[inside].operations.splice((after || total), 0, item)
+    } else {
+      state.appOperations.splice((after || total), 0, item)
+    }
   },
   REMOVE_ACTIVE_OPERATION (state, operationId) {
     state.appOperations = state.appOperations.filter(tab => tab.id !== operationId)
@@ -85,8 +93,8 @@ export const mutations = {
 }
 
 export const actions = {
-  addOperation ({ commit, state }, { operation, after }) {
-    commit('ADD_ACTIVE_OPERATION', { operation, after })
+  addOperation ({ commit, state }, { operation, after, inside }) {
+    commit('ADD_ACTIVE_OPERATION', { operation, after, inside })
   },
   removeOperation ({ commit, state }, operationId) {
     commit('REMOVE_ACTIVE_OPERATION', operationId)
