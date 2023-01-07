@@ -71,14 +71,29 @@ export const mutations = {
       if (!state.appOperations[inside].operations) {
         state.appOperations[inside].operations = []
       }
-      const total = state.appOperations[inside].operations
-      state.appOperations[inside].operations.splice((after || total), 0, item)
+      state.appOperations = state.appOperations.map((tab, index) => {
+        if (index === +inside) {
+          const subTotal = tab.operations.length
+          tab.operations.splice((after || subTotal), 0, item)
+        }
+        return tab
+      })
     } else {
       state.appOperations.splice((after || total), 0, item)
     }
   },
   REMOVE_ACTIVE_OPERATION (state, operationId) {
-    state.appOperations = state.appOperations.filter(tab => tab.id !== operationId)
+    state.appOperations = state.appOperations.map((tab) => {
+      if (tab.operations) {
+        tab.operations = tab.operations.filter((subTab) => {
+          return subTab.id !== operationId
+        })
+      }
+      return tab
+    })
+    state.appOperations = state.appOperations.filter((tab) => {
+      return tab.id !== operationId
+    })
   },
   UPDATE_ACTIVE_OPERATION (state, { id, data }) {
     const current = state.appOperations.find(tab => tab.id === id)

@@ -47,7 +47,7 @@
                 </nuxt-link>
               </span>
             </span>
-            <div v-if="operation.operations">
+            <div v-if="operation.operations" class="sub-operations m-t-10">
               <div v-for="(subOperation, subIndex) in operation.operations" :key="subOperation.id" :class="isActiveViewClass(subOperation.id)" class="operation-feature">
                 <div class="operation-item m-t-30 pointer">
                   <nuxt-link :to="`/designer/edit?id=${subOperation.id}&parent=${operation.id}`" class="operation-title relative">
@@ -212,7 +212,7 @@ add-action-icon{
   position: relative;
   width: 100%;
 }
-.operation-features > .operation-feature > .operation-item {
+.operation-features .operation-feature > .operation-item {
   font-weight: 700;
 }
 .operation-item{
@@ -223,6 +223,9 @@ add-action-icon{
   width: 100%;
   border: 1px solid #1155cb;
   text-align: left;
+}
+.sub-operations > .operation-feature:first-child > .operation-item{
+  margin-top: 10px;
 }
 .operation-next{
   content: ' ';
@@ -291,5 +294,8 @@ add-action-icon{
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.sub-operations{
+  padding: 0 10px;
 }
 </style>
