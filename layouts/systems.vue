@@ -17,7 +17,7 @@ import LayoutFooter from '~/components/LayoutFooter.vue'
 import LayoutSystemsNav from '~/components/LayoutSystemsNav.vue'
 import LayoutSiteNav from '~/components/LayoutSiteNav.vue'
 export default {
-  name: 'Default',
+  name: 'Systems',
   components: {
     LayoutActiveView,
     LayoutFooter,

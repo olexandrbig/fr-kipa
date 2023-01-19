@@ -4,6 +4,17 @@
       <h2 class="view-title">
         <fa :icon="['fas', 'pencil']" /> Edit system
       </h2>
+      <form v-if="getFields().length" class="m-b-20" @submit.prevent="editSystem({ entryId: storePropName, id:system.id })">
+        <p class="m-b-20">
+          <b>Update system properties</b>
+        </p>
+        <FormBuilder :model="getFormData()" :fields="getFields()" :entry="storePropName" />
+        <div>
+          <button class="btn btn-primary" type="submit">
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -13,16 +24,17 @@ import { mapActions, mapGetters } from 'vuex'
 import { Utils } from '@/services/Utils'
 
 export default {
+  layout: 'systems',
   scrollToTop: true,
   async asyncData ({ store, route, redirect }) {
-    const operationId = route.query.id
-    const operation = store.state.appOperations.find((item) => {
-      return item.id === operationId
+    const systemId = route.query.id
+    const system = store.state.availableSystems.find((item) => {
+      return item.id === systemId
     })
-    if (operation) {
-      await store.dispatch('getApiDetails', { path: `api/operations/model/${operation.key}/` })
+    if (system) {
+      await store.dispatch('getApiDetails', { path: 'api/systems/model/' })
     } else {
-      redirect('/')
+      redirect('/systems/')
     }
   },
   data: () => ({
@@ -31,30 +43,30 @@ export default {
   }),
   head () {
     return {
-      title: 'Add trigger'
+      title: 'Edit system'
     }
   },
   computed: {
     ...mapGetters({
       operationsModel: 'operationsModel'
     }),
-    operation () {
-      const operationId = this.$route.query.id
-      return this.$store.state.appOperations.find((item) => {
-        return item.id === operationId
+    system () {
+      const systemId = this.$route.query.id
+      return this.$store.state.availableSystems.find((item) => {
+        return item.id === systemId
       })
     }
   },
   watchQuery: ['id'],
   methods: {
     ...mapActions({
-      saveOperation: 'saveOperation'
+      editSystem: 'editSystem'
     }),
     getFields () {
       return (this.operationsModel && this.operationsModel.properties) || []
     },
     getFormData () {
-      return (this.operation && this.operation.properties) || {}
+      return (this.system && this.system.properties) || {}
     },
     categoryToIcon (category) {
       return Utils.categoryToIcon(category)

@@ -4,22 +4,38 @@
       <h2 class="view-title">
         <fa :icon="['fas', 'plus']" /> Create system
       </h2>
+      <form v-if="getFields().length" class="m-b-20" @submit.prevent="addSystem({ entryId: storePropName })">
+        <p class="m-b-20">
+          <b>Define system properties</b>
+        </p>
+        <FormBuilder :model="getFormData()" :fields="getFields()" :entry="storePropName" />
+        <div>
+          <button class="btn btn-primary" type="submit">
+            Create
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { Utils } from '~/services/Utils'
+import FormBuilder from '~/components/FormBuilder.vue'
 
 export default {
-  scrollToTop: true,
-  async fetch () {
-    const params = {
-      search: this.$refs.search && this.$refs.search.value
-    }
-    await this.$store.dispatch('getAvailableOperations', params)
+  components: {
+    FormBuilder
   },
+  layout: 'systems',
+  scrollToTop: true,
+  async asyncData ({ store }) {
+    await store.dispatch('getApiDetails', { path: 'api/systems/model/' })
+  },
+  data: () => ({
+    formData: {},
+    storePropName: 'addSystem'
+  }),
   head () {
     return {
       title: 'Add trigger'
@@ -27,15 +43,19 @@ export default {
   },
   computed: {
     ...mapGetters({
-      availableOperations: 'availableOperations'
+      operationsModel: 'operationsModel'
     })
   },
+  watchQuery: ['id'],
   methods: {
     ...mapActions({
-      addOperation: 'addOperation'
+      addSystem: 'addSystem'
     }),
-    categoryToIcon (category) {
-      return Utils.categoryToIcon(category)
+    getFields () {
+      return (this.operationsModel && this.operationsModel.properties) || []
+    },
+    getFormData () {
+      return (this.operation && this.operation.properties) || {}
     },
     featureIsNotAvailable () {
       this.$toast.error('This feature is not yet available')
@@ -43,12 +63,3 @@ export default {
   }
 }
 </script>
-<style>
-.available-operations{
-  list-style: none;
-  padding: 0;
-}
-.available-operation{
-  margin-bottom: 10px;
-}
-</style>

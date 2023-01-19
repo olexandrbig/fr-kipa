@@ -1,57 +1,15 @@
 <template>
-  <aside class="operation-nav" :style="{height:`${mainHeight()}px`}">
-    <ul class="operation-features text-center">
-      <draggable v-model="activeOperations">
-        <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
-          <nuxt-link :to="`/systems/edit?id=${operation.id}`" class="operation-item w-80 m-t-30 pointer">
-            <div class="operation-title relative">
-              <span class="pull-right">
-                <fa
-                  v-if="isActiveMenu(operation.id)"
-                  key="on"
-                  :class="'feature-icon'"
-                  :icon="['fas', 'xmark']"
-                  @click="deactivateMenu(operation.id)"
-                />
-                <fa
-                  v-else
-                  key="off"
-                  :class="'feature-icon'"
-                  :icon="['fas', 'ellipsis-vertical']"
-                  @click="activateMenu(operation.id)"
-                />
-                <transition name="dropdown">
-                  <div
-                    v-if="isActiveMenu(operation.id)"
-                    class="dropdown-menu"
-                    :class="{ active: isActiveMenu(operation.id) }"
-                  >
-                    <ul class="dropdown-menu-nav">
-                      <li class="dropdown-menu-item">
-                        <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(operation.id)">
-                          <div class="dropdown-menu-text">Remove</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </transition>
-              </span>
-              <span class="feature-icon"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
-              <span class="text-ellipsis">{{ operation.name }}</span>
-            </div>
-            <span class="operation-next">
-              <fa :icon="['fas', 'arrow-down-long']" />
-              <span class="operation-next-add">
-                <nuxt-link class="add-action" :to="`/systems/add?after=${index+1}`">
-                  <fa :icon="['fas', 'plus']" class="add-action-icon" />
-                </nuxt-link>
-              </span>
-            </span>
-          </nuxt-link>
-        </li>
-      </draggable>
+  <aside class="system-nav" :style="{height:`${mainHeight()}px`}">
+    <ul class="system-features text-center">
+      <li v-for="system in availableSystems" :key="system.id" :class="isActiveViewClass(system.id)">
+        <nuxt-link :to="`/systems/edit?id=${system.id}`" class="system-item w-80 pointer">
+          <div class="operation-title relative">
+            <span class="text-ellipsis">[{{ system.properties.type }}] {{ system.properties.name }}</span>
+          </div>
+        </nuxt-link>
+      </li>
     </ul>
-    <ul class="operation-features text-center">
+    <ul class="system-features text-center">
       <li>
         <nuxt-link class="add-action" to="/systems/add">
           <fa :icon="['fas', 'plus']" class="add-action-icon" />
@@ -62,55 +20,24 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { Utils } from '@/services/Utils'
-
 export default {
   name: 'LayoutSystemsNav',
   data () {
-    return {
-      activeMenus: []
-    }
+    return {}
   },
   computed: {
-    activeModuleCode () {
-      return this.$store.state.activeModule
-    },
-    activeOperations: {
-      get () {
-        return this.$store.state.appOperations
-      },
-      set (value) {
-        this.$store.commit('SET_STORE_VALUE', { entryId: 'appOperations', value })
-        this.$toast.success('Operations re-ordered')
-      }
+    availableSystems () {
+      return this.$store.state.availableSystems
     }
   },
   methods: {
-    ...mapActions({
-      removeOperation: 'removeOperation'
-    }),
-    isActiveMenu (id) {
-      return this.activeMenus.includes(id)
-    },
-    deactivateMenu (id) {
-      this.activeMenus = this.activeMenus.filter((item) => {
-        return item !== id
-      })
-    },
-    activateMenu (id) {
-      this.activeMenus.push(id)
-    },
-    categoryToIcon (category) {
-      return Utils.categoryToIcon(category)
-    },
-    isActiveViewClass (viewCode) {
-      return this.$store.state.activeView === `${this.activeModuleCode}:${viewCode}` ? 'active' : false
-    },
     mainHeight () {
       if (process.client) {
         return (window && window.innerHeight) - 30
       }
+    },
+    isActiveViewClass (id) {
+      return this.$route.query.id === id
     }
   }
 }
@@ -130,7 +57,7 @@ export default {
 add-action-icon{
   font-size: 2em;
 }
-.operation-nav{
+.system-nav{
   display: block;
   float: left;
   height: 100%;
@@ -141,33 +68,37 @@ add-action-icon{
   background: #ffffff;
   border-right: 1px solid #1155cb;
 }
-.operation-features{
+.system-features{
   list-style: none;
   padding: 0;
   float: left;
   width: 100%;
 }
-.operation-feature{
+.system-feature{
   display: inline-block;
   background: #ffffff;
   float: left;
   position: relative;
   width: 100%;
 }
-.operation-features > .operation-feature > .operation-item {
+.system-item.nuxt-link-exact-active{
+  font-weight: 700;
+  background: #eeeeee;
+}
+.system-features > .system-feature > .system-item {
   font-weight: 700;
 }
-.operation-item{
+.system-item{
   text-decoration: none;
   color: #043558;
   line-height: 30px;
   padding: 5px;
   display: inline-block;
   width: 100%;
-  border: 1px solid #1155cb;
+  border-bottom: 1px solid #1155cb;
   text-align: left;
 }
-.operation-next{
+.system-next{
   content: ' ';
   display: none;
   width: 24px;
@@ -182,10 +113,10 @@ add-action-icon{
   font-size: 28px;
   text-align: center;
 }
-.operation-feature:not(:last-child) .operation-item .operation-next{
+.system-feature:not(:last-child) .system-item .system-next{
   display: inline-block;
 }
-.operation-next-add .add-action{
+.system-next-add .add-action{
   display: none;
   font-size: 10px;
   border-radius: 50%;
@@ -201,22 +132,16 @@ add-action-icon{
   top: 3px;
   z-index: 1;
 }
-.operation-next:hover .operation-next-add .add-action{
+.system-next:hover .system-next-add .add-action{
   display: inline-block;
 }
-.operation-feature.active .operation-item,
-.operation-subfeature.active .operation-item,
-.operation-item:hover{
+.system-feature.active .system-item,
+.system-subfeature.active .system-item,
+.system-item:hover{
   background: #f5f5f5;
 }
-.operation-sublist .operation-item{
+.system-sublist .system-item{
   padding-left: 40px;
-}
-.operation-text{
-  line-height: 15px;
-}
-.w-80{
-  width: 80%;
 }
 .feature-icon{
   font-size: 1.3em;

@@ -13,6 +13,7 @@ export const state = () => ({
   appOperations: [],
   allOperations: AVAILABLE_OPERATIONS,
   availableOperations: [],
+  availableSystems: [],
   appData: [{
     link: '/designer',
     code: 'designer',
@@ -104,6 +105,17 @@ export const mutations = {
   },
   SET_STORE_VALUE (state, { entryId, value }) {
     state[entryId] = value
+  },
+  ADD_ACTIVE_SYSTEM (state, { data }) {
+    const item = {
+      id: uuidv4(),
+      properties: Utils.getObjectCopy(data)
+    }
+    state.availableSystems.push(item)
+  },
+  UPDATE_ACTIVE_SYSTEM (state, { id, data }) {
+    const current = state.availableSystems.find(tab => tab.id === id)
+    current.properties = data
   }
 }
 
@@ -164,5 +176,13 @@ export const actions = {
   saveOperation ({ commit, state }, { entryId, id }) {
     commit('UPDATE_ACTIVE_OPERATION', { id, data: state[entryId] })
     this.$toast.success('Operation updated')
+  },
+  addSystem ({ commit, state }, { entryId }) {
+    commit('ADD_ACTIVE_SYSTEM', { data: state[entryId] })
+    this.$toast.success('System created')
+  },
+  editSystem ({ commit, state }, { entryId, id }) {
+    commit('UPDATE_ACTIVE_SYSTEM', { id, data: state[entryId] })
+    this.$toast.success('System updated')
   }
 }
