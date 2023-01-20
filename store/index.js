@@ -14,6 +14,7 @@ export const state = () => ({
   allOperations: AVAILABLE_OPERATIONS,
   availableOperations: [],
   availableSystems: [],
+  latestId: null,
   appData: [{
     link: '/designer',
     code: 'designer',
@@ -25,6 +26,18 @@ export const state = () => ({
     code: 'systems',
     name: 'Systems',
     icon: 'sitemap',
+    views: []
+  }, {
+    link: '/gateway',
+    code: 'gateway',
+    name: 'API Gateway',
+    icon: 'server',
+    views: []
+  }, {
+    link: '/credentials',
+    code: 'credentials',
+    name: 'Security Credentials',
+    icon: 'key',
     views: []
   }],
   tabs: ['m1:OVERVIEW', 'm1:PRODUCT:VERSIONS'],
@@ -112,6 +125,7 @@ export const mutations = {
       properties: Utils.getObjectCopy(data)
     }
     state.availableSystems.push(item)
+    state.latestId = item.id
   },
   UPDATE_ACTIVE_SYSTEM (state, { id, data }) {
     const current = state.availableSystems.find(tab => tab.id === id)
@@ -180,6 +194,7 @@ export const actions = {
   addSystem ({ commit, state }, { entryId }) {
     commit('ADD_ACTIVE_SYSTEM', { data: state[entryId] })
     this.$toast.success('System created')
+    this.$router.push({ path: `/systems/edit?id=${state.latestId}` })
   },
   editSystem ({ commit, state }, { entryId, id }) {
     commit('UPDATE_ACTIVE_SYSTEM', { id, data: state[entryId] })
