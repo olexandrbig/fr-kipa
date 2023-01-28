@@ -2,7 +2,7 @@
   <div>
     <div class="clearfix relative">
       <h2 class="view-title">
-        <fa :icon="['fas', 'server']" /> API Gateway
+        <fa :icon="['fas', 'globe']" /> API Gateway
       </h2>
     </div>
   </div>

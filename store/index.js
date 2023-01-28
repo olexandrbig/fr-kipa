@@ -14,6 +14,7 @@ export const state = () => ({
   allOperations: AVAILABLE_OPERATIONS,
   availableOperations: [],
   availableSystems: [],
+  availableFlows: [],
   latestId: null,
   appData: [{
     link: '/designer',
@@ -22,16 +23,22 @@ export const state = () => ({
     icon: 'pen-nib',
     views: []
   }, {
+    link: '/flows',
+    code: 'flows',
+    name: 'flows',
+    icon: 'sitemap',
+    views: []
+  }, {
     link: '/systems',
     code: 'systems',
     name: 'Systems',
-    icon: 'sitemap',
+    icon: 'server',
     views: []
   }, {
     link: '/gateway',
     code: 'gateway',
     name: 'API Gateway',
-    icon: 'server',
+    icon: 'globe',
     views: []
   }, {
     link: '/credentials',

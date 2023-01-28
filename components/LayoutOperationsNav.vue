@@ -1,121 +1,131 @@
 <template>
-  <aside class="operation-nav" :style="{height:`${mainHeight()}px`}">
-    <ul class="operation-features text-center">
-      <draggable v-model="activeOperations">
-        <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
-          <div class="operation-item w-80 m-t-30 pointer">
-            <nuxt-link :to="`/designer/edit?id=${operation.id}`" class="operation-title relative">
-              <span class="pull-right relative">
-                <fa
-                  v-if="isActiveMenu(operation.id)"
-                  key="on"
-                  :class="'feature-icon'"
-                  :icon="['fas', 'xmark']"
-                  @click="deactivateMenu(operation.id)"
-                />
-                <fa
-                  v-else
-                  key="off"
-                  :class="'feature-icon'"
-                  :icon="['fas', 'ellipsis-vertical']"
-                  @click="activateMenu(operation.id)"
-                />
-                <transition name="dropdown">
-                  <div
+  <aside class="operation-nav">
+    <div class="operation-actions">
+      <button class="btn btn-primary" type="button" @click="featureIsNotAvailable()">
+        Save to flow
+      </button>
+      <button class="btn btn-default" type="button" @click="featureIsNotAvailable()">
+        Import
+      </button>
+    </div>
+    <div class="operation-nav-list" :style="{height:`${mainHeight()}px`}">
+      <ul class="operation-features text-center">
+        <draggable v-model="activeOperations">
+          <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
+            <div class="operation-item w-80 m-t-30 pointer">
+              <nuxt-link :to="`/designer/edit?id=${operation.id}`" class="operation-title relative">
+                <span class="pull-right relative">
+                  <fa
                     v-if="isActiveMenu(operation.id)"
-                    class="dropdown-menu"
-                    :class="{ active: isActiveMenu(operation.id) }"
-                  >
-                    <ul class="dropdown-menu-nav">
-                      <li class="dropdown-menu-item">
-                        <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(operation.id)">
-                          <div class="dropdown-menu-text">Remove</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </transition>
-              </span>
-              <span class="feature-icon"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
-              <span class="text-ellipsis">{{ operation.name }}</span>
-            </nuxt-link>
-            <span class="operation-next">
-              <fa :icon="['fas', 'arrow-down-long']" />
-              <span class="operation-next-add">
-                <nuxt-link class="add-action" :to="`/designer/add?after=${index+1}`">
-                  <fa :icon="['fas', 'plus']" class="add-action-icon" />
-                </nuxt-link>
-              </span>
-            </span>
-            <div v-if="operation.operations" class="sub-operations m-t-10">
-              <div v-for="(subOperation, subIndex) in operation.operations" :key="subOperation.id" :class="isActiveViewClass(subOperation.id)" class="operation-feature">
-                <div class="operation-item m-t-30 pointer">
-                  <nuxt-link :to="`/designer/edit?id=${subOperation.id}&parent=${operation.id}`" class="operation-title relative">
-                    <span class="pull-right relative">
-                      <fa
-                        v-if="isActiveMenu(subOperation.id)"
-                        key="on"
-                        :class="'feature-icon'"
-                        :icon="['fas', 'xmark']"
-                        @click="deactivateMenu(subOperation.id)"
-                      />
-                      <fa
-                        v-else
-                        key="off"
-                        :class="'feature-icon'"
-                        :icon="['fas', 'ellipsis-vertical']"
-                        @click="activateMenu(subOperation.id)"
-                      />
-                      <transition name="dropdown">
-                        <div
-                          v-if="isActiveMenu(subOperation.id)"
-                          class="dropdown-menu"
-                          :class="{ active: isActiveMenu(subOperation.id) }"
-                        >
-                          <ul class="dropdown-menu-nav">
-                            <li class="dropdown-menu-item">
-                              <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(subOperation.id)">
-                                <div class="dropdown-menu-text">Remove</div>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </transition>
-                    </span>
-                    <span class="feature-icon"><fa :icon="['fas', categoryToIcon(subOperation.category)]" /></span>
-                    <span class="text-ellipsis">{{ subOperation.name }}</span>
-                  </nuxt-link>
-                  <span class="operation-next">
-                    <fa :icon="['fas', 'arrow-down-long']" />
-                    <span class="operation-next-add">
-                      <nuxt-link class="add-action" :to="`/designer/add?after=${subIndex+1}&inside=${index}`">
-                        <fa :icon="['fas', 'plus']" class="add-action-icon" />
-                      </nuxt-link>
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div v-if="operation.key === 'loop'">
-              <ul class="operation-features text-center m-t-20">
-                <li>
-                  <nuxt-link class="add-action" :to="`/designer/add?inside=${index}`">
+                    key="on"
+                    :class="'feature-icon'"
+                    :icon="['fas', 'xmark']"
+                    @click="deactivateMenu(operation.id)"
+                  />
+                  <fa
+                    v-else
+                    key="off"
+                    :class="'feature-icon'"
+                    :icon="['fas', 'ellipsis-vertical']"
+                    @click="activateMenu(operation.id)"
+                  />
+                  <transition name="dropdown">
+                    <div
+                      v-if="isActiveMenu(operation.id)"
+                      class="dropdown-menu"
+                      :class="{ active: isActiveMenu(operation.id) }"
+                    >
+                      <ul class="dropdown-menu-nav">
+                        <li class="dropdown-menu-item">
+                          <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(operation.id)">
+                            <div class="dropdown-menu-text">Remove</div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </transition>
+                </span>
+                <span class="feature-icon"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
+                <span class="text-ellipsis">{{ operation.name }}</span>
+              </nuxt-link>
+              <span class="operation-next">
+                <fa :icon="['fas', 'arrow-down-long']" />
+                <span class="operation-next-add">
+                  <nuxt-link class="add-action" :to="`/designer/add?after=${index+1}`">
                     <fa :icon="['fas', 'plus']" class="add-action-icon" />
                   </nuxt-link>
-                </li>
-              </ul>
+                </span>
+              </span>
+              <div v-if="operation.operations" class="sub-operations m-t-10">
+                <div v-for="(subOperation, subIndex) in operation.operations" :key="subOperation.id" :class="isActiveViewClass(subOperation.id)" class="operation-feature">
+                  <div class="operation-item m-t-30 pointer">
+                    <nuxt-link :to="`/designer/edit?id=${subOperation.id}&parent=${operation.id}`" class="operation-title relative">
+                      <span class="pull-right relative">
+                        <fa
+                          v-if="isActiveMenu(subOperation.id)"
+                          key="on"
+                          :class="'feature-icon'"
+                          :icon="['fas', 'xmark']"
+                          @click="deactivateMenu(subOperation.id)"
+                        />
+                        <fa
+                          v-else
+                          key="off"
+                          :class="'feature-icon'"
+                          :icon="['fas', 'ellipsis-vertical']"
+                          @click="activateMenu(subOperation.id)"
+                        />
+                        <transition name="dropdown">
+                          <div
+                            v-if="isActiveMenu(subOperation.id)"
+                            class="dropdown-menu"
+                            :class="{ active: isActiveMenu(subOperation.id) }"
+                          >
+                            <ul class="dropdown-menu-nav">
+                              <li class="dropdown-menu-item">
+                                <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(subOperation.id)">
+                                  <div class="dropdown-menu-text">Remove</div>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </transition>
+                      </span>
+                      <span class="feature-icon"><fa :icon="['fas', categoryToIcon(subOperation.category)]" /></span>
+                      <span class="text-ellipsis">{{ subOperation.name }}</span>
+                    </nuxt-link>
+                    <span class="operation-next">
+                      <fa :icon="['fas', 'arrow-down-long']" />
+                      <span class="operation-next-add">
+                        <nuxt-link class="add-action" :to="`/designer/add?after=${subIndex+1}&inside=${index}`">
+                          <fa :icon="['fas', 'plus']" class="add-action-icon" />
+                        </nuxt-link>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div v-if="operation.key === 'loop' || operation.key === 'exceptionhandler'">
+                <ul class="operation-features text-center m-t-20">
+                  <li>
+                    <nuxt-link class="add-action" :to="`/designer/add?inside=${index}`">
+                      <fa :icon="['fas', 'plus']" class="add-action-icon" />
+                    </nuxt-link>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
+          </li>
+        </draggable>
+      </ul>
+      <ul class="operation-features text-center">
+        <li>
+          <nuxt-link class="add-action" to="/designer/add">
+            <fa :icon="['fas', 'plus']" class="add-action-icon" />
+          </nuxt-link>
         </li>
-      </draggable>
-    </ul>
-    <ul class="operation-features text-center">
-      <li>
-        <nuxt-link class="add-action" to="/designer/add">
-          <fa :icon="['fas', 'plus']" class="add-action-icon" />
-        </nuxt-link>
-      </li>
-    </ul>
+      </ul>
+    </div>
   </aside>
 </template>
 
@@ -148,6 +158,9 @@ export default {
     ...mapActions({
       removeOperation: 'removeOperation'
     }),
+    featureIsNotAvailable () {
+      this.$toast.error('This feature is not yet available')
+    },
     isActiveMenu (id) {
       return this.activeMenus.includes(id)
     },
@@ -167,13 +180,16 @@ export default {
     },
     mainHeight () {
       if (process.client) {
-        return (window && window.innerHeight) - 30
+        return (window && window.innerHeight) - 30 - 90
       }
     }
   }
 }
 </script>
 <style>
+.operation-actions{
+  padding: 10px;
+}
 .add-action{
   margin: 10px auto;
   display: inline-block;
@@ -198,6 +214,17 @@ add-action-icon{
   overflow-x: hidden;
   background: #ffffff;
   border-right: 1px solid #1155cb;
+}
+.operation-nav-list{
+  display: block;
+  float: left;
+  height: 100%;
+  min-height: 100%;
+  width: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #ffffff;
+  border-top: 1px solid #1155cb;
 }
 .operation-features{
   list-style: none;

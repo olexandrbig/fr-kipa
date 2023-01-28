@@ -2,7 +2,7 @@
   <div>
     <div class="clearfix relative">
       <h2 class="view-title">
-        <fa :icon="['fas', 'sitemap']" /> Systems
+        <fa :icon="['fas', 'server']" /> Systems
       </h2>
       <p>Welcome to systems list. Start building your application by clicking "Create system"</p>
     </div>

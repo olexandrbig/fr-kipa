@@ -2,6 +2,23 @@
   "operations": [
     {
       "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
+      "key": "exceptionhandler",
+      "version": "1.0.0",
+      "name": "Exception operation",
+      "description": "Specify exception flow",
+      "lastUpdated": "2018-12-10T13:49:51.141Z",
+      "builtIn": true,
+      "groupId": "7020fba8-f581-41e8-a5a3-022c7ef10a95",
+      "sequenceInGroup": 1,
+      "category": "EXCEPTION",
+      "resultDescription": "",
+      "isContainerOp": false,
+      "searchTags": [
+        "exception"
+      ]
+    },
+    {
+      "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
       "key": "loop",
       "version": "1.0.0",
       "name": "Loop operation",

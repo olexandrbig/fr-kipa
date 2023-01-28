@@ -64,7 +64,7 @@ export default {
           'faBookOpen', 'faCrown', 'faUniversity', 'faUsers', 'faHeartPulse', 'faRightFromBracket', 'faList', 'faPlus',
           'faTasks', 'faBalanceScale', 'faBoxesStacked', 'faThLarge', 'faPencilRuler', 'faFlag', 'faWind', 'faDirections',
           'faFolderTree', 'faSliders', 'faAtom', 'faRotateLeft', 'faCircleInfo', 'faTag', 'faTags', 'faEllipsisVertical',
-          'faArrowDownLong', 'faSitemap', 'faPenNib', 'faRepeat', 'faKey', 'faServer']
+          'faArrowDownLong', 'faSitemap', 'faPenNib', 'faRepeat', 'faKey', 'faServer', 'faGlobe', 'faTriangleExclamation']
       },
       {
         set: '@fortawesome/free-brands-svg-icons',
