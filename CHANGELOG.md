@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## 0.13.0 - 2023-01-30
+
+### Changed
+* Designer inside flows
+
+### Added
+* Design save to flow
+* Flow load to design
+
+
 ## 0.12.0 - 2023-01-28
 
 ### Added

@@ -4,7 +4,7 @@
       <h2 class="view-title">
         <fa :icon="['fas', 'pencil']" /> Edit flow
       </h2>
-      <form v-if="getFields().length" class="m-b-20" @submit.prevent="editSystem({ entryId: storePropName, id:system.id })">
+      <form v-if="getFields().length" class="m-b-20" @submit.prevent="editFlow({ entryId: storePropName, id:flow.id })">
         <p class="m-b-20">
           <b>Update flow properties</b>
         </p>
@@ -13,6 +13,9 @@
           <button class="btn btn-primary" type="submit">
             Save
           </button>
+          <nuxt-link :to="`/flows/one/${flow.id}/designer/`" class="btn btn-default">
+            View design
+          </nuxt-link>
         </div>
       </form>
     </div>
@@ -27,11 +30,11 @@ export default {
   layout: 'flows',
   scrollToTop: true,
   async asyncData ({ store, route, redirect }) {
-    const systemId = route.query.id
-    const system = store.state.availableSystems.find((item) => {
-      return item.id === systemId
+    const flowId = route.query.id
+    const flow = store.state.availableFlows.find((item) => {
+      return item.id === flowId
     })
-    if (system) {
+    if (flow) {
       await store.dispatch('getApiDetails', { path: 'api/flows/model/' })
     } else {
       redirect('/flows/')
@@ -50,23 +53,23 @@ export default {
     ...mapGetters({
       operationsModel: 'operationsModel'
     }),
-    system () {
-      const systemId = this.$route.query.id
-      return this.$store.state.availableSystems.find((item) => {
-        return item.id === systemId
+    flow () {
+      const flowId = this.$route.query.id
+      return this.$store.state.availableFlows.find((item) => {
+        return item.id === flowId
       })
     }
   },
   watchQuery: ['id'],
   methods: {
     ...mapActions({
-      editSystem: 'editSystem'
+      editFlow: 'editFlow'
     }),
     getFields () {
       return (this.operationsModel && this.operationsModel.properties) || []
     },
     getFormData () {
-      return (this.system && this.system.properties) || {}
+      return (this.flow && this.flow.properties) || {}
     },
     categoryToIcon (category) {
       return Utils.categoryToIcon(category)

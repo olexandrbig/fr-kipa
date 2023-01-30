@@ -4,7 +4,7 @@
       <h2 class="view-title">
         <fa :icon="['fas', 'plus']" /> Create flow
       </h2>
-      <form v-if="getFields().length" class="m-b-20" @submit.prevent="addSystem({ entryId: storePropName })">
+      <form v-if="getFields().length" class="m-b-20" @submit.prevent="addFlow({ entryId: storePropName })">
         <p class="m-b-20">
           <b>Define flow properties</b>
         </p>
@@ -30,11 +30,11 @@ export default {
   layout: 'flows',
   scrollToTop: true,
   async asyncData ({ store }) {
-    await store.dispatch('getApiDetails', { path: 'api/systems/model/' })
+    await store.dispatch('getApiDetails', { path: 'api/flows/model/' })
   },
   data: () => ({
     formData: {},
-    storePropName: 'addSystem'
+    storePropName: 'addFlow'
   }),
   head () {
     return {
@@ -49,13 +49,13 @@ export default {
   watchQuery: ['id'],
   methods: {
     ...mapActions({
-      addSystem: 'addSystem'
+      addFlow: 'addFlow'
     }),
     getFields () {
       return (this.operationsModel && this.operationsModel.properties) || []
     },
     getFormData () {
-      return (this.operation && this.operation.properties) || {}
+      return (this.flow && this.flow.properties) || {}
     },
     featureIsNotAvailable () {
       this.$toast.error('This feature is not yet available')

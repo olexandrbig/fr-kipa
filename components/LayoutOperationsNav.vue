@@ -1,7 +1,7 @@
 <template>
   <aside class="operation-nav">
     <div class="operation-actions">
-      <button class="btn btn-primary" type="button" @click="featureIsNotAvailable()">
+      <button class="btn btn-primary" type="button" @click="addOrUpdateFLow()">
         Save to flow
       </button>
       <button class="btn btn-default" type="button" @click="featureIsNotAvailable()">
@@ -13,7 +13,7 @@
         <draggable v-model="activeOperations">
           <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
             <div class="operation-item w-80 m-t-30 pointer">
-              <nuxt-link :to="`/designer/edit?id=${operation.id}`" class="operation-title relative">
+              <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}`" class="operation-title relative">
                 <span class="pull-right relative">
                   <fa
                     v-if="isActiveMenu(operation.id)"
@@ -51,7 +51,7 @@
               <span class="operation-next">
                 <fa :icon="['fas', 'arrow-down-long']" />
                 <span class="operation-next-add">
-                  <nuxt-link class="add-action" :to="`/designer/add?after=${index+1}`">
+                  <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?after=${index+1}`">
                     <fa :icon="['fas', 'plus']" class="add-action-icon" />
                   </nuxt-link>
                 </span>
@@ -59,7 +59,7 @@
               <div v-if="operation.operations" class="sub-operations m-t-10">
                 <div v-for="(subOperation, subIndex) in operation.operations" :key="subOperation.id" :class="isActiveViewClass(subOperation.id)" class="operation-feature">
                   <div class="operation-item m-t-30 pointer">
-                    <nuxt-link :to="`/designer/edit?id=${subOperation.id}&parent=${operation.id}`" class="operation-title relative">
+                    <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${subOperation.id}&parent=${operation.id}`" class="operation-title relative">
                       <span class="pull-right relative">
                         <fa
                           v-if="isActiveMenu(subOperation.id)"
@@ -97,7 +97,7 @@
                     <span class="operation-next">
                       <fa :icon="['fas', 'arrow-down-long']" />
                       <span class="operation-next-add">
-                        <nuxt-link class="add-action" :to="`/designer/add?after=${subIndex+1}&inside=${index}`">
+                        <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?after=${subIndex+1}&inside=${index}`">
                           <fa :icon="['fas', 'plus']" class="add-action-icon" />
                         </nuxt-link>
                       </span>
@@ -108,7 +108,7 @@
               <div v-if="operation.key === 'loop' || operation.key === 'exceptionhandler'">
                 <ul class="operation-features text-center m-t-20">
                   <li>
-                    <nuxt-link class="add-action" :to="`/designer/add?inside=${index}`">
+                    <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?inside=${index}`">
                       <fa :icon="['fas', 'plus']" class="add-action-icon" />
                     </nuxt-link>
                   </li>
@@ -120,7 +120,7 @@
       </ul>
       <ul class="operation-features text-center">
         <li>
-          <nuxt-link class="add-action" to="/designer/add">
+          <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add`">
             <fa :icon="['fas', 'plus']" class="add-action-icon" />
           </nuxt-link>
         </li>
@@ -144,6 +144,9 @@ export default {
     activeModuleCode () {
       return this.$store.state.activeModule
     },
+    flowId () {
+      return this.$route.params.id
+    },
     activeOperations: {
       get () {
         return this.$store.state.appOperations
@@ -156,6 +159,8 @@ export default {
   },
   methods: {
     ...mapActions({
+      editFlow: 'editFlow',
+      addFlowByDesign: 'addFlowByDesign',
       removeOperation: 'removeOperation'
     }),
     featureIsNotAvailable () {
@@ -181,6 +186,13 @@ export default {
     mainHeight () {
       if (process.client) {
         return (window && window.innerHeight) - 30 - 90
+      }
+    },
+    addOrUpdateFLow () {
+      if (this.flowId !== 'new') {
+        this.editFlow({ id: this.flowId, list: this.activeOperations })
+      } else {
+        this.addFlowByDesign({ list: this.activeOperations })
       }
     }
   }

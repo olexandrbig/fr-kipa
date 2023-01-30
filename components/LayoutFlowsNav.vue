@@ -1,10 +1,10 @@
 <template>
   <aside class="system-nav" :style="{height:`${mainHeight()}px`}">
     <ul class="system-features text-center">
-      <li v-for="flow in availableSystems" :key="flow.id" :class="isActiveViewClass(flow.id)">
+      <li v-for="flow in availableFlows" :key="flow.id" :class="isActiveViewClass(flow.id)">
         <nuxt-link :to="`/flows/edit?id=${flow.id}`" class="system-item w-80 pointer">
           <div class="operation-title relative">
-            <span class="text-ellipsis">[{{ flow.properties.type }}] {{ flow.properties.name }}</span>
+            <span class="text-ellipsis">{{ flow.properties.name || 'Unnamed flow' }}</span>
           </div>
         </nuxt-link>
       </li>
@@ -26,7 +26,7 @@ export default {
     return {}
   },
   computed: {
-    availableSystems () {
+    availableFlows () {
       return this.$store.state.availableFlows
     }
   },

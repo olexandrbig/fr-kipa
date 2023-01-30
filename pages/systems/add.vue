@@ -55,7 +55,7 @@ export default {
       return (this.operationsModel && this.operationsModel.properties) || []
     },
     getFormData () {
-      return (this.operation && this.operation.properties) || {}
+      return (this.system && this.system.properties) || {}
     },
     featureIsNotAvailable () {
       this.$toast.error('This feature is not yet available')

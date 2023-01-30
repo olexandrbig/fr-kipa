@@ -17,7 +17,7 @@ export const state = () => ({
   availableFlows: [],
   latestId: null,
   appData: [{
-    link: '/designer',
+    link: '/flows/one/new/designer',
     code: 'designer',
     name: 'Designer',
     icon: 'pen-nib',
@@ -81,7 +81,7 @@ export const mutations = {
     state.activeView = tabId
   },
   SET_AVAILABLE_OPERATIONS (state, list) {
-    state.availableOperations = list
+    state.availableOperations = list || []
   },
   ADD_ACTIVE_OPERATION (state, { operation, after, inside }) {
     const total = state.appOperations.length
@@ -116,6 +116,9 @@ export const mutations = {
       return tab.id !== operationId
     })
   },
+  SET_ACTIVE_OPERATIONS (state, list) {
+    state.appOperations = list || []
+  },
   UPDATE_ACTIVE_OPERATION (state, { id, data }) {
     const current = state.appOperations.find(tab => tab.id === id)
     current.properties = data
@@ -137,6 +140,26 @@ export const mutations = {
   UPDATE_ACTIVE_SYSTEM (state, { id, data }) {
     const current = state.availableSystems.find(tab => tab.id === id)
     current.properties = data
+  },
+  ADD_ACTIVE_FLOW (state, { data, list }) {
+    const item = {
+      id: uuidv4(),
+      properties: data ? Utils.getObjectCopy(data) : [],
+      list: list ? Utils.getObjectCopy(list) : []
+    }
+    state.availableFlows.push(item)
+    state.latestId = item.id
+  },
+  UPDATE_ACTIVE_FLOW (state, { id, data, list }) {
+    const current = state.availableFlows.find(tab => tab.id === id)
+    if (current) {
+      if (data) {
+        current.properties = data
+      }
+      if (list) {
+        current.list = list
+      }
+    }
   }
 }
 
@@ -206,5 +229,21 @@ export const actions = {
   editSystem ({ commit, state }, { entryId, id }) {
     commit('UPDATE_ACTIVE_SYSTEM', { id, data: state[entryId] })
     this.$toast.success('System updated')
+  },
+  addFlowByDesign ({ commit, state, dispatch }, { list }) {
+    dispatch('addFlow', { list })
+  },
+  addFlow ({ commit, state }, { entryId, list }) {
+    commit('ADD_ACTIVE_FLOW', { data: entryId ? state[entryId] : null, list })
+    this.$toast.success('Flow created')
+    this.$router.push({ path: `/flows/edit?id=${state.latestId}` })
+  },
+  editFlow ({ commit, state }, { entryId, id, list }) {
+    commit('UPDATE_ACTIVE_FLOW', { id, data: entryId ? state[entryId] : null, list: list || null })
+    this.$toast.success('Flow updated')
+  },
+  setFlowDesign ({ commit, state }, { list }) {
+    commit('SET_ACTIVE_OPERATIONS', list)
+    this.$toast.success('Flow design loaded')
   }
 }
