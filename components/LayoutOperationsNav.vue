@@ -2,9 +2,9 @@
   <aside class="operation-nav">
     <div class="operation-actions">
       <button class="btn btn-primary" type="button" @click="addOrUpdateFLow()">
-        Save to flow
+        Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
       </button>
-      <button class="btn btn-default" type="button" @click="featureIsNotAvailable()">
+      <button class="btn btn-default pull-right" type="button" @click="featureIsNotAvailable()">
         Import
       </button>
     </div>
@@ -146,6 +146,15 @@ export default {
     },
     flowId () {
       return this.$route.params.id
+    },
+    currentFlow () {
+      const flowId = this.$route.params.id
+      if (flowId) {
+        return this.$store.state.availableFlows && this.$store.state.availableFlows.find((item) => {
+          return item.id === flowId
+        })
+      }
+      return false
     },
     activeOperations: {
       get () {
