@@ -13,7 +13,6 @@
         <draggable
           v-model="activeOperations"
           v-bind="dragOptions"
-          @input="emitter"
         >
           <li v-for="(operation, index) in activeOperations" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
             <div class="operation-item w-80 m-t-30 pointer">
@@ -127,6 +126,9 @@
             </div>
           </li>
         </draggable>
+        <div class="w-80 inline-block">
+          <NestedDraggable v-model="activeOperations" :parent="'root'" />
+        </div>
       </ul>
       <ul class="operation-features text-center">
         <li>
@@ -142,12 +144,17 @@
 <script>
 import { mapActions } from 'vuex'
 import { Utils } from '@/services/Utils'
+import NestedDraggable from '~/components/NestedDraggable.vue'
 
 export default {
   name: 'LayoutOperationsNav',
+  components: {
+    NestedDraggable
+  },
   data () {
     return {
       activeMenus: [],
+      activeOperationsList: [],
       dragOptions: {
         animation: 300,
         disabled: false,
