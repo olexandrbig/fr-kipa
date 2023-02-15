@@ -245,5 +245,16 @@ export const actions = {
   setFlowDesign ({ commit, state }, { list }) {
     commit('SET_ACTIVE_OPERATIONS', list)
     this.$toast.success('Flow design loaded')
+  },
+  reorderAppOperations ({ commit, state }, { value, parent }) {
+    if (parent !== 'root' && state.appOperations) {
+      state.appOperations = state.appOperations.map((tab, index) => {
+        if (tab.id === parent) {
+          tab.operations = value
+        }
+        return tab
+      })
+    }
+    this.$toast.success('Operations re-ordered')
   }
 }
