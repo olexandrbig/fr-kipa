@@ -1,12 +1,12 @@
 <template>
   <draggable
-    :value="value"
+    :value="internalVal"
     v-bind="dragOptions"
     @input="emitter"
   >
-    <li v-for="(operation, index) in value" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
+    <li v-for="(operation, index) in internalVal" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
       <div class="operation-item m-t-30 pointer">
-        <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}`" class="operation-title relative">
+        <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}&parent=${parent}`" class="operation-title relative">
           <span class="pull-right relative">
             <fa
               v-if="isActiveMenu(operation.id)"
@@ -44,13 +44,13 @@
         <span class="operation-next">
           <fa :icon="['fas', 'arrow-down-long']" />
           <span class="operation-next-add">
-            <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?after=${index+1}`">
+            <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?after=${index+1}&inside=${parenti}`">
               <fa :icon="['fas', 'plus']" class="add-action-icon" />
             </nuxt-link>
           </span>
         </span>
         <div v-if="operation.operations" class="sub-operations m-t-10">
-          <NestedDraggable v-model="operation.operations" :parent="operation.id" />
+          <NestedDraggable v-model="operation.operations" :parent="operation.id" :parenti="index" />
         </div>
         <div v-if="operation.key === 'loop' || operation.key === 'exceptionhandler'">
           <ul class="operation-features text-center m-t-20">
@@ -81,10 +81,16 @@ export default {
       required: false,
       type: String,
       default: null
+    },
+    parenti: {
+      required: false,
+      type: Number,
+      default: null
     }
   },
   data () {
     return {
+      internalVal: null,
       activeMenus: [],
       dragOptions: {
         animation: 300,
@@ -108,6 +114,15 @@ export default {
     },
     activeModuleCode () {
       return this.$store.state.activeModule
+    }
+  },
+  watch: {
+    value: {
+      handler (val) {
+        this.internalVal = val
+      },
+      deep: true,
+      immediate: true
     }
   },
   methods: {

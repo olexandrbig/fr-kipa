@@ -255,6 +255,6 @@ export const actions = {
         return tab
       })
     }
-    this.$toast.success('Flow design loaded')
+    this.$toast.success('Operations re-ordered')
   }
 }
