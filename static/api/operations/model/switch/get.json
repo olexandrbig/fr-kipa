@@ -1,0 +1,18 @@
+{
+  "properties" : [
+    {
+      "id": "3048c1c0-3075-4440-b8b8-57dcb8de2d6b",
+      "name": "name",
+      "type": "STRING",
+      "isOptional": false,
+      "description": "name of the switch"
+    } ,
+    {
+      "id": "9ce69b54-1c4b-4797-a087-e1ff46836c97",
+      "name": "description",
+      "type": "STRING",
+      "isOptional": true,
+      "description": "description of the switch"
+    }
+  ]
+}
