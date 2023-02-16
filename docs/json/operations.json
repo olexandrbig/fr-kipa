@@ -2,6 +2,23 @@
   "operations": [
     {
       "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
+      "key": "loop",
+      "version": "1.0.0",
+      "name": "Loop operation",
+      "description": "Iterate over operations inside",
+      "lastUpdated": "2018-12-10T13:49:51.141Z",
+      "builtIn": true,
+      "groupId": "7020fba8-f581-41e8-a5a3-022c7ef10a95",
+      "sequenceInGroup": 1,
+      "category": "LOOP",
+      "resultDescription": "",
+      "isContainerOp": false,
+      "searchTags": [
+        "loop"
+      ]
+    },
+    {
+      "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
       "key": "exceptionhandler",
       "version": "1.0.0",
       "name": "Exception operation",
@@ -19,19 +36,19 @@
     },
     {
       "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
-      "key": "loop",
+      "key": "switch",
       "version": "1.0.0",
-      "name": "Loop operation",
-      "description": "Iterate over operations inside",
+      "name": "Switch operation",
+      "description": "Specify switch flow",
       "lastUpdated": "2018-12-10T13:49:51.141Z",
       "builtIn": true,
       "groupId": "7020fba8-f581-41e8-a5a3-022c7ef10a95",
       "sequenceInGroup": 1,
-      "category": "LOOP",
+      "category": "SWITCH",
       "resultDescription": "",
       "isContainerOp": false,
       "searchTags": [
-        "loop"
+        "switch"
       ]
     },
     {

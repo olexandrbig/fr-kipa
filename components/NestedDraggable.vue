@@ -52,7 +52,7 @@
         <div v-if="operation.operations" class="sub-operations m-t-10">
           <NestedDraggable v-model="operation.operations" :parent="operation.id" :parenti="index" />
         </div>
-        <div v-if="operation.key === 'loop' || operation.key === 'exceptionhandler'">
+        <div v-if="operation.key === 'loop' || operation.key === 'switch' || operation.key === 'exceptionhandler'">
           <ul class="operation-features text-center m-t-20">
             <li>
               <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?inside=${index}`">

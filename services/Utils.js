@@ -15,6 +15,8 @@ export function categoryToIcon (category) {
       return 'sliders'
     case 'LOOP':
       return 'repeat'
+    case 'SWITCH':
+      return 'shuffle'
     case 'EXCEPTION':
       return 'triangle-exclamation'
     case 'KAFKA':
