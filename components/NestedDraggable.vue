@@ -2,6 +2,8 @@
   <draggable
     :value="internalVal"
     v-bind="dragOptions"
+    ghost-class="moving-card"
+    :move="checkMove"
     @input="emitter"
   >
     <li v-for="(operation, index) in internalVal" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
@@ -49,10 +51,10 @@
             </nuxt-link>
           </span>
         </span>
-        <div v-if="operation.operations" class="sub-operations m-t-10">
-          <NestedDraggable v-model="operation.operations" :parent="operation.id" :parenti="index" />
-        </div>
         <div v-if="operation.key === 'loop' || operation.key === 'switch' || operation.key === 'exceptionhandler'">
+          <div class="sub-operations m-t-10">
+            <NestedDraggable v-model="operation.operations" :parent="operation.id" :parenti="index" />
+          </div>
           <ul class="operation-features text-center m-t-20">
             <li>
               <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?inside=${index}`">
@@ -133,13 +135,12 @@ export default {
     }),
     emitter (value) {
       this.$store.dispatch('reorderAppOperations', { value, parent: this.parent })
-      this.$emit('input', value)
     },
     categoryToIcon (category) {
       return Utils.categoryToIcon(category)
     },
-    isActiveViewClass (viewCode) {
-      return this.$store.state.activeView === `${this.activeModuleCode}:${viewCode}` ? 'active' : false
+    isActiveViewClass (id) {
+      return this.$route.query.id === id ? 'active' : false
     },
     isActiveMenu (id) {
       return this.activeMenus.includes(id)
@@ -155,3 +156,109 @@ export default {
   }
 }
 </script>
+<style>
+.moving-card {
+  opacity: 0.5!important;
+}
+.moving-card .operation-item{
+  background: #ffffff!important;
+  border-color: #000000!important;
+  border-style: dashed!important;
+}
+.text-ellipsis{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  max-width: 77%;
+}
+
+.operation-feature{
+  display: inline-block;
+  float: left;
+  position: relative;
+  width: 100%;
+}
+.operation-features .operation-feature > .operation-item {
+  font-weight: 700;
+}
+.operation-item{
+  color: #043558;
+  line-height: 30px;
+  padding: 5px;
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #1155cb;
+  background: #ffffff;
+  text-align: left;
+}
+.sub-operations > .operation-feature:first-child > .operation-item{
+  margin-top: 10px;
+}
+.operation-next{
+  content: ' ';
+  display: none;
+  width: 24px;
+  height: 30px;
+  line-height: 28px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  color: #1155cb;
+  margin-left: -12px;
+  z-index: 1;
+  font-size: 28px;
+  text-align: center;
+}
+.operation-feature:not(:last-child) > .operation-item > .operation-next{
+  display: inline-block;
+}
+
+.operation-next-add .add-action{
+  display: none;
+  font-size: 10px;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  line-height: 13px;
+  background: #ffffff;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: -8px;
+  left: 50%;
+  position: absolute;
+  top: 3px;
+  z-index: 1;
+}
+.operation-next:hover .operation-next-add .add-action{
+  display: inline-block;
+}
+.operation-feature.active > .operation-item,
+.operation-subfeature.active > .operation-item{
+  background: #eeeeee;
+  color: #1155cb!important;
+}
+.operation-sublist .operation-item{
+  padding-left: 40px;
+}
+.operation-text{
+  line-height: 15px;
+}
+.operation-title{
+  text-decoration: none;
+  color: inherit;
+}
+.w-80{
+  width: 80%;
+}
+.feature-icon{
+  font-size: 1.3em;
+  vertical-align: middle;
+  width: 20px!important;
+  text-align: center;
+  display: inline-block;
+}
+.sub-operations{
+  padding: 0 10px;
+}
+</style>

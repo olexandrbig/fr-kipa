@@ -577,3 +577,16 @@ tr:nth-child(even) {
   opacity: 0;
   transform: translateY(30px);
 }
+
+@keyframes nodeInserted {
+  from { opacity: 0.2; }
+  to { opacity: 0.8; }
+}
+
+.item-dropzone-area {
+  height: 2rem;
+  background: #888;
+  opacity: 0.8;
+  animation-duration: 0.5s;
+  animation-name: nodeInserted;
+}

@@ -88,6 +88,7 @@ export const mutations = {
     const item = Utils.getObjectCopy(operation)
     item.id = uuidv4()
     item.properties = {}
+    item.operations = []
     if (inside && state.appOperations[inside]) {
       if (!state.appOperations[inside].operations) {
         state.appOperations[inside].operations = []
@@ -248,13 +249,24 @@ export const actions = {
   },
   reorderAppOperations ({ commit, state }, { value, parent }) {
     if (parent !== 'root' && state.appOperations) {
-      state.appOperations = state.appOperations.map((tab, index) => {
-        if (tab.id === parent) {
-          tab.operations = value
-        }
+      state.appOperations = state.appOperations.map((tab) => {
+        treeWalk(tab, value, parent)
         return tab
       })
+    } else if (parent === 'root' && state.appOperations) {
+      state.appOperations = value
     }
     this.$toast.success('Operations re-ordered')
+  }
+}
+
+function treeWalk (tab, value, parent) {
+  if (tab && tab.id === parent) {
+    tab.operations = value
+  } else if (tab.operations) {
+    tab.operations = tab.operations.map((subTab) => {
+      treeWalk(subTab, value, parent)
+      return subTab
+    })
   }
 }
