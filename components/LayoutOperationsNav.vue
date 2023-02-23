@@ -65,10 +65,6 @@ export default {
     activeOperations: {
       get () {
         return this.$store.state.appOperations
-      },
-      set (value) {
-        this.$store.commit('SET_STORE_VALUE', { entryId: 'appOperations', value })
-        this.$toast.success('Operations re-ordered')
       }
     }
   },
@@ -78,9 +74,6 @@ export default {
       addFlowByDesign: 'addFlowByDesign',
       removeOperation: 'removeOperation'
     }),
-    emitter (value) {
-      this.$emit('input', value)
-    },
     featureIsNotAvailable () {
       this.$toast.error('This feature is not yet available')
     },
@@ -161,98 +154,5 @@ add-action-icon{
   padding: 0;
   float: left;
   width: 100%;
-}
-.operation-feature{
-  display: inline-block;
-  background: #ffffff;
-  float: left;
-  position: relative;
-  width: 100%;
-}
-.operation-features .operation-feature > .operation-item {
-  font-weight: 700;
-}
-.operation-item{
-  color: #043558;
-  line-height: 30px;
-  padding: 5px;
-  display: inline-block;
-  width: 100%;
-  border: 1px solid #1155cb;
-  text-align: left;
-}
-.sub-operations > .operation-feature:first-child > .operation-item{
-  margin-top: 10px;
-}
-.operation-next{
-  content: ' ';
-  display: none;
-  width: 24px;
-  height: 30px;
-  line-height: 28px;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  color: #1155cb;
-  margin-left: -12px;
-  z-index: 1;
-  font-size: 28px;
-  text-align: center;
-}
-.operation-feature:not(:last-child) > .operation-item > .operation-next{
-  display: inline-block;
-}
-
-.operation-next-add .add-action{
-  display: none;
-  font-size: 10px;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  line-height: 13px;
-  background: #ffffff;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: -8px;
-  left: 50%;
-  position: absolute;
-  top: 3px;
-  z-index: 1;
-}
-.operation-next:hover .operation-next-add .add-action{
-  display: inline-block;
-}
-.operation-feature.active .operation-item,
-.operation-subfeature.active .operation-item,
-.operation-item:hover{
-  background: #f5f5f5;
-}
-.operation-sublist .operation-item{
-  padding-left: 40px;
-}
-.operation-text{
-  line-height: 15px;
-}
-.operation-title{
-  text-decoration: none;
-  color: inherit;
-}
-.w-80{
-  width: 80%;
-}
-.feature-icon{
-  font-size: 1.3em;
-  vertical-align: middle;
-  width: 20px!important;
-  text-align: center;
-  display: inline-block;
-}
-.text-ellipsis{
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.sub-operations{
-  padding: 0 10px;
 }
 </style>
