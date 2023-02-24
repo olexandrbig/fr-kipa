@@ -1,7 +1,7 @@
 {
   "operations": [
     {
-      "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
+      "id": "23c8bca6-07c3-4bd7-b035-9047a6bfeea2",
       "key": "loop",
       "version": "1.0.0",
       "name": "Loop operation",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
+      "id": "22c8bca6-07c3-4bd7-b035-9047a6bfeea2",
       "key": "exceptionhandler",
       "version": "1.0.0",
       "name": "Exception operation",
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
+      "id": "21c8bca6-07c3-4bd7-b035-9047a6bfeea2",
       "key": "switch",
       "version": "1.0.0",
       "name": "Switch operation",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
+      "id": "20c8bca6-07c3-4bd7-b035-9047a6bfeea2",
       "key": "ftplistfiles",
       "version": "1.0.0",
       "name": "Get file(s) from (S)FTP server",

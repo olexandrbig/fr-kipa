@@ -5,14 +5,14 @@
       "name": "name",
       "type": "STRING",
       "isOptional": false,
-      "description": "name of the switch"
+      "description": "Name"
     } ,
     {
       "id": "9ce69b54-1c4b-4797-a087-e1ff46836c97",
       "name": "description",
       "type": "STRING",
       "isOptional": true,
-      "description": "description of the switch"
+      "description": "Description"
     }
   ]
 }

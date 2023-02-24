@@ -1,7 +1,7 @@
 {
   "operations": [
     {
-      "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea2",
+      "id": "10c8bca6-07c3-4bd7-b035-9047a6bfeea2",
       "version": "1.0.0",
       "name": "Get file(s) from (S)FTP server",
       "description": "Retrieves one or more files specified by full path from FTP server",
