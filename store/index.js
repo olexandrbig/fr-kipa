@@ -256,7 +256,7 @@ export const actions = {
     } else if (parent === 'root' && state.appOperations) {
       state.appOperations = value
     }
-    this.$toast.success('Operations re-ordered')
+    // this.$toast.success('Operations re-ordered')
   }
 }
 

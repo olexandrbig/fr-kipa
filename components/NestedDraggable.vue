@@ -3,7 +3,6 @@
     :value="internalVal"
     v-bind="dragOptions"
     ghost-class="moving-card"
-    :move="checkMove"
     @input="emitter"
   >
     <li v-for="(operation, index) in internalVal" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">

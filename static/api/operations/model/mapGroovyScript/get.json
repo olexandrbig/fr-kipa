@@ -5,7 +5,7 @@
       "name": "name",
       "type": "STRING",
       "isOptional": false,
-      "description": "Name of the groovy map function"
+      "description": "Name"
     },
     {
       "id": "ccf8e1ec-4172-45b3-bb9a-51bbce2b681a",

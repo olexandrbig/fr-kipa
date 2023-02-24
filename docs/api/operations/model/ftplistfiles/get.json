@@ -1,0 +1,68 @@
+{
+  "properties": [
+    {
+      "id": "0048c1c0-3075-4440-b8b8-57dcb8de2d6b",
+      "name": "name",
+      "type": "STRING",
+      "isOptional": false,
+      "description": "Name"
+    } ,
+    {
+      "id": "01e69b54-1c4b-4797-a087-e1ff46836c97",
+      "name": "description",
+      "type": "STRING",
+      "isOptional": true,
+      "description": "Description"
+    },
+    {
+      "id": "02c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "system",
+      "type": "ENUM",
+      "isOptional": true,
+      "enums": [
+        "JSCAPE",
+        "FileZilla",
+        "GoAnywhere",
+        "Progress MOVEit",
+        "Globalscape MFT",
+        "Oracle MFT",
+        "Rebex Tiny Server",
+        "Titan FTP Server",
+        "SRT Cornerstone"
+      ],
+      "defaultValue": "Oracle MFT"
+    },
+    {
+      "id": "03c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "authentication",
+      "type": "ENUM",
+      "isOptional": true,
+      "enums": [
+        "Public Key",
+        "User/Password"
+      ],
+      "defaultValue": "Public Key"
+    },
+    {
+      "id": "04c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "credentials",
+      "type": "STRING",
+      "isOptional": true,
+      "description": "Credentials"
+    },
+    {
+      "id": "05c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "directory",
+      "type": "STRING",
+      "isOptional": true,
+      "description": "Directory"
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "includeSubdirectories",
+      "type": "BOOLEAN",
+      "description": "Include subdirectories",
+      "isOptional": true
+    }
+  ]
+}
