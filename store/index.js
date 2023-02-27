@@ -89,40 +89,32 @@ export const mutations = {
     item.id = uuidv4()
     item.properties = {}
     item.operations = []
-    if (inside && state.appOperations[inside]) {
-      if (!state.appOperations[inside].operations) {
-        state.appOperations[inside].operations = []
-      }
-      state.appOperations = state.appOperations.map((tab, index) => {
-        if (index === +inside) {
-          const subTotal = tab.operations.length
-          tab.operations.splice((after || subTotal), 0, item)
+    if (inside && inside !== 'root') {
+      const target = Utils.findOperationById(state.appOperations, inside)
+      if (target) {
+        if (!target.operations) {
+          target.operations = []
         }
-        return tab
-      })
+        const subTotal = target.operations.length
+        target.operations.splice((after || subTotal), 0, item)
+      } else {
+        state.appOperations.splice((after || total), 0, item)
+      }
     } else {
       state.appOperations.splice((after || total), 0, item)
     }
   },
   REMOVE_ACTIVE_OPERATION (state, operationId) {
-    state.appOperations = state.appOperations.map((tab) => {
-      if (tab.operations) {
-        tab.operations = tab.operations.filter((subTab) => {
-          return subTab.id !== operationId
-        })
-      }
-      return tab
-    })
-    state.appOperations = state.appOperations.filter((tab) => {
-      return tab.id !== operationId
-    })
+    state.appOperations = Utils.removeOperationById(state.appOperations, operationId)
   },
   SET_ACTIVE_OPERATIONS (state, list) {
     state.appOperations = list || []
   },
   UPDATE_ACTIVE_OPERATION (state, { id, data }) {
-    const current = state.appOperations.find(tab => tab.id === id)
-    current.properties = data
+    const current = Utils.findOperationById(state.appOperations, id)
+    if (current) {
+      current.properties = data
+    }
   },
   SET_OPERATIONS_MODEL (state, data) {
     state.operationsModel = data

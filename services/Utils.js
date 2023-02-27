@@ -4,6 +4,37 @@ export const Utils = {
   },
   getObjectCopy: (obj) => {
     return getObjectCopy(obj)
+  },
+  findOperationById: (list, id) => {
+    return treeSearch({ operations: list }, id)
+  },
+  removeOperationById: (list, id) => {
+    return treeClean(list, id)
+  }
+}
+
+export function treeSearch (item, id) {
+  let result
+  if (item && item.id === id) {
+    result = item
+  } else if (item.operations) {
+    item.operations.forEach((subItem) => {
+      const subResult = treeSearch(subItem, id)
+      if (subResult) {
+        result = subResult
+      }
+    })
+  }
+  return result
+}
+export function treeClean (list, id) {
+  if (list) {
+    return list.filter((item) => {
+      if (item.operations) {
+        item.operations = treeClean(item.operations, id)
+      }
+      return item.id !== id
+    })
   }
 }
 
