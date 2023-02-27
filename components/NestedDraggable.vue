@@ -7,7 +7,7 @@
   >
     <li v-for="(operation, index) in internalVal" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
       <div class="operation-item m-t-30 pointer">
-        <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}&parent=${parent}`" class="operation-title relative">
+        <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}`" class="operation-title relative">
           <span class="pull-right relative">
             <fa
               v-if="isActiveMenu(operation.id)"
@@ -45,7 +45,7 @@
         <span class="operation-next">
           <fa :icon="['fas', 'arrow-down-long']" />
           <span class="operation-next-add">
-            <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?after=${index+1}&inside=${parenti}`">
+            <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?after=${index+1}&inside=${parent}`">
               <fa :icon="['fas', 'plus']" class="add-action-icon" />
             </nuxt-link>
           </span>
@@ -56,7 +56,7 @@
           </div>
           <ul class="operation-features text-center m-t-20">
             <li>
-              <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?inside=${index}`">
+              <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?inside=${operation.id}`">
                 <fa :icon="['fas', 'plus']" class="add-action-icon" />
               </nuxt-link>
             </li>
