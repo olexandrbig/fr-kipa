@@ -25,7 +25,7 @@
           </small>
         </p>
       </div>
-      <div v-else>
+      <div v-else class="m-b-20">
         <fa :icon="['fas','circle-info']" /> Operation is not found
       </div>
       <form v-if="getFields().length" class="m-b-20" @submit.prevent="saveOperation({ entryId: storePropName, id:operation.id })">

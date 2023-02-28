@@ -17,7 +17,7 @@ export function treeSearch (item, id) {
   let result
   if (item && item.id === id) {
     result = item
-  } else if (item.operations) {
+  } else if (item && item.operations) {
     item.operations.forEach((subItem) => {
       const subResult = treeSearch(subItem, id)
       if (subResult) {

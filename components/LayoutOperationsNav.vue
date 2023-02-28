@@ -1,16 +1,16 @@
 <template>
   <aside class="operation-nav">
     <div class="operation-actions">
-      <button class="btn btn-primary" type="button" @click="addOrUpdateFLow()">
+      <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
         Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
       </button>
-      <button class="btn btn-default pull-right" type="button" @click="featureIsNotAvailable()">
-        Import
-      </button>
+      <h2 class="nav-title">
+        <fa :icon="['fas', 'pen-nib']" /> Designer
+      </h2>
     </div>
     <div class="operation-nav-list" :style="{height:`${mainHeight()}px`}">
       <ul class="operation-features text-center">
-        <div class="w-80 inline-block">
+        <div class="w-90 inline-block">
           <NestedDraggable v-model="activeOperations" :parent="'root'" :parenti="0" />
         </div>
       </ul>
@@ -110,6 +110,9 @@ export default {
 }
 </script>
 <style>
+.nav-title{
+  padding: 8px 0;
+}
 .operation-actions{
   padding: 10px;
 }
@@ -132,7 +135,7 @@ add-action-icon{
   float: left;
   height: 100%;
   min-height: 100%;
-  width: 400px;
+  width: 640px;
   overflow-y: auto;
   overflow-x: hidden;
   background: #ffffff;
@@ -143,7 +146,7 @@ add-action-icon{
   float: left;
   height: 100%;
   min-height: 100%;
-  width: 400px;
+  width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   background: #ffffff;
