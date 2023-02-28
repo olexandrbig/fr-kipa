@@ -26,7 +26,7 @@ export default {
 .active-view{
   display: block;
   float: left;
-  width: calc(100% - 460px);
+  width: calc(100% - 700px);
   background: #f5f5f5;
   height: 100%;
   min-height: 100%;

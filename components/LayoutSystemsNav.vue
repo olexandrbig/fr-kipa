@@ -1,21 +1,28 @@
 <template>
-  <aside class="system-nav" :style="{height:`${mainHeight()}px`}">
-    <ul class="system-features text-center">
-      <li v-for="system in availableSystems" :key="system.id" :class="isActiveViewClass(system.id)">
-        <nuxt-link :to="`/systems/edit?id=${system.id}`" class="system-item w-80 pointer">
-          <div class="operation-title relative">
-            <span class="text-ellipsis">[{{ system.properties.type }}] {{ system.properties.name }}</span>
-          </div>
-        </nuxt-link>
-      </li>
-    </ul>
-    <ul class="system-features text-center">
-      <li>
-        <nuxt-link class="add-action" to="/systems/add">
-          <fa :icon="['fas', 'plus']" class="add-action-icon" />
-        </nuxt-link>
-      </li>
-    </ul>
+  <aside class="system-nav">
+    <div class="operation-actions">
+      <h2 class="nav-title">
+        <fa :icon="['fas', 'server']" /> Systems
+      </h2>
+    </div>
+    <div class="operation-nav-list" :style="{height:`${mainHeight()}px`}">
+      <ul class="system-items text-center">
+        <li v-for="system in availableSystems" :key="system.id" :class="isActiveViewClass(system.id)">
+          <nuxt-link :to="`/systems/edit?id=${system.id}`" class="system-entry w-80 pointer">
+            <div class="operation-title relative">
+              <span class="text-ellipsis">[{{ system.properties.type }}] {{ system.properties.name }}</span>
+            </div>
+          </nuxt-link>
+        </li>
+      </ul>
+      <ul class="system-items text-center">
+        <li>
+          <nuxt-link class="add-action" to="/systems/add">
+            <fa :icon="['fas', 'plus']" class="add-action-icon" />
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
   </aside>
 </template>
 
@@ -33,7 +40,7 @@ export default {
   methods: {
     mainHeight () {
       if (process.client) {
-        return (window && window.innerHeight) - 30
+        return (window && window.innerHeight) - 30 - 90
       }
     },
     isActiveViewClass (id) {
@@ -68,7 +75,7 @@ add-action-icon{
   background: #ffffff;
   border-right: 1px solid #1155cb;
 }
-.system-features{
+.system-items{
   list-style: none;
   padding: 0;
   float: left;
@@ -81,21 +88,22 @@ add-action-icon{
   position: relative;
   width: 100%;
 }
-.system-item.nuxt-link-exact-active{
+.system-entry.nuxt-link-exact-active{
   font-weight: 700;
   background: #eeeeee;
 }
-.system-features > .system-feature > .system-item {
+.system-items > .system-feature > .system-entry {
   font-weight: 700;
 }
-.system-item{
+.system-entry{
   text-decoration: none;
   color: #043558;
   line-height: 30px;
   padding: 5px;
   display: inline-block;
-  width: 100%;
-  border-bottom: 1px solid #1155cb;
+  width: 94%;
+  margin: 1% 3%;
+  border: 1px solid #1155cb;
   text-align: left;
 }
 .system-next{
@@ -113,7 +121,7 @@ add-action-icon{
   font-size: 28px;
   text-align: center;
 }
-.system-feature:not(:last-child) .system-item .system-next{
+.system-feature:not(:last-child) .system-entry .system-next{
   display: inline-block;
 }
 .system-next-add .add-action{
@@ -135,12 +143,12 @@ add-action-icon{
 .system-next:hover .system-next-add .add-action{
   display: inline-block;
 }
-.system-feature.active .system-item,
-.system-subfeature.active .system-item,
-.system-item:hover{
+.system-feature.active .system-entry,
+.system-subfeature.active .system-entry,
+.system-entry:hover{
   background: #f5f5f5;
 }
-.system-sublist .system-item{
+.system-sublist .system-entry{
   padding-left: 40px;
 }
 .feature-icon{

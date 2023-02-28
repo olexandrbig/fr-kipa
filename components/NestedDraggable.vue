@@ -94,7 +94,7 @@ export default {
       internalVal: null,
       activeMenus: [],
       dragOptions: {
-        animation: 300,
+        // animation: 300,
         disabled: false,
         group: 'all'
       }
@@ -249,6 +249,9 @@ export default {
 }
 .w-80{
   width: 80%;
+}
+.w-90{
+  width: 90%;
 }
 .feature-icon{
   font-size: 1.3em;

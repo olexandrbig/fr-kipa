@@ -1,21 +1,28 @@
 <template>
-  <aside class="system-nav" :style="{height:`${mainHeight()}px`}">
-    <ul class="system-features text-center">
-      <li v-for="flow in availableFlows" :key="flow.id" :class="isActiveViewClass(flow.id)">
-        <nuxt-link :to="`/flows/edit?id=${flow.id}`" class="system-item w-80 pointer">
-          <div class="operation-title relative">
-            <span class="text-ellipsis">{{ flow.properties.name || 'Unnamed flow' }}</span>
-          </div>
-        </nuxt-link>
-      </li>
-    </ul>
-    <ul class="system-features text-center">
-      <li>
-        <nuxt-link class="add-action" to="/flows/add">
-          <fa :icon="['fas', 'plus']" class="add-action-icon" />
-        </nuxt-link>
-      </li>
-    </ul>
+  <aside class="system-nav">
+    <div class="operation-actions">
+      <h2 class="nav-title">
+        <fa :icon="['fas', 'sitemap']" /> Flows
+      </h2>
+    </div>
+    <div class="operation-nav-list" :style="{height:`${mainHeight()}px`}">
+      <ul class="system-flows text-center">
+        <li v-for="flow in availableFlows" :key="flow.id" :class="isActiveViewClass(flow.id)">
+          <nuxt-link :to="`/flows/edit?id=${flow.id}`" class="flow-item w-80 pointer">
+            <div class="operation-title relative">
+              <span class="text-ellipsis">{{ flow.properties.name || 'Unnamed flow' }}</span>
+            </div>
+          </nuxt-link>
+        </li>
+      </ul>
+      <ul class="system-flows text-center">
+        <li>
+          <nuxt-link class="add-action" to="/flows/add">
+            <fa :icon="['fas', 'plus']" class="add-action-icon" />
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
   </aside>
 </template>
 
@@ -33,7 +40,7 @@ export default {
   methods: {
     mainHeight () {
       if (process.client) {
-        return (window && window.innerHeight) - 30
+        return (window && window.innerHeight) - 30 - 90
       }
     },
     isActiveViewClass (id) {
@@ -68,34 +75,25 @@ add-action-icon{
   background: #ffffff;
   border-right: 1px solid #1155cb;
 }
-.system-features{
+.system-flows{
   list-style: none;
   padding: 0;
   float: left;
   width: 100%;
 }
-.system-feature{
-  display: inline-block;
-  background: #ffffff;
-  float: left;
-  position: relative;
-  width: 100%;
-}
-.system-item.nuxt-link-exact-active{
+.flow-item.nuxt-link-exact-active{
   font-weight: 700;
   background: #eeeeee;
 }
-.system-features > .system-feature > .system-item {
-  font-weight: 700;
-}
-.system-item{
+.flow-item{
   text-decoration: none;
   color: #043558;
   line-height: 30px;
   padding: 5px;
   display: inline-block;
-  width: 100%;
-  border-bottom: 1px solid #1155cb;
+  width: 94%;
+  margin: 1% 3%;
+  border: 1px solid #1155cb;
   text-align: left;
 }
 .system-next{
@@ -112,9 +110,6 @@ add-action-icon{
   z-index: 1;
   font-size: 28px;
   text-align: center;
-}
-.system-feature:not(:last-child) .system-item .system-next{
-  display: inline-block;
 }
 .system-next-add .add-action{
   display: none;
@@ -135,12 +130,11 @@ add-action-icon{
 .system-next:hover .system-next-add .add-action{
   display: inline-block;
 }
-.system-feature.active .system-item,
-.system-subfeature.active .system-item,
-.system-item:hover{
+.system-subfeature.active .flow-item,
+.flow-item:hover{
   background: #f5f5f5;
 }
-.system-sublist .system-item{
+.system-sublist .flow-item{
   padding-left: 40px;
 }
 .feature-icon{
