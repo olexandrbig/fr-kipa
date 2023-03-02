@@ -48,6 +48,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { Utils } from '@/services/Utils'
+
 export default {
   name: 'FormBuilder',
   props: {
@@ -67,11 +68,13 @@ export default {
   data: () => ({
     formData: {},
     cmOptions: {
+      mode: 'text/x-groovy',
       tabSize: 4,
-      mode: 'text/groovy',
-      theme: 'base16-dark',
+      styleActiveLine: true,
+      autofocus: true,
       lineNumbers: true,
-      line: true
+      line: true,
+      matchBrackets: true
     }
   }),
   async fetch () {
