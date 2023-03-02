@@ -10,14 +10,15 @@
         type="text"
         @change="updateStore({ entryId:entry, value:formData })"
       >
-      <textarea
-        v-if="property.type === 'SCRIPT'"
-        v-model="formData[property.name]"
-        class="form-control"
-        :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
-        :required="!property.isOptional"
-        @change="updateStore({ entryId:entry, value:formData })"
-      />
+      <client-only v-if="property.type === 'SCRIPT'">
+        <codemirror
+          v-model="formData[property.name]"
+          :options="cmOptions"
+          :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
+          :required="!property.isOptional"
+          @input="updateStore({ entryId:entry, value:formData })"
+        />
+      </client-only>
       <label v-if="property.type === 'BOOLEAN'" class="form-control">
         <input
           v-model="formData[property.name]"
@@ -64,7 +65,14 @@ export default {
     }
   },
   data: () => ({
-    formData: {}
+    formData: {},
+    cmOptions: {
+      tabSize: 4,
+      mode: 'text/groovy',
+      theme: 'base16-dark',
+      lineNumbers: true,
+      line: true
+    }
   }),
   async fetch () {
     this.formData = {}
