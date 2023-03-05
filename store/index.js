@@ -138,7 +138,7 @@ export const mutations = {
     const item = {
       id: uuidv4(),
       properties: data ? Utils.getObjectCopy(data) : [],
-      list: list ? Utils.getObjectCopy(list) : []
+      list: list || []
     }
     state.availableFlows.push(item)
     state.latestId = item.id

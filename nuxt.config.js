@@ -37,6 +37,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    'codemirror/lib/codemirror.css',
     '~/assets/main.css'
   ],
 
@@ -45,7 +46,8 @@ export default {
     { src: '~/plugins/vue-underscore', mode: 'client' },
     { src: '~/plugins/vue-i18n' },
     { src: '~/plugins/vue-chart', mode: 'client' },
-    { src: '~/plugins/vuedraggable.js' }
+    { src: '~/plugins/vuedraggable' },
+    { src: '~/plugins/codemirror', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

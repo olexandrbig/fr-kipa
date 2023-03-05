@@ -262,6 +262,9 @@ select.form-control-borderless{
 .m-r-20 {
   margin-right: 20px;
 }
+.m-r-3 {
+  margin-right: 3px;
+}
 .m-lr-2 {
   margin-left: 2px;
   margin-right: 2px;
@@ -589,4 +592,16 @@ tr:nth-child(even) {
   opacity: 0.8;
   animation-duration: 0.5s;
   animation-name: nodeInserted;
+}
+
+.vue-codemirror{
+  font-family: Georama,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 200px;
+  width: 100%;
+  height: auto;
+  border-width: 1px;
+  border-style: inset;
+  border-color: rgb(118, 118, 118);
 }

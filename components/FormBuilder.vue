@@ -1,6 +1,18 @@
 <template>
   <div v-if="fields && fields.length" class="form-builder">
-    <div v-for="property in fields" :key="property.name" class="m-b-10">
+    <div v-if="Object.keys(fieldsMapped()).length > 1" class="m-b-10">
+      <button
+        v-for="(item, key) in fieldsMapped()"
+        :key="key"
+        class="btn m-r-3"
+        type="button"
+        :class="getTabClasses(key)"
+        @click="currentTab = key"
+      >
+        {{ key }}
+      </button>
+    </div>
+    <div v-for="property in fieldsByGroup(currentTab)" :key="property.name" class="m-b-10">
       <input
         v-if="property.type === 'STRING'"
         v-model="formData[property.name]"
@@ -10,14 +22,24 @@
         type="text"
         @change="updateStore({ entryId:entry, value:formData })"
       >
-      <textarea
-        v-if="property.type === 'SCRIPT'"
+      <input
+        v-if="property.type === 'NUMBER'"
         v-model="formData[property.name]"
         class="form-control"
         :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
         :required="!property.isOptional"
+        type="number"
         @change="updateStore({ entryId:entry, value:formData })"
-      />
+      >
+      <client-only v-if="property.type === 'SCRIPT'">
+        <codemirror
+          v-model="formData[property.name]"
+          :options="cmOptions"
+          :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
+          :required="!property.isOptional"
+          @input="updateStore({ entryId:entry, value:formData })"
+        />
+      </client-only>
       <label v-if="property.type === 'BOOLEAN'" class="form-control">
         <input
           v-model="formData[property.name]"
@@ -47,6 +69,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { Utils } from '@/services/Utils'
+
 export default {
   name: 'FormBuilder',
   props: {
@@ -64,7 +87,17 @@ export default {
     }
   },
   data: () => ({
-    formData: {}
+    currentTab: '',
+    formData: {},
+    cmOptions: {
+      mode: 'text/x-groovy',
+      tabSize: 4,
+      styleActiveLine: true,
+      autofocus: true,
+      lineNumbers: true,
+      line: true,
+      matchBrackets: true
+    }
   }),
   async fetch () {
     this.formData = {}
@@ -84,6 +117,20 @@ export default {
       if (property && this.formData && !this.formData[property.name]) {
         this.formData[property.name] = this.formData && this.formData[property.name] ? this.formData[property.name] : property.defaultValue
       }
+    },
+    fieldsMapped () {
+      return Utils.groupBy(this.fields, 'group')
+    },
+    fieldsByGroup (currentTab) {
+      const mapped = this.fieldsMapped()
+      return currentTab ? mapped[currentTab] : mapped[Object.keys(mapped)[0]]
+    },
+    getTabClasses (key) {
+      if (!this.currentTab) {
+        const mapped = this.fieldsMapped()
+        this.currentTab = Object.keys(mapped)[0]
+      }
+      return this.currentTab === key ? 'btn-default' : 'btn-primary'
     }
   }
 }

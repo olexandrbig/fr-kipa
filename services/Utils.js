@@ -10,7 +10,12 @@ export const Utils = {
   },
   removeOperationById: (list, id) => {
     return treeClean(list, id)
-  }
+  },
+  groupBy: (arr, prop) =>
+    arr.reduce((acc, val) => {
+      ;(acc[val[prop]] = acc[val[prop]] || []).push(val)
+      return acc
+    }, {})
 }
 
 export function treeSearch (item, id) {
