@@ -5,14 +5,16 @@
       "name": "name",
       "type": "STRING",
       "isOptional": false,
-      "description": "Name"
+      "description": "Name",
+      "group": "General"
     } ,
     {
       "id": "01e69b54-1c4b-4797-a087-e1ff46836c97",
       "name": "description",
       "type": "STRING",
       "isOptional": true,
-      "description": "Description"
+      "description": "Description",
+      "group": "General"
     },
     {
       "id": "02c40e59-cefb-4d30-8cf7-c09aca77f720",
@@ -30,7 +32,8 @@
         "Titan FTP Server",
         "SRT Cornerstone"
       ],
-      "defaultValue": "Oracle MFT"
+      "defaultValue": "Oracle MFT",
+      "group": "General"
     },
     {
       "id": "03c40e59-cefb-4d30-8cf7-c09aca77f720",
@@ -41,28 +44,56 @@
         "Public Key",
         "User/Password"
       ],
-      "defaultValue": "Public Key"
+      "defaultValue": "Public Key",
+      "group": "General"
     },
     {
       "id": "04c40e59-cefb-4d30-8cf7-c09aca77f720",
       "name": "credentials",
       "type": "STRING",
       "isOptional": true,
-      "description": "Credentials"
+      "description": "Credentials",
+      "group": "General"
     },
     {
       "id": "05c40e59-cefb-4d30-8cf7-c09aca77f720",
       "name": "directory",
       "type": "STRING",
       "isOptional": true,
-      "description": "Directory"
+      "description": "Directory",
+      "group": "General"
     },
     {
       "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
       "name": "includeSubdirectories",
       "type": "BOOLEAN",
       "description": "Include subdirectories",
-      "isOptional": true
+      "isOptional": true,
+      "group": "General"
+    },
+    {
+      "id": "06c40e29-cefb-4d30-8cf7-c09aca77f720",
+      "name": "timeout",
+      "type": "NUMBER",
+      "description": "Timeout (milliseconds)",
+      "isOptional": true,
+      "group": "Resilience"
+    },
+    {
+      "id": "06c40e39-cefb-4d30-8cf7-c09aca77f720",
+      "name": "attempts",
+      "type": "NUMBER",
+      "description": "Reconnect attempts",
+      "isOptional": true,
+      "group": "Resilience"
+    },
+    {
+      "id": "06c40e49-cefb-4d30-8cf7-c09aca77f720",
+      "name": "delay",
+      "type": "NUMBER",
+      "description": "Reconnect delay (milliseconds)",
+      "isOptional": true,
+      "group": "Resilience"
     }
   ]
 }

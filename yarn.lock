@@ -3220,12 +3220,7 @@ coa@^2.0.2:
     chalk "^2.4.1"
     q "^1.1.2"
 
-codemirror@^4.13.0:
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-4.13.0.tgz#209772d38a7bb99647c37b500db121110dd9af6f"
-  integrity sha512-+KOX1KjxkdzFJibjxg4u7r5uuLXG6M9cmVbio7x5qAyXcyT0Y437DPMP3AEmD1bGxoi+xFx21B84W0MfIuTfxQ==
-
-codemirror@^5.41.0:
+codemirror@^5.41.0, codemirror@^5.65.12:
   version "5.65.12"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.65.12.tgz#294fdf097d10ac5b56a9e011a91eff252afc73ae"
   integrity sha512-z2jlHBocElRnPYysN2HAuhXbO3DNB0bcSKmNz3hcWR2Js2Dkhc1bEOxG93Z3DeUrnm+qx56XOY5wQmbP5KY0sw==
