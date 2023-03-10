@@ -1,9 +1,15 @@
 <template>
   <div>
     <div class="clearfix relative">
-      <h2 class="view-title">
-        <fa :icon="['fas', 'key']" /> Security Credentials
-      </h2>
+      <div class="center-info-block">
+        <fa class="center-info-block-icon" :icon="['fas', 'key']" />
+        <h2 class="center-info-block-title">
+          Security Credentials
+        </h2>
+        <p class="center-info-block-description">
+          Start building your application by clicking "Create credential"
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -11,7 +17,7 @@
 <script>
 
 export default {
-  layout: 'small',
+  layout: 'credentials',
   scrollToTop: true,
   head () {
     const entity = 'credentials'
@@ -34,3 +40,21 @@ export default {
   }
 }
 </script>
+
+<style>
+.center-info-block{
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+  padding: 100px 0;
+  width: 100%;
+}
+.center-info-block-icon{
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+.center-info-block-title{
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+</style>
