@@ -1,10 +1,15 @@
 <template>
   <div>
     <div class="clearfix relative">
-      <h2 class="view-title">
-        <fa :icon="['fas', 'server']" /> Systems
-      </h2>
-      <p>Welcome to systems list. Start building your application by clicking "Create system"</p>
+      <div class="center-info-block">
+        <fa class="center-info-block-icon" :icon="['fas', 'server']" />
+        <h2 class="center-info-block-title">
+          Systems
+        </h2>
+        <p class="center-info-block-description">
+          Start building your application by clicking "Create system"
+        </p>
+      </div>
     </div>
   </div>
 </template>

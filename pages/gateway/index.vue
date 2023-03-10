@@ -1,9 +1,15 @@
 <template>
   <div>
     <div class="clearfix relative">
-      <h2 class="view-title">
-        <fa :icon="['fas', 'globe']" /> API Gateway
-      </h2>
+      <div class="center-info-block">
+        <fa class="center-info-block-icon" :icon="['fas', 'globe']" />
+        <h2 class="center-info-block-title">
+          API Gateway
+        </h2>
+        <p class="center-info-block-description">
+          Start building your application by clicking "Create gateway"
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -11,7 +17,7 @@
 <script>
 
 export default {
-  layout: 'small',
+  layout: 'gateway',
   scrollToTop: true,
   head () {
     const entity = 'gateway'

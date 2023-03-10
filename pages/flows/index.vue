@@ -1,10 +1,15 @@
 <template>
   <div>
     <div class="clearfix relative">
-      <h2 class="view-title">
-        <fa :icon="['fas', 'sitemap']" /> Flows
-      </h2>
-      <p>Welcome to flows list. Start building your application by clicking "Start design"</p>
+      <div class="center-info-block">
+        <fa class="center-info-block-icon" :icon="['fas', 'sitemap']" />
+        <h2 class="center-info-block-title">
+          Flows
+        </h2>
+        <p class="center-info-block-description">
+          Start building your application by clicking "Start design"
+        </p>
+      </div>
     </div>
   </div>
 </template>

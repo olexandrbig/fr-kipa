@@ -15,6 +15,8 @@ export const state = () => ({
   availableOperations: [],
   availableSystems: [],
   availableFlows: [],
+  availableGateways: [],
+  availableCredentials: [],
   latestId: null,
   appData: [{
     link: '/flows/one/new/designer',

@@ -1,10 +1,15 @@
 <template>
   <div>
     <div class="clearfix relative">
-      <h2 class="view-title">
-        <fa :icon="['fas', 'pen-nib']" /> Designer
-      </h2>
-      <p>Welcome to workflow designer. Start building your application by clicking "Chose an operation"</p>
+      <div class="center-info-block">
+        <fa class="center-info-block-icon" :icon="['fas', 'pen-nib']" />
+        <h2 class="center-info-block-title">
+          Designer
+        </h2>
+        <p class="center-info-block-description">
+          Start building your application by clicking "Chose an operation"
+        </p>
+      </div>
     </div>
   </div>
 </template>
