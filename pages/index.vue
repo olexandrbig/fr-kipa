@@ -13,7 +13,7 @@
 export default {
   scrollToTop: true,
   asyncData ({ app, redirect, params }) {
-    redirect('/flows/one/new/designer/add')
+    redirect('/flows/one/new/designer/')
     return {}
   },
   head () {

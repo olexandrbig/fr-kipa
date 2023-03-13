@@ -45,9 +45,9 @@
         <span class="operation-next">
           <fa :icon="['fas', 'arrow-down-long']" />
           <span class="operation-next-add">
-            <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?after=${index+1}&inside=${parent}`">
+            <button type="button" class="add-action" @click="showNav({flowId, after:index+1, inside: parent})">
               <fa :icon="['fas', 'plus']" class="add-action-icon" />
-            </nuxt-link>
+            </button>
           </span>
         </span>
         <div v-if="operation.key === 'loop' || operation.key === 'switch' || operation.key === 'exceptionhandler'">
@@ -56,9 +56,9 @@
           </div>
           <ul class="operation-features text-center m-t-20">
             <li>
-              <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add?inside=${operation.id}`">
+              <button type="button" class="add-action" @click="showNav({flowId, inside: operation.id})">
                 <fa :icon="['fas', 'plus']" class="add-action-icon" />
-              </nuxt-link>
+              </button>
             </li>
           </ul>
         </div>
@@ -130,7 +130,8 @@ export default {
     ...mapActions({
       editFlow: 'editFlow',
       addFlowByDesign: 'addFlowByDesign',
-      removeOperation: 'removeOperation'
+      removeOperation: 'removeOperation',
+      showNav: 'showNav'
     }),
     emitter (value) {
       this.$store.dispatch('reorderAppOperations', { value, parent: this.parent })

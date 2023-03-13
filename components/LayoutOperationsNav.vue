@@ -16,12 +16,15 @@
       </ul>
       <ul class="operation-features text-center">
         <li>
-          <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add`">
+          <button type="button" class="add-action" @click="showNav({flowId})">
             <fa :icon="['fas', 'plus']" class="add-action-icon" />
-          </nuxt-link>
+          </button>
         </li>
       </ul>
     </div>
+    <LayoutSideNav>
+      <AddTrigger />
+    </LayoutSideNav>
   </aside>
 </template>
 
@@ -29,11 +32,15 @@
 import { mapActions } from 'vuex'
 import { Utils } from '@/services/Utils'
 import NestedDraggable from '~/components/NestedDraggable.vue'
+import LayoutSideNav from '~/components/LayoutSideNav.vue'
+import AddTrigger from '~/components/AddTrigger.vue'
 
 export default {
   name: 'LayoutOperationsNav',
   components: {
-    NestedDraggable
+    NestedDraggable,
+    LayoutSideNav,
+    AddTrigger
   },
   data () {
     return {
@@ -68,11 +75,17 @@ export default {
       }
     }
   },
+  mounted () {
+    // if (!this.activeOperations.length) {
+    //   this.showNav(this.flowId)
+    // }
+  },
   methods: {
     ...mapActions({
       editFlow: 'editFlow',
       addFlowByDesign: 'addFlowByDesign',
-      removeOperation: 'removeOperation'
+      removeOperation: 'removeOperation',
+      showNav: 'showNav'
     }),
     featureIsNotAvailable () {
       this.$toast.error('This feature is not yet available')
@@ -126,6 +139,8 @@ export default {
   line-height: 38px;
   color: #1155cb;
   border: 1px solid #1155cb;
+  cursor: pointer;
+  padding: 0;
 }
 add-action-icon{
   font-size: 2em;

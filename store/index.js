@@ -53,10 +53,18 @@ export const state = () => ({
   activeModule: 'm1',
   activeView: 'm1:PRODUCT:VERSIONS',
   operationsModel: {},
-  operationCache: {}
+  operationCache: {},
+  navVisible: false,
+  navParams: {}
 })
 
 export const getters = {
+  isNavVisible (state) {
+    return state.navVisible
+  },
+  navParams (state) {
+    return state.navParams
+  },
   availableOperations (state) {
     return state.availableOperations
   },
@@ -71,6 +79,12 @@ export const mutations = {
   },
   ADD_TAB (state, tabId) {
     state.tabs.push(tabId)
+  },
+  SET_NAV_VISIBLE (state, data) {
+    state.navVisible = data
+  },
+  SET_NAV_PARAMS (state, data) {
+    state.navParams = data
   },
   REMOVE_TAB (state, tabId) {
     state.tabs = state.tabs.filter(tab => tab !== tabId)
@@ -251,6 +265,14 @@ export const actions = {
       state.appOperations = value
     }
     // this.$toast.success('Operations re-ordered')
+  },
+  closeNav ({ commit }) {
+    commit('SET_NAV_VISIBLE', false)
+    commit('SET_NAV_PARAMS', {})
+  },
+  showNav ({ commit }, data) {
+    commit('SET_NAV_VISIBLE', true)
+    commit('SET_NAV_PARAMS', data)
   }
 }
 
