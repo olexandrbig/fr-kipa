@@ -105,6 +105,7 @@ export default {
     this.fields.forEach((item) => {
       this.initDefault(item)
     })
+    this.currentTab = ''
   },
   watch: {
     model: '$fetch'
