@@ -7,7 +7,7 @@
   >
     <li v-for="(operation, index) in internalVal" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
       <div class="operation-item m-t-30 pointer">
-        <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}`" class="operation-title relative">
+        <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}`" class="operation-title relative" @click.native="closeNav()">
           <span class="pull-right relative">
             <fa
               v-if="isActiveMenu(operation.id)"
@@ -131,7 +131,8 @@ export default {
       editFlow: 'editFlow',
       addFlowByDesign: 'addFlowByDesign',
       removeOperation: 'removeOperation',
-      showNav: 'showNav'
+      showNav: 'showNav',
+      closeNav: 'closeNav'
     }),
     emitter (value) {
       this.$store.dispatch('reorderAppOperations', { value, parent: this.parent })

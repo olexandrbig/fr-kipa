@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/gateway/add", (function(a,b){return {data:[{}],fetch:{},mutations:[[a,b],[a,{properties:[{id:"3248c1c0-3075-4440-b8b8-57dcb8de2d6b",name:"name",type:"STRING",isOptional:b,description:"Name of gateway"}]}]]}}("SET_OPERATIONS_MODEL",false)));

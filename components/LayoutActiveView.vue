@@ -16,7 +16,7 @@ export default {
   methods: {
     mainHeight () {
       if (process.client) {
-        return (window && window.innerHeight) - 60
+        return (window && window.innerHeight) - 30
       }
     }
   }

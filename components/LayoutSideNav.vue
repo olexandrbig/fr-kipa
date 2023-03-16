@@ -1,9 +1,9 @@
 <template>
-  <aside v-if="isNavVisible" class="side-nav" :style="{height:`${mainHeight()}px`}">
+  <aside class="side-nav" :class="navClass" :style="{height:`${mainHeight()}px`}">
     <div class="side-nav-icon" @click="closeNav()">
       <fa :icon="['fas','xmark']" class="side-nav-icon-svg" />
     </div>
-    <div>
+    <div class="side-nav-content">
       <slot />
     </div>
   </aside>
@@ -14,10 +14,18 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'LayoutSiteNav',
+  data () {
+    return {
+      navClass: ''
+    }
+  },
   computed: {
     isNavVisible () {
       return this.$store.getters.isNavVisible
     }
+  },
+  watch: {
+    isNavVisible: 'setNavClass'
   },
   methods: {
     ...mapActions({
@@ -27,6 +35,12 @@ export default {
       if (process.client) {
         return (window && window.innerHeight) - 30
       }
+    },
+    setNavClass () {
+      const self = this
+      setTimeout(() => {
+        self.navClass = this.$store.getters.isNavVisible ? 'in' : 'out'
+      }, 10)
     }
   }
 }
@@ -35,24 +49,42 @@ export default {
 .side-nav{
   float: left;
   height: 100%;
-  min-height: 100%;
   width: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   background: #ffffff;
-  padding: 5px;
+  padding: 0;
   position: fixed;
-  right: -300px;
+  left: 699px;
   top: 0;
   z-index: 1100;
   border-left: 1px solid #1155cb;
+  border-right: 1px solid #1155cb;
   display: block;
-  -webkit-animation: slide 0.5s forwards;
-  animation: slide 0.5s forwards;
+  transform: translateX(450%);
+  transition: transform 0.5s ease-in-out;
+}
+.side-nav-content{
+  float: left;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  left: 0;
+  top: 0;
+  padding: 5px;
+  display: block;
+}
+.side-nav.in{
+  transform: translateX(0);
+}
+.side-nav.out{
+  transform: translateX(450%);
 }
 .side-nav-icon{
-  position: fixed;
-  right: -290px;
+  position: absolute;
+  left: 249px;
   top: 10px;
   width: 30px;
   height: 30px;
@@ -62,8 +94,6 @@ export default {
   cursor: pointer;
   text-align: center;
   z-index: 2;
-  -webkit-animation: slideBtn 0.5s forwards;
-  animation: slideBtn 0.5s forwards;
 }
 .side-nav-icon-svg{
   margin-top: 4px;
