@@ -60,9 +60,7 @@ export default {
   z-index: 1100;
   border-left: 1px solid #1155cb;
   border-right: 1px solid #1155cb;
-  display: block;
-  transform: translateX(450%);
-  transition: transform 0.5s ease-in-out;
+  display: none;
 }
 .side-nav-content{
   float: left;
@@ -77,10 +75,7 @@ export default {
   display: block;
 }
 .side-nav.in{
-  transform: translateX(0);
-}
-.side-nav.out{
-  transform: translateX(450%);
+  display: block;
 }
 .side-nav-icon{
   position: absolute;
