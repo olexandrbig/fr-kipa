@@ -1,8 +1,8 @@
 <template>
   <aside class="side-nav" :class="navClass" :style="{height:`${mainHeight()}px`}">
-    <div class="side-nav-icon" @click="closeNav()">
-      <fa :icon="['fas','xmark']" class="side-nav-icon-svg" />
-    </div>
+    <!--    <div class="side-nav-icon" @click="closeNav()">-->
+    <!--      <fa :icon="['fas','xmark']" class="side-nav-icon-svg" />-->
+    <!--    </div>-->
     <div class="side-nav-content">
       <slot />
     </div>
@@ -19,14 +19,6 @@ export default {
       navClass: ''
     }
   },
-  computed: {
-    isNavVisible () {
-      return this.$store.getters.isNavVisible
-    }
-  },
-  watch: {
-    isNavVisible: 'setNavClass'
-  },
   methods: {
     ...mapActions({
       closeNav: 'closeNav'
@@ -35,12 +27,6 @@ export default {
       if (process.client) {
         return (window && window.innerHeight) - 30
       }
-    },
-    setNavClass () {
-      const self = this
-      setTimeout(() => {
-        self.navClass = this.$store.getters.isNavVisible ? 'in' : 'out'
-      }, 10)
     }
   }
 }
@@ -53,14 +39,10 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   background: #ffffff;
-  padding: 0;
-  position: fixed;
-  left: 699px;
-  top: 0;
   z-index: 1100;
   border-left: 1px solid #1155cb;
   border-right: 1px solid #1155cb;
-  display: none;
+  display: block;
 }
 .side-nav-content{
   float: left;
@@ -72,9 +54,6 @@ export default {
   left: 0;
   top: 0;
   padding: 5px;
-  display: block;
-}
-.side-nav.in{
   display: block;
 }
 .side-nav-icon{

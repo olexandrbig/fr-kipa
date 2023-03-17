@@ -5,64 +5,71 @@
     ghost-class="moving-card"
     @input="emitter"
   >
-    <li v-for="(operation, index) in internalVal" :key="operation.id" :class="isActiveViewClass(operation.id)" class="operation-feature">
-      <div class="operation-item m-t-30 pointer">
-        <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}`" class="operation-title relative" @click.native="closeNav()">
-          <span class="pull-right relative">
-            <fa
-              v-if="isActiveMenu(operation.id)"
-              key="on"
-              :class="'feature-icon'"
-              :icon="['fas', 'xmark']"
-              @click="deactivateMenu(operation.id)"
-            />
-            <fa
-              v-else
-              key="off"
-              :class="'feature-icon'"
-              :icon="['fas', 'ellipsis-vertical']"
-              @click="activateMenu(operation.id)"
-            />
-            <transition name="dropdown">
-              <div
+    <li
+      v-for="(operation, index) in internalVal"
+      :key="operation.id"
+      :class="isActiveViewClass(operation.id)"
+      class="operation-feature"
+    >
+      <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}`">
+        <div class="operation-item m-t-30 pointer">
+          <div class="operation-title relative">
+            <span class="pull-right relative">
+              <fa
                 v-if="isActiveMenu(operation.id)"
-                class="dropdown-menu"
-                :class="{ active: isActiveMenu(operation.id) }"
-              >
-                <ul class="dropdown-menu-nav">
-                  <li class="dropdown-menu-item">
-                    <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(operation.id)">
-                      <div class="dropdown-menu-text">Remove</div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </transition>
-          </span>
-          <span class="feature-icon"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
-          <span class="text-ellipsis">{{ operation.name }}</span>
-        </nuxt-link>
-        <span class="operation-next">
-          <fa :icon="['fas', 'arrow-down-long']" />
-          <span class="operation-next-add">
-            <button type="button" class="add-action" @click="showNav({flowId, after:index+1, inside: parent})">
-              <fa :icon="['fas', 'plus']" class="add-action-icon" />
-            </button>
-          </span>
-        </span>
-        <div v-if="operation.key === 'loop' || operation.key === 'switch' || operation.key === 'exceptionhandler'">
-          <div class="sub-operations m-t-10">
-            <NestedDraggable v-model="operation.operations" :parent="operation.id" :parenti="index" />
+                key="on"
+                :class="'feature-icon'"
+                :icon="['fas', 'xmark']"
+                @click="deactivateMenu(operation.id)"
+              />
+              <fa
+                v-else
+                key="off"
+                :class="'feature-icon'"
+                :icon="['fas', 'ellipsis-vertical']"
+                @click="activateMenu(operation.id)"
+              />
+              <transition name="dropdown">
+                <div
+                  v-if="isActiveMenu(operation.id)"
+                  class="dropdown-menu"
+                  :class="{ active: isActiveMenu(operation.id) }"
+                >
+                  <ul class="dropdown-menu-nav">
+                    <li class="dropdown-menu-item">
+                      <a href class="dropdown-menu-link" title="Remove" @click="removeOperation(operation.id)">
+                        <div class="dropdown-menu-text">Remove</div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </transition>
+            </span>
+            <span class="feature-icon"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
+            <span class="text-ellipsis">{{ operation.name }}</span>
           </div>
-          <ul class="operation-features text-center m-t-20">
-            <li>
-              <button type="button" class="add-action" @click="showNav({flowId, inside: operation.id})">
+          <span class="operation-next">
+            <fa :icon="['fas', 'arrow-down-long']" />
+            <span class="operation-next-add">
+              <button type="button" class="add-action" @click="showNav({flowId, after:index+1, inside: parent})">
                 <fa :icon="['fas', 'plus']" class="add-action-icon" />
               </button>
-            </li>
-          </ul>
+            </span>
+          </span>
+          <div v-if="operation.key === 'loop' || operation.key === 'switch' || operation.key === 'exceptionhandler'">
+            <div class="sub-operations m-t-10">
+              <NestedDraggable v-model="operation.operations" :parent="operation.id" :parenti="index" />
+            </div>
+            <ul class="operation-features text-center m-t-20">
+              <li>
+                <button type="button" class="add-action" @click="showNav({flowId, inside: operation.id})">
+                  <fa :icon="['fas', 'plus']" class="add-action-icon" />
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </nuxt-link>
     </li>
   </draggable>
 </template>
@@ -70,6 +77,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { Utils } from '@/services/Utils'
+
 export default {
   name: 'NestedDraggable',
   props: {
@@ -131,11 +139,13 @@ export default {
       editFlow: 'editFlow',
       addFlowByDesign: 'addFlowByDesign',
       removeOperation: 'removeOperation',
-      showNav: 'showNav',
-      closeNav: 'closeNav'
+      showNav: 'showNav'
     }),
     emitter (value) {
-      this.$store.dispatch('reorderAppOperations', { value, parent: this.parent })
+      this.$store.dispatch('reorderAppOperations', {
+        value,
+        parent: this.parent
+      })
     },
     categoryToIcon (category) {
       return Utils.categoryToIcon(category)
@@ -159,14 +169,16 @@ export default {
 </script>
 <style>
 .moving-card {
-  opacity: 0.5!important;
+  opacity: 0.5 !important;
 }
-.moving-card .operation-item{
-  background: #ffffff!important;
-  border-color: #000000!important;
-  border-style: dashed!important;
+
+.moving-card .operation-item {
+  background: #ffffff !important;
+  border-color: #000000 !important;
+  border-style: dashed !important;
 }
-.text-ellipsis{
+
+.text-ellipsis {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -174,16 +186,18 @@ export default {
   max-width: 77%;
 }
 
-.operation-feature{
+.operation-feature {
   display: inline-block;
   float: left;
   position: relative;
   width: 100%;
 }
+
 .operation-features .operation-feature > .operation-item {
   font-weight: 700;
 }
-.operation-item{
+
+.operation-item {
   color: #043558;
   line-height: 30px;
   padding: 5px;
@@ -193,10 +207,12 @@ export default {
   background: #ffffff;
   text-align: left;
 }
-.sub-operations > .operation-feature:first-child > .operation-item{
+
+.sub-operations > .operation-feature:first-child > .operation-item {
   margin-top: 10px;
 }
-.operation-next{
+
+.operation-next {
   content: ' ';
   display: none;
   width: 24px;
@@ -211,11 +227,12 @@ export default {
   font-size: 28px;
   text-align: center;
 }
-.operation-feature:not(:last-child) > .operation-item > .operation-next{
+
+.operation-feature:not(:last-child) > .operation-item > .operation-next {
   display: inline-block;
 }
 
-.operation-next-add .add-action{
+.operation-next-add .add-action {
   display: none;
   font-size: 10px;
   border-radius: 50%;
@@ -231,38 +248,48 @@ export default {
   top: 3px;
   z-index: 1;
 }
-.operation-next:hover .operation-next-add .add-action{
+
+.operation-next:hover .operation-next-add .add-action {
   display: inline-block;
 }
+
 .operation-feature.active > .operation-item,
-.operation-subfeature.active > .operation-item{
+.operation-subfeature.active > .operation-item {
   background: #eeeeee;
-  color: #1155cb!important;
+  color: #1155cb !important;
 }
-.operation-sublist .operation-item{
+
+.operation-sublist .operation-item {
   padding-left: 40px;
 }
-.operation-text{
+
+.operation-text {
   line-height: 15px;
 }
-.operation-title{
+
+.operation-title {
   text-decoration: none;
   color: inherit;
+  font-weight: 700;
 }
-.w-80{
+
+.w-80 {
   width: 80%;
 }
-.w-90{
+
+.w-90 {
   width: 90%;
 }
-.feature-icon{
+
+.feature-icon {
   font-size: 1.3em;
   vertical-align: middle;
-  width: 20px!important;
+  width: 20px !important;
   text-align: center;
   display: inline-block;
 }
-.sub-operations{
+
+.sub-operations {
   padding: 0 10px;
 }
 </style>

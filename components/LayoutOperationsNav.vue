@@ -1,31 +1,33 @@
 <template>
-  <aside class="operation-nav">
-    <div class="operation-actions">
-      <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
-        Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
-      </button>
-      <h2 class="nav-title">
-        <fa :icon="['fas', 'pen-nib']" /> Designer
-      </h2>
-    </div>
-    <div class="operation-nav-list" :style="{height:`${mainHeight()}px`}">
-      <ul class="operation-features text-center">
-        <div class="w-90 inline-block">
-          <NestedDraggable v-model="activeOperations" :parent="'root'" :parenti="0" />
-        </div>
-      </ul>
-      <ul class="operation-features text-center">
-        <li>
-          <button type="button" class="add-action" @click="showNav({flowId})">
-            <fa :icon="['fas', 'plus']" class="add-action-icon" />
-          </button>
-        </li>
-      </ul>
-    </div>
+  <div class="operations">
+    <aside class="operation-nav">
+      <div class="operation-actions">
+        <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
+          Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
+        </button>
+        <h2 class="nav-title">
+          <fa :icon="['fas', 'pen-nib']" /> Designer
+        </h2>
+      </div>
+      <div class="operation-nav-list" :style="{height:`${mainHeight()}px`}">
+        <ul class="operation-features text-center">
+          <div class="w-90 inline-block">
+            <NestedDraggable v-model="activeOperations" :parent="'root'" :parenti="0" />
+          </div>
+        </ul>
+        <ul class="operation-features text-center">
+          <li>
+            <button type="button" class="add-action" @click="showNav({flowId})">
+              <fa :icon="['fas', 'plus']" class="add-action-icon" />
+            </button>
+          </li>
+        </ul>
+      </div>
+    </aside>
     <LayoutSideNav>
       <AddTrigger />
     </LayoutSideNav>
-  </aside>
+  </div>
 </template>
 
 <script>
@@ -144,6 +146,14 @@ export default {
 }
 add-action-icon{
   font-size: 2em;
+}
+.operations{
+  display: block;
+  float: left;
+  height: 100%;
+  min-height: 100%;
+  width: 940px;
+  overflow: hidden;
 }
 .operation-nav{
   display: block;

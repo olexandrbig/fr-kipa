@@ -54,7 +54,7 @@ export const state = () => ({
   activeView: 'm1:PRODUCT:VERSIONS',
   operationsModel: {},
   operationCache: {},
-  navVisible: false,
+  navVisible: true,
   navParams: {}
 })
 
