@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/flows/add", {data:[{}],fetch:{},mutations:[["SET_OPERATIONS_MODEL",false]]});

@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/flows/add", (function(a,b){return {data:[{}],fetch:{},mutations:[[a,b],[a,{properties:[{id:"3048c1c0-3075-4440-b8b8-57dcb8de2d6b",name:"name",type:"STRING",isOptional:b,description:"Name of flow"}]}]]}}("SET_OPERATIONS_MODEL",false)));
