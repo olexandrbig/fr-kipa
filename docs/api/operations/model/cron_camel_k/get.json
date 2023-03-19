@@ -1,6 +1,20 @@
 {
   "properties": [
     {
+      "id": "0048c1c0-3075-4440-b8b8-17dcb8de2d6b",
+      "name": "name",
+      "type": "STRING",
+      "isOptional": false,
+      "description": "Name"
+    } ,
+    {
+      "id": "01e69b54-1c4b-4797-a087-21ff46836c97",
+      "name": "description",
+      "type": "STRING",
+      "isOptional": true,
+      "description": "Description"
+    },
+    {
       "id": "5bdc634e-14f4-48e6-9b78-ee8f163df24d",
       "name": "enabled",
       "type": "BOOLEAN",

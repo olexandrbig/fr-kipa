@@ -111,7 +111,7 @@ export default {
     },
     mainHeight () {
       if (process.client) {
-        return (window && window.innerHeight) - 90
+        return (window && window.innerHeight) - 30 - 90
       }
     },
     addOrUpdateFLow () {

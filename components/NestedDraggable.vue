@@ -253,7 +253,7 @@ export default {
   display: inline-block;
 }
 
-.operation-feature.active > .operation-item,
+.operation-feature.active > a >  .operation-item,
 .operation-subfeature.active > .operation-item {
   background: #eeeeee;
   color: #1155cb !important;

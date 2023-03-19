@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a,b){return {staticAssetsBase:"http:\u002F\u002Flocalhost:3000\u002Fstatic\u002F1679254652",layout:"default",error:a,state:a,serverRendered:false,routePath:b,config:{_app:{basePath:"\u002Ffr-kipa\u002F",assetsPath:b,cdnURL:"http:\u002F\u002Flocalhost:3000\u002F"},content:{dbHash:"247cf835"}}}}(null,"\u002F"));

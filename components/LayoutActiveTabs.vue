@@ -59,7 +59,7 @@ export default {
     },
     mainHeight () {
       if (process.client) {
-        return (window && window.innerHeight) - 80
+        return (window && window.innerHeight) - 90
       }
     }
   }
