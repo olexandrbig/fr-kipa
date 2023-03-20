@@ -1,5 +1,5 @@
 <template>
-  <div class="operations">
+  <div class="operations" :class="{'has-nav': navVisible}">
     <aside class="operation-nav">
       <div class="operation-actions">
         <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
@@ -61,6 +61,9 @@ export default {
     },
     flowId () {
       return this.$route.params.id
+    },
+    navVisible () {
+      return this.$store.state.navVisible
     },
     currentFlow () {
       const flowId = this.$route.params.id
@@ -152,8 +155,11 @@ add-action-icon{
   float: left;
   height: 100%;
   min-height: 100%;
-  width: 940px;
+  width: 640px;
   overflow: hidden;
+}
+.operations.has-nav{
+  width: 940px;
 }
 .operation-nav{
   display: block;

@@ -1,8 +1,8 @@
 <template>
-  <aside class="side-nav" :class="navClass" :style="{height:`${mainHeight()}px`}">
-    <!--    <div class="side-nav-icon" @click="closeNav()">-->
-    <!--      <fa :icon="['fas','xmark']" class="side-nav-icon-svg" />-->
-    <!--    </div>-->
+  <aside v-if="navVisible" class="side-nav" :class="navClass" :style="{height:`${mainHeight()}px`}">
+    <div class="side-nav-icon" @click="closeNav()">
+      <fa :icon="['fas','xmark']" class="side-nav-icon-svg" />
+    </div>
     <div class="side-nav-content">
       <slot />
     </div>
@@ -17,6 +17,11 @@ export default {
   data () {
     return {
       navClass: ''
+    }
+  },
+  computed: {
+    navVisible () {
+      return this.$store.state.navVisible
     }
   },
   methods: {
@@ -43,6 +48,7 @@ export default {
   border-left: 1px solid #1155cb;
   border-right: 1px solid #1155cb;
   display: block;
+  position: relative;
 }
 .side-nav-content{
   float: left;

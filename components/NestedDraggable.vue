@@ -228,7 +228,7 @@ export default {
   text-align: center;
 }
 
-.operation-feature:not(:last-child) > .operation-item > .operation-next {
+.operation-feature:not(:last-child) .operation-item > .operation-next {
   display: inline-block;
 }
 
