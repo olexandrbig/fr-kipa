@@ -46,6 +46,7 @@ export default {
     { src: '~/plugins/vue-underscore', mode: 'client' },
     { src: '~/plugins/vue-i18n' },
     { src: '~/plugins/vue-chart', mode: 'client' },
+    { src: '~/plugins/vue-shortkey', mode: 'client' },
     { src: '~/plugins/vuedraggable' },
     { src: '~/plugins/codemirror', mode: 'client' }
   ],
