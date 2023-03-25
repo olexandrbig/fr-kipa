@@ -17,6 +17,7 @@ export const state = () => ({
   availableFlows: [],
   availableGateways: [],
   availableCredentials: [],
+  activeBreakpoints: [],
   latestId: null,
   appData: [{
     link: '/flows/one/new/designer',
@@ -70,6 +71,9 @@ export const getters = {
   },
   operationsModel (state) {
     return state.operationsModel ? state.operationsModel : { properties: [] }
+  },
+  activeBreakpoints (state) {
+    return state.activeBreakpoints || []
   }
 }
 
@@ -168,6 +172,15 @@ export const mutations = {
       if (list) {
         current.list = list
       }
+    }
+  },
+  TOGGLE_BREAKPOINT (state, data) {
+    const current = state.activeBreakpoints
+    const currentIndex = current.indexOf(data)
+    if (current && currentIndex > -1) {
+      state.activeBreakpoints.splice(currentIndex, 1)
+    } else {
+      state.activeBreakpoints.push(data)
     }
   }
 }
@@ -273,6 +286,13 @@ export const actions = {
   showNav ({ commit }, data) {
     commit('SET_NAV_VISIBLE', true)
     commit('SET_NAV_PARAMS', data)
+  },
+  toggleBreakpoint ({ commit }, data) {
+    commit('TOGGLE_BREAKPOINT', data)
+  },
+  isActiveBreakpoint ({ commit, state }, data) {
+    const current = state.activeBreakpoints
+    return current.includes(data)
   }
 }
 

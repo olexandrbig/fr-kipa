@@ -11,6 +11,12 @@
       :class="isActiveViewClass(operation.id)"
       class="operation-feature"
     >
+      <span
+        class="operation-breakpoint"
+        title="Toggle breakpoint"
+        :class="isActiveBreakpointClass(operation.id)"
+        @click="toggleBreakpoint(operation.id)"
+      />
       <nuxt-link :to="`/flows/one/${flowId}/designer/edit?id=${operation.id}`">
         <div class="operation-item m-t-30 pointer">
           <div class="operation-title relative">
@@ -75,7 +81,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { Utils } from '@/services/Utils'
 
 export default {
@@ -109,6 +115,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      activeBreakpoints: 'activeBreakpoints'
+    }),
     flowId () {
       return this.$route.params.id
     },
@@ -139,7 +148,9 @@ export default {
       editFlow: 'editFlow',
       addFlowByDesign: 'addFlowByDesign',
       removeOperation: 'removeOperation',
-      showNav: 'showNav'
+      showNav: 'showNav',
+      toggleBreakpoint: 'toggleBreakpoint',
+      isActiveBreakpoint: 'isActiveBreakpoint'
     }),
     emitter (value) {
       this.$store.dispatch('reorderAppOperations', {
@@ -152,6 +163,9 @@ export default {
     },
     isActiveViewClass (id) {
       return this.$route.query.id === id ? 'active' : false
+    },
+    isActiveBreakpointClass (id) {
+      return this.activeBreakpoints.includes(id) ? 'active-breakpoint' : false
     },
     isActiveMenu (id) {
       return this.activeMenus.includes(id)
@@ -170,6 +184,23 @@ export default {
 <style>
 .moving-card {
   opacity: 0.5 !important;
+}
+
+.operation-breakpoint{
+  position: absolute;
+  left: -23px;
+  top: 44px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid;
+  background: #fff;
+  cursor: pointer;
+}
+
+.operation-breakpoint.active-breakpoint{
+  background: #b54038;
+  border-color: #b54038;
 }
 
 .moving-card .operation-item {

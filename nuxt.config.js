@@ -68,7 +68,7 @@ export default {
           'faTasks', 'faBalanceScale', 'faBoxesStacked', 'faThLarge', 'faPencilRuler', 'faFlag', 'faWind', 'faDirections',
           'faFolderTree', 'faSliders', 'faAtom', 'faRotateLeft', 'faCircleInfo', 'faTag', 'faTags', 'faEllipsisVertical',
           'faArrowDownLong', 'faSitemap', 'faPenNib', 'faRepeat', 'faKey', 'faServer', 'faGlobe', 'faTriangleExclamation',
-          'faShuffle']
+          'faShuffle', 'faCalendarDays']
       },
       {
         set: '@fortawesome/free-brands-svg-icons',

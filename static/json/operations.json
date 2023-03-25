@@ -1,6 +1,28 @@
 {
   "operations": [
     {
+      "id": "a794778d-4fe3-4dae-aa81-d3313add0f5d",
+      "key": "cron_camel_k",
+      "version": "1.0.0",
+      "name": "Schedule event",
+      "description": "Schedule event",
+      "lastUpdated": "2018-12-10T13:49:51.141Z",
+      "builtIn": true,
+      "groupId": "b420e4f6-f1e6-48ba-ab96-4e1989ca7c40",
+      "sequenceInGroup": 1,
+      "category": "SCHEDULER",
+      "resultDescription": "An event is trigged according to a scheduler",
+      "isParent": false,
+      "isTrigger": true,
+      "searchTags": [
+        "scheduler",
+        "schedule event",
+        "cron",
+        "recurrence",
+        "reoccurence"
+      ]
+    },
+    {
       "id": "23c8bca6-07c3-4bd7-b035-9047a6bfeea2",
       "key": "loop",
       "version": "1.0.0",
@@ -109,7 +131,7 @@
     },
     {
       "id": "4cc8bca6-07c3-4bd7-b035-9047a6bfeea5",
-      "key":"ftplistfiles",
+      "key": "ftplistfiles",
       "version": "1.0.0",
       "name": "delete remote FTP file",
       "description": "Deletes a file from the remote working directory",
@@ -127,7 +149,7 @@
     },
     {
       "id": "be35e877-f176-4af3-b48f-a2fa72f3fb38",
-      "key":"mapGroovyScript",
+      "key": "mapGroovyScript",
       "version": "1.0.0",
       "name": "Groovy Map",
       "description": "Map data using grooy",
@@ -147,7 +169,7 @@
     },
     {
       "id": "be35e877-f176-4af3-b48f-a2fa72f3fb39",
-      "key":"cron_camel_k",
+      "key": "retrieve_messages",
       "version": "1.0.0",
       "name": "Retrieve messages",
       "description": "Retrieve messages from Kafka topic",
@@ -167,7 +189,7 @@
     },
     {
       "id": "be35e877-f176-4af3-b48f-a2fa72f3fb40",
-      "key":"cron_camel_k",
+      "key": "send_messages",
       "version": "1.0.0",
       "name": "Send messages",
       "description": "Send messages to Kafka topic",

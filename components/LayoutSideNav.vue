@@ -1,6 +1,6 @@
 <template>
   <aside v-if="navVisible" class="side-nav" :class="navClass" :style="{height:`${mainHeight()}px`}">
-    <div class="side-nav-icon" v-shortkey.once="['tab']" @shortkey="closeNav()" @click="closeNav()">
+    <div v-shortkey.once="['tab']" class="side-nav-icon" @shortkey="closeNav()" @click="closeNav()">
       <fa :icon="['fas','xmark']" class="side-nav-icon-svg" />
     </div>
     <div class="side-nav-content">

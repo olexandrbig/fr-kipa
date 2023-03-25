@@ -17,7 +17,7 @@
         </ul>
         <ul class="operation-features text-center">
           <li>
-            <button v-shortkey.once="['tab']" @shortkey="showNav({flowId})" type="button" class="add-action" @click="showNav({flowId})">
+            <button v-shortkey.once="['tab']" type="button" class="add-action" @shortkey="showNav({flowId})" @click="showNav({flowId})">
               <fa :icon="['fas', 'plus']" class="add-action-icon" />
             </button>
           </li>
