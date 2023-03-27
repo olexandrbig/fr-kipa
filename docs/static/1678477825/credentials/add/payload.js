@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/credentials/add", {data:[{}],fetch:{},mutations:[["SET_OPERATIONS_MODEL",false]]});

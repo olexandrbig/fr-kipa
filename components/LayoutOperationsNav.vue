@@ -1,39 +1,48 @@
 <template>
-  <aside class="operation-nav">
-    <div class="operation-actions">
-      <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
-        Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
-      </button>
-      <h2 class="nav-title">
-        <fa :icon="['fas', 'pen-nib']" /> Designer
-      </h2>
-    </div>
-    <div class="operation-nav-list" :style="{height:`${mainHeight()}px`}">
-      <ul class="operation-features text-center">
-        <div class="w-90 inline-block">
-          <NestedDraggable v-model="activeOperations" :parent="'root'" :parenti="0" />
-        </div>
-      </ul>
-      <ul class="operation-features text-center">
-        <li>
-          <nuxt-link class="add-action" :to="`/flows/one/${flowId}/designer/add`">
-            <fa :icon="['fas', 'plus']" class="add-action-icon" />
-          </nuxt-link>
-        </li>
-      </ul>
-    </div>
-  </aside>
+  <div class="operations" :class="{'has-nav': navVisible}">
+    <aside class="operation-nav">
+      <div class="operation-actions">
+        <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
+          Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
+        </button>
+        <h2 class="nav-title">
+          <fa :icon="['fas', 'pen-nib']" /> Designer
+        </h2>
+      </div>
+      <div class="operation-nav-list" :style="{height:`${mainHeight()}px`}">
+        <ul class="operation-features text-center">
+          <div class="w-90 inline-block">
+            <NestedDraggable v-model="activeOperations" :parent="'root'" :parenti="0" />
+          </div>
+        </ul>
+        <ul class="operation-features text-center">
+          <li>
+            <button v-shortkey.once="['tab']" type="button" class="add-action" @shortkey="showNav({flowId})" @click="showNav({flowId})">
+              <fa :icon="['fas', 'plus']" class="add-action-icon" />
+            </button>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <LayoutSideNav>
+      <AddTrigger />
+    </LayoutSideNav>
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import { Utils } from '@/services/Utils'
 import NestedDraggable from '~/components/NestedDraggable.vue'
+import LayoutSideNav from '~/components/LayoutSideNav.vue'
+import AddTrigger from '~/components/AddTrigger.vue'
 
 export default {
   name: 'LayoutOperationsNav',
   components: {
-    NestedDraggable
+    NestedDraggable,
+    LayoutSideNav,
+    AddTrigger
   },
   data () {
     return {
@@ -53,6 +62,9 @@ export default {
     flowId () {
       return this.$route.params.id
     },
+    navVisible () {
+      return this.$store.state.navVisible
+    },
     currentFlow () {
       const flowId = this.$route.params.id
       if (flowId) {
@@ -68,11 +80,17 @@ export default {
       }
     }
   },
+  mounted () {
+    // if (!this.activeOperations.length) {
+    //   this.showNav(this.flowId)
+    // }
+  },
   methods: {
     ...mapActions({
       editFlow: 'editFlow',
       addFlowByDesign: 'addFlowByDesign',
-      removeOperation: 'removeOperation'
+      removeOperation: 'removeOperation',
+      showNav: 'showNav'
     }),
     featureIsNotAvailable () {
       this.$toast.error('This feature is not yet available')
@@ -126,9 +144,22 @@ export default {
   line-height: 38px;
   color: #1155cb;
   border: 1px solid #1155cb;
+  cursor: pointer;
+  padding: 0;
 }
 add-action-icon{
   font-size: 2em;
+}
+.operations{
+  display: block;
+  float: left;
+  height: 100%;
+  min-height: 100%;
+  width: 640px;
+  overflow: hidden;
+}
+.operations.has-nav{
+  width: 940px;
 }
 .operation-nav{
   display: block;

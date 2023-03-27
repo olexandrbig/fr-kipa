@@ -1,5 +1,5 @@
 <template>
-  <section class="active-view">
+  <section class="active-view" :class="{'has-nav': navVisible}">
     <ClientOnly>
       <div class="module-details" :style="{height:`${mainHeight()}px`}">
         <div class="module-details-gap">
@@ -13,6 +13,11 @@
 <script>
 export default {
   name: 'LayoutActiveView',
+  computed: {
+    navVisible () {
+      return this.$store.state.navVisible
+    }
+  },
   methods: {
     mainHeight () {
       if (process.client) {
@@ -30,6 +35,9 @@ export default {
   background: #f5f5f5;
   height: 100%;
   min-height: 100%;
+}
+.active-view.has-nav{
+  width: calc(100% - 1000px);
 }
 .module-details{
   overflow-y: auto;

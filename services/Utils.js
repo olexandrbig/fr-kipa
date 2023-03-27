@@ -49,6 +49,8 @@ export function categoryToIcon (category) {
       return 'folder-tree'
     case 'MAPPING':
       return 'sliders'
+    case 'SCHEDULER':
+      return 'calendar-days'
     case 'LOOP':
       return 'repeat'
     case 'SWITCH':

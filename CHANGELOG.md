@@ -8,6 +8,78 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## 0.19.7 - 2023-03-21
+
+### Changed
+* FA version
+
+### Added
+* Breakpoints
+* Cron operation
+
+
+## 0.19.7 - 2023-03-21
+
+### Added
+* Proof of concept, toggle add menu via Tab btn
+
+
+## 0.19.6 - 2023-03-20
+
+### Fixed
+* Inset after next item
+
+### Changed
+* Middle nav column now can be toggled off adding more space for operation details
+
+
+## 0.19.5 - 2023-03-17
+
+### Fixed
+* Active item highlight
+* Try to fix item jump
+
+### Added
+* Name and description for Cron 
+
+
+
+## 0.19.4 - 2023-03-17
+
+### Changed
+* 3 side layout on designer view
+* Improve clickable zone of operation
+
+
+## 0.19.3 - 2023-03-17
+
+### Changed
+* Side bar transition removed
+
+
+## 0.19.2 - 2023-03-16
+
+### Changed
+* Right sidebar animation and position
+* Transition to item edit
+* Content height
+
+
+## 0.19.1 - 2023-03-13
+
+### Fixed
+* Active form re-init
+
+
+## 0.19.0 - 2023-03-13
+
+### Added
+* Right sidebar
+
+### Changed
+* Create trigger via Right sidebar
+
+
 ## 0.18.0 - 2023-03-10
 
 ### Added

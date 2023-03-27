@@ -17,6 +17,7 @@ export const state = () => ({
   availableFlows: [],
   availableGateways: [],
   availableCredentials: [],
+  activeBreakpoints: [],
   latestId: null,
   appData: [{
     link: '/flows/one/new/designer',
@@ -53,15 +54,26 @@ export const state = () => ({
   activeModule: 'm1',
   activeView: 'm1:PRODUCT:VERSIONS',
   operationsModel: {},
-  operationCache: {}
+  operationCache: {},
+  navVisible: true,
+  navParams: {}
 })
 
 export const getters = {
+  isNavVisible (state) {
+    return state.navVisible
+  },
+  navParams (state) {
+    return state.navParams
+  },
   availableOperations (state) {
     return state.availableOperations
   },
   operationsModel (state) {
     return state.operationsModel ? state.operationsModel : { properties: [] }
+  },
+  activeBreakpoints (state) {
+    return state.activeBreakpoints || []
   }
 }
 
@@ -71,6 +83,12 @@ export const mutations = {
   },
   ADD_TAB (state, tabId) {
     state.tabs.push(tabId)
+  },
+  SET_NAV_VISIBLE (state, data) {
+    state.navVisible = data
+  },
+  SET_NAV_PARAMS (state, data) {
+    state.navParams = data
   },
   REMOVE_TAB (state, tabId) {
     state.tabs = state.tabs.filter(tab => tab !== tabId)
@@ -154,6 +172,15 @@ export const mutations = {
       if (list) {
         current.list = list
       }
+    }
+  },
+  TOGGLE_BREAKPOINT (state, data) {
+    const current = state.activeBreakpoints
+    const currentIndex = current.indexOf(data)
+    if (current && currentIndex > -1) {
+      state.activeBreakpoints.splice(currentIndex, 1)
+    } else {
+      state.activeBreakpoints.push(data)
     }
   }
 }
@@ -251,6 +278,21 @@ export const actions = {
       state.appOperations = value
     }
     // this.$toast.success('Operations re-ordered')
+  },
+  closeNav ({ commit }) {
+    commit('SET_NAV_VISIBLE', false)
+    commit('SET_NAV_PARAMS', {})
+  },
+  showNav ({ commit }, data) {
+    commit('SET_NAV_VISIBLE', true)
+    commit('SET_NAV_PARAMS', data)
+  },
+  toggleBreakpoint ({ commit }, data) {
+    commit('TOGGLE_BREAKPOINT', data)
+  },
+  isActiveBreakpoint ({ commit, state }, data) {
+    const current = state.activeBreakpoints
+    return current.includes(data)
   }
 }
 

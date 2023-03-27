@@ -46,6 +46,7 @@ export default {
     { src: '~/plugins/vue-underscore', mode: 'client' },
     { src: '~/plugins/vue-i18n' },
     { src: '~/plugins/vue-chart', mode: 'client' },
+    { src: '~/plugins/vue-shortkey', mode: 'client' },
     { src: '~/plugins/vuedraggable' },
     { src: '~/plugins/codemirror', mode: 'client' }
   ],
@@ -67,7 +68,7 @@ export default {
           'faTasks', 'faBalanceScale', 'faBoxesStacked', 'faThLarge', 'faPencilRuler', 'faFlag', 'faWind', 'faDirections',
           'faFolderTree', 'faSliders', 'faAtom', 'faRotateLeft', 'faCircleInfo', 'faTag', 'faTags', 'faEllipsisVertical',
           'faArrowDownLong', 'faSitemap', 'faPenNib', 'faRepeat', 'faKey', 'faServer', 'faGlobe', 'faTriangleExclamation',
-          'faShuffle']
+          'faShuffle', 'faCalendarDays']
       },
       {
         set: '@fortawesome/free-brands-svg-icons',
