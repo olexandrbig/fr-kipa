@@ -5,6 +5,12 @@
         <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
           Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
         </button>
+        <button v-if="!debugPending.length" class="btn btn-default pull-right m-r-3" type="button" @click="debug({data: activeOperations})">
+          <span>Debug</span>
+        </button>
+        <button v-else class="btn btn-default pull-right m-r-3" type="button" @click="debug({force: true})">
+          <span>Resume/Restart</span>
+        </button>
         <h2 class="nav-title">
           <fa :icon="['fas', 'pen-nib']" /> Designer
         </h2>
@@ -31,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { Utils } from '@/services/Utils'
 import NestedDraggable from '~/components/NestedDraggable.vue'
 import LayoutSideNav from '~/components/LayoutSideNav.vue'
@@ -56,6 +62,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      debugPending: 'debug/pending'
+    }),
     activeModuleCode () {
       return this.$store.state.activeModule
     },
@@ -90,7 +99,8 @@ export default {
       editFlow: 'editFlow',
       addFlowByDesign: 'addFlowByDesign',
       removeOperation: 'removeOperation',
-      showNav: 'showNav'
+      showNav: 'showNav',
+      debug: 'debug/simulate'
     }),
     featureIsNotAvailable () {
       this.$toast.error('This feature is not yet available')

@@ -116,7 +116,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      activeBreakpoints: 'activeBreakpoints'
+      activeBreakpoints: 'activeBreakpoints',
+      debugCompleted: 'debug/completed',
+      debugFailed: 'debug/failed',
+      debugCurrent: 'debug/current'
     }),
     flowId () {
       return this.$route.params.id
@@ -165,7 +168,19 @@ export default {
       return this.$route.query.id === id ? 'active' : false
     },
     isActiveBreakpointClass (id) {
-      return this.activeBreakpoints.includes(id) ? 'active-breakpoint' : false
+      if (this.debugFailed.includes(id)) {
+        return 'failed-breakpoint'
+      }
+      if (this.debugCompleted.includes(id)) {
+        return 'completed-breakpoint'
+      }
+      if (this.activeBreakpoints.includes(id)) {
+        return 'active-breakpoint'
+      }
+      if (this.debugCurrent === id) {
+        return 'current-breakpoint'
+      }
+      return false
     },
     isActiveMenu (id) {
       return this.activeMenus.includes(id)
@@ -199,8 +214,20 @@ export default {
 }
 
 .operation-breakpoint.active-breakpoint{
-  background: #b54038;
-  border-color: #b54038;
+  background: #cf4747;
+  border-color: #000000;
+}
+.operation-breakpoint.current-breakpoint{
+  background: #FEBA49;
+  border-color: #FEBA49;
+}
+.operation-breakpoint.completed-breakpoint{
+  background: #2a94a2;
+  border-color: #2a94a2;
+}
+.operation-breakpoint.failed-breakpoint{
+  background: #cf4747;
+  border-color: #FEBA49;
 }
 
 .moving-card .operation-item {

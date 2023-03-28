@@ -17,6 +17,9 @@ export const getters = {
   },
   current (state) {
     return state.current
+  },
+  breaks (state, getters, rootState) {
+    return rootState.activeBreakpoints
   }
 }
 
@@ -37,42 +40,69 @@ export const mutations = {
   SET_PENDING (state, data) {
     state.pending = data
   },
+  SET_COMPLETED (state, data) {
+    state.completed = data
+  },
+  SET_FAILED (state, data) {
+    state.failed = data
+  },
   SET_CURRENT (state, data) {
     state.current = data
   }
 }
 
 export const actions = {
-  setCompleted ({ commit }, { data }) {
+  setCompleted ({ commit }, data) {
     commit('REMOVE_PENDING', data)
     commit('PUSH_COMPLETED', data)
   },
-  setFailed ({ commit }, { data }) {
+  setFailed ({ commit }, data) {
     commit('REMOVE_PENDING', data)
     commit('PUSH_FAILED', data)
   },
   simulate ({ commit, dispatch, getters }, { data, force }) {
     if (data) {
-      commit('SET_PENDING', data)
+      const list = []
+      data.forEach((subTab) => {
+        treeToArray(list, subTab)
+      })
+      commit('SET_PENDING', list.map((item) => {
+        return item.id
+      }))
+      commit('SET_COMPLETED', [])
+      commit('SET_FAILED', [])
     }
     const total = getters.pending.length
     if (total) {
-      commit('SET_CURRENT', getters.pending[0])
-      const hasBreak = false
+      const current = getters.pending[0]
+      commit('SET_CURRENT', current)
+      const breaks = getters.breaks
+      const hasBreak = breaks.includes(current)
       if (hasBreak && !force) {
         // eslint-disable-next-line no-console
         console.log('> Break reached')
       } else {
         setTimeout(() => {
+          const current = getters.current
           if (total === 2) {
             // For demo fail when 2 steps left
-            dispatch('setFailed', getters.current)
+            console.log('> Fail reached')
+            dispatch('setFailed', current)
           } else {
-            dispatch('setCompleted', getters.current)
-            dispatch('simulate')
+            dispatch('setCompleted', current)
+            dispatch('simulate', {})
           }
         }, 1000)
       }
     }
+  }
+}
+
+function treeToArray (list, item) {
+  list.push(item)
+  if (item.operations) {
+    item.operations.forEach((subTab) => {
+      treeToArray(list, subTab)
+    })
   }
 }
