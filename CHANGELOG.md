@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## 0.20.2 - 2023-03-30
+
+### Added
+* Debug console
+
+
+## 0.20.1 - 2023-03-28
+
+### Added
+* Debug progress status
+* Iteration and resume
+
+
+## 0.20.0 - 2023-03-27
+
+### Added
+* Debug store concept
+
+
 ## 0.19.7 - 2023-03-21
 
 ### Changed

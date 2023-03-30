@@ -1,6 +1,6 @@
 {
   "name": "admin-area",
-  "version": "0.19.8",
+  "version": "0.20.2",
   "private": true,
   "scripts": {
     "dev": "nuxt",
