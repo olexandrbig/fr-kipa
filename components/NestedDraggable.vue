@@ -168,14 +168,14 @@ export default {
       return this.$route.query.id === id ? 'active' : false
     },
     isActiveBreakpointClass (id) {
+      if (this.activeBreakpoints.includes(id)) {
+        return 'active-breakpoint'
+      }
       if (this.debugFailed.includes(id)) {
         return 'failed-breakpoint'
       }
       if (this.debugCompleted.includes(id)) {
         return 'completed-breakpoint'
-      }
-      if (this.activeBreakpoints.includes(id)) {
-        return 'active-breakpoint'
       }
       if (this.debugCurrent === id) {
         return 'current-breakpoint'
