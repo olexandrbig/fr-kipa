@@ -2,7 +2,8 @@ export const state = () => ({
   current: null,
   pending: [],
   completed: [],
-  failed: []
+  failed: [],
+  logs: []
 })
 
 export const getters = {
@@ -17,6 +18,9 @@ export const getters = {
   },
   current (state) {
     return state.current
+  },
+  logs (state) {
+    return state.logs
   },
   breaks (state, getters, rootState) {
     return rootState.activeBreakpoints
@@ -37,6 +41,9 @@ export const mutations = {
   PUSH_FAILED (state, data) {
     state.failed.push(data)
   },
+  PUSH_LOG (state, data) {
+    state.logs.push(data)
+  },
   SET_PENDING (state, data) {
     state.pending = data
   },
@@ -48,6 +55,9 @@ export const mutations = {
   },
   SET_CURRENT (state, data) {
     state.current = data
+  },
+  SET_LOGS (state, data) {
+    state.logs = data
   }
 }
 
@@ -55,10 +65,12 @@ export const actions = {
   setCompleted ({ commit }, data) {
     commit('REMOVE_PENDING', data)
     commit('PUSH_COMPLETED', data)
+    commit('PUSH_LOG', `Successfully completed ${data}`)
   },
   setFailed ({ commit }, data) {
     commit('REMOVE_PENDING', data)
     commit('PUSH_FAILED', data)
+    commit('PUSH_LOG', `Failed at ${data}`)
   },
   simulate ({ commit, dispatch, getters }, { data, force }) {
     if (data) {
@@ -71,6 +83,10 @@ export const actions = {
       }))
       commit('SET_COMPLETED', [])
       commit('SET_FAILED', [])
+      commit('SET_LOGS', [])
+      commit('PUSH_LOG', 'Started debug')
+      const flowId = this.$router.currentRoute.params.id
+      this.$router.push({ path: `/flows/one/${flowId}/designer/debug` })
     }
     const total = getters.pending.length
     if (total) {
@@ -80,24 +96,26 @@ export const actions = {
       const hasBreak = breaks.includes(current)
       if (hasBreak && !force) {
         // eslint-disable-next-line no-console
-        console.log('> Break reached')
+        commit('PUSH_LOG', `Waiting for resume at ${current}`)
       } else {
+        if (hasBreak && force) {
+          commit('PUSH_LOG', `Resuming from ${current}`)
+        }
         setTimeout(() => {
           const current = getters.current
-          if (total === 2) {
-            // For demo fail when 2 steps left
-            console.log('> Fail reached')
-            dispatch('setFailed', current)
-          } else {
-            dispatch('setCompleted', current)
-            dispatch('simulate', {})
-          }
-        }, 1000)
+          dispatch('setCompleted', current)
+          dispatch('simulate', {})
+        }, getRandomNumber(500, 1500))
       }
+    } else {
+      commit('PUSH_LOG', 'Finished debug')
     }
   }
 }
 
+function getRandomNumber (min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
 function treeToArray (list, item) {
   list.push(item)
   if (item.operations) {
