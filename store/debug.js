@@ -3,7 +3,8 @@ export const state = () => ({
   pending: [],
   completed: [],
   failed: [],
-  logs: []
+  logs: [],
+  options: {}
 })
 
 export const getters = {
@@ -18,6 +19,9 @@ export const getters = {
   },
   current (state) {
     return state.current
+  },
+  options (state) {
+    return state.options
   },
   logs (state) {
     return state.logs
@@ -50,6 +54,9 @@ export const mutations = {
   SET_COMPLETED (state, data) {
     state.completed = data
   },
+  SET_OPTIONS (state, data) {
+    state.options = data
+  },
   SET_FAILED (state, data) {
     state.failed = data
   },
@@ -72,7 +79,7 @@ export const actions = {
     commit('PUSH_FAILED', data)
     commit('PUSH_LOG', `Failed at ${data}`)
   },
-  simulate ({ commit, dispatch, getters }, { data, force }) {
+  simulate ({ commit, dispatch, getters }, { data, force, breakAll }) {
     if (data) {
       const list = []
       data.forEach((subTab) => {
@@ -82,6 +89,7 @@ export const actions = {
         return item.id
       }))
       commit('SET_COMPLETED', [])
+      commit('SET_OPTIONS', { breakAll })
       commit('SET_FAILED', [])
       commit('SET_LOGS', [])
       commit('PUSH_LOG', 'Started debug')
@@ -94,7 +102,7 @@ export const actions = {
       commit('SET_CURRENT', current)
       const breaks = getters.breaks
       const hasBreak = breaks.includes(current)
-      if (hasBreak && !force) {
+      if ((hasBreak || breakAll) && !force) {
         // eslint-disable-next-line no-console
         commit('PUSH_LOG', `Waiting for resume at ${current}`)
       } else {
@@ -104,7 +112,7 @@ export const actions = {
         setTimeout(() => {
           const current = getters.current
           dispatch('setCompleted', current)
-          dispatch('simulate', {})
+          dispatch('simulate', { breakAll })
         }, getRandomNumber(500, 1500))
       }
     } else {

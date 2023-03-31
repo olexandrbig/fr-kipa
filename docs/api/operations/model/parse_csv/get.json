@@ -1,0 +1,83 @@
+{
+  "properties": [
+    {
+      "id": "0048c1c0-3075-4440-b8b8-57dcb8de2d6b",
+      "name": "name",
+      "type": "STRING",
+      "isOptional": false,
+      "description": "Name"
+    } ,
+    {
+      "id": "01e69b54-1c4b-4797-a087-e1ff46836c97",
+      "name": "description",
+      "type": "STRING",
+      "isOptional": true,
+      "description": "Description"
+    },
+    {
+      "id": "05c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "separator",
+      "type": "STRING",
+      "isOptional": true,
+      "defaultValue": ",",
+      "description": "Separator"
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "hasHeader",
+      "type": "BOOLEAN",
+      "description": "Has header",
+      "isOptional": true
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "skipHeader",
+      "type": "BOOLEAN",
+      "description": "Skip header",
+      "isOptional": true
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "ignoreHeaderCase",
+      "type": "BOOLEAN",
+      "description": "Ignore header case",
+      "isOptional": true
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "hasQuote",
+      "type": "BOOLEAN",
+      "description": "Has Quote",
+      "isOptional": true
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "quoteChar",
+      "type": "STRING",
+      "description": "Quote Char",
+      "defaultValue": "\"",
+      "isOptional": true
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "ignoreEmptyLines",
+      "type": "BOOLEAN",
+      "description": "Ignore empty lines",
+      "isOptional": true
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "ignoreSurroundingSpaces",
+      "type": "BOOLEAN",
+      "description": "Ignore surrounding spaces",
+      "isOptional": true
+    },
+    {
+      "id": "06c40e59-cefb-4d30-8cf7-c09aca77f720",
+      "name": "trimValues",
+      "type": "BOOLEAN",
+      "description": "Trim values",
+      "isOptional": true
+    }
+  ]
+}

@@ -5,11 +5,16 @@
         <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
           Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
         </button>
-        <button v-if="!debugPending.length" class="btn btn-default pull-right m-r-3" type="button" @click="debug({data: activeOperations})">
-          <span>Debug</span>
-        </button>
-        <button v-else class="btn btn-default pull-right m-r-3" type="button" @click="debug({force: true})">
-          <span>Resume/Restart</span>
+        <div v-if="!debugPending.length">
+          <button class="btn btn-default pull-right m-r-3" type="button" @click="debug({data: activeOperations})">
+            <span>Debug-run</span>
+          </button>
+          <button class="btn btn-default pull-right m-r-3" type="button" @click="debug({data: activeOperations, breakAll: true})">
+            <span>Debug-step</span>
+          </button>
+        </div>
+        <button v-else class="btn btn-default pull-right m-r-3" type="button" @click="debug({...debugOptions, force: true})">
+          <span>Resume</span>
         </button>
         <h2 class="nav-title">
           <fa :icon="['fas', 'pen-nib']" /> Designer
@@ -63,7 +68,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      debugPending: 'debug/pending'
+      debugPending: 'debug/pending',
+      debugOptions: 'debug/options'
     }),
     activeModuleCode () {
       return this.$store.state.activeModule
