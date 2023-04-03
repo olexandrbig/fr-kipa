@@ -62,6 +62,15 @@
           {{ enumValue }}
         </option>
       </select>
+      <vue-tags-input
+        v-if="property.type === 'LIST_STRING'"
+        v-model="formData[property.name]"
+        :tag="tag"
+        :tags="tags"
+        :placeholder="'Add value'"
+        class="form-control form-control-native"
+        @tags-changed="updateStore({ entryId:entry, value:formData }); tag = ''"
+      />
     </div>
   </div>
 </template>
@@ -89,6 +98,8 @@ export default {
   data: () => ({
     currentTab: '',
     formData: {},
+    tag: '',
+    tags: [],
     cmOptions: {
       mode: 'text/x-groovy',
       tabSize: 4,

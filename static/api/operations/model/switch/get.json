@@ -6,13 +6,41 @@
       "type": "STRING",
       "isOptional": false,
       "description": "Name"
-    } ,
+    },
     {
       "id": "9ce69b54-1c4b-4797-a087-e1ff46836c97",
       "name": "description",
       "type": "STRING",
       "isOptional": true,
       "description": "Description"
+    },
+    {
+      "id": "9ce69b54-1c4b-4797-a087-e1ff46836c07",
+      "name": "variable",
+      "type": "STRING",
+      "isOptional": true,
+      "description": "Variable"
+    },
+    {
+      "id": "9ce69b54-1c4b-4797-a087-e1ff46836c17",
+      "name": "evaluateValues",
+      "type": "BOOLEAN",
+      "isOptional": true,
+      "description": "Evaluate values"
+    },
+    {
+      "id": "9ce69b54-1c4b-4797-a087-e1ff46836c27",
+      "name": "supportElseCase",
+      "type": "BOOLEAN",
+      "isOptional": true,
+      "description": "Support else case"
+    },
+    {
+      "id": "9ce69b54-1c4b-4797-a087-e1ff46836c37",
+      "name": "values",
+      "type": "LIST_STRING",
+      "isOptional": true,
+      "description": "Values"
     }
   ]
 }

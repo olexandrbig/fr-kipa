@@ -48,7 +48,8 @@ export default {
     { src: '~/plugins/vue-chart', mode: 'client' },
     { src: '~/plugins/vue-shortkey', mode: 'client' },
     { src: '~/plugins/vuedraggable' },
-    { src: '~/plugins/codemirror', mode: 'client' }
+    { src: '~/plugins/codemirror', mode: 'client' },
+    { src: '~/plugins/vue-tags-input', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
