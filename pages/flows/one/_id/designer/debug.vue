@@ -16,6 +16,12 @@
           <td>{{ failed.length }}</td>
         </tr>
       </table>
+      <button v-if="pending.length" class="btn btn-default m-t-10 m-b-10" type="button" @click="debug({...options, force: true})">
+        <span>Resume</span>
+      </button>
+      <button v-else class="btn btn-primary m-t-10 m-b-10 disabled" type="button" disabled="disabled">
+        <span>Resume</span>
+      </button>
       <div class="console">
         <p v-for="log in logs" :key="log">
           > {{ log }}
@@ -26,7 +32,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   scrollToTop: true,
@@ -45,10 +51,16 @@ export default {
       pending: 'debug/pending',
       completed: 'debug/completed',
       logs: 'debug/logs',
-      failed: 'debug/failed'
+      failed: 'debug/failed',
+      options: 'debug/options'
     })
   },
-  watchQuery: ['id']
+  watchQuery: ['id'],
+  methods: {
+    ...mapActions({
+      debug: 'debug/simulate'
+    })
+  }
 }
 </script>
 <style>
