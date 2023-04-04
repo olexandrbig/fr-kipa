@@ -62,15 +62,28 @@
           {{ enumValue }}
         </option>
       </select>
-      <vue-tags-input
-        v-if="property.type === 'LIST_STRING'"
-        v-model="formData[property.name]"
-        :tag="tag"
-        :tags="tags"
-        :placeholder="'Add value'"
-        class="form-control form-control-native"
-        @tags-changed="updateStore({ entryId:entry, value:formData }); tag = ''"
-      />
+      <div v-if="property.type === 'LIST_STRING'">
+        <div v-if="formData[property.name] && formData[property.name].length">
+          <div v-for="(item, index) in formData[property.name]" :key="item" class="input-group m-b-10">
+            <input
+              v-model="formData[property.name][index]"
+              class="form-control"
+              :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
+              :required="!property.isOptional"
+              type="text"
+              @change="updateStore({ entryId:entry, value:formData })"
+            >
+            <button class="btn btn-primary">
+              <fa :icon="['fas', 'xmark']" /> Remove
+            </button>
+          </div>
+          <div>
+            <button class="btn btn-block btn-primary" @click="formData[property.name].push('')">
+              <fa :icon="['fas', 'plus']" /> Add
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -128,6 +141,9 @@ export default {
     initDefault (property) {
       if (property && this.formData && !this.formData[property.name]) {
         this.formData[property.name] = this.formData && this.formData[property.name] ? this.formData[property.name] : property.defaultValue
+        if (property.type === 'LIST_STRING' && !this.formData[property.name][0]) {
+          this.formData[property.name][0] = ''
+        }
       }
     },
     fieldsMapped () {
@@ -147,3 +163,13 @@ export default {
   }
 }
 </script>
+<style>
+.input-group {
+  display: flex;
+  align-content: stretch;
+}
+
+.input-group > input {
+  flex: 1 0;
+}
+</style>

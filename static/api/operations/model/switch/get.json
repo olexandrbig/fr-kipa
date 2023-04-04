@@ -40,7 +40,8 @@
       "name": "values",
       "type": "LIST_STRING",
       "isOptional": true,
-      "description": "Values"
+      "description": "Values",
+      "defaultValue": []
     }
   ]
 }
