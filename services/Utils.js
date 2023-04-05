@@ -64,7 +64,9 @@ export function categoryToIcon (category) {
   }
 }
 export function getObjectCopy (obj) {
-  if (obj && typeof (obj) === 'object') {
+  if (obj && Array.isArray(obj)) {
+    return [...obj]
+  } else if (obj && typeof (obj) === 'object') {
     const copy = {}
     for (const p in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, p)) {

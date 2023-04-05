@@ -63,25 +63,25 @@
         </option>
       </select>
       <div v-if="property.type === 'LIST_STRING'">
-        <div v-if="formData[property.name] && formData[property.name].length">
-          <div v-for="(item, index) in formData[property.name]" :key="item" class="input-group m-b-10">
+        <div v-if="tags && tags.length">
+          <div v-for="(item, index) in tags" :key="item" class="input-group m-b-10">
             <input
-              v-model="formData[property.name][index]"
+              v-model="tags[index]"
               class="form-control"
               :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
               :required="!property.isOptional"
               type="text"
-              @change="updateStore({ entryId:entry, value:formData })"
+              @change="updateTags(property.name)"
             >
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" type="button" @click="removeItem(index)">
               <fa :icon="['fas', 'xmark']" /> Remove
             </button>
           </div>
-          <div>
-            <button class="btn btn-block btn-primary" @click="formData[property.name].push('')">
-              <fa :icon="['fas', 'plus']" /> Add
-            </button>
-          </div>
+        </div>
+        <div>
+          <button class="btn btn-block btn-primary" type="button" @click="addItem()">
+            <fa :icon="['fas', 'plus']" /> Add
+          </button>
         </div>
       </div>
     </div>
@@ -138,11 +138,21 @@ export default {
     ...mapActions({
       updateStore: 'updateStore'
     }),
+    addItem () {
+      this.tags.push('')
+    },
+    removeItem (index) {
+      this.tags.splice(index, 1)
+    },
+    updateTags (name) {
+      this.formData[name] = this.tags
+      this.updateStore({ entryId: this.entry, value: this.formData })
+    },
     initDefault (property) {
       if (property && this.formData && !this.formData[property.name]) {
         this.formData[property.name] = this.formData && this.formData[property.name] ? this.formData[property.name] : property.defaultValue
-        if (property.type === 'LIST_STRING' && !this.formData[property.name][0]) {
-          this.formData[property.name][0] = ''
+        if (property.type === 'LIST_STRING') {
+          this.tags = Utils.getObjectCopy(this.formData[property.name])
         }
       }
     },
