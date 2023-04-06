@@ -57,7 +57,7 @@
           <span class="operation-next">
             <fa :icon="['fas', 'arrow-down-long']" />
             <span class="operation-next-add">
-              <button type="button" class="add-action" @click="showNav({flowId, after:index+1, inside: parent})">
+              <button type="button" class="add-action" @click="showNav({flowId, after:index+1, inside: parent, type:'ADD_TRIGGER'})">
                 <fa :icon="['fas', 'plus']" class="add-action-icon" />
               </button>
             </span>
@@ -68,7 +68,7 @@
             </div>
             <ul class="operation-features text-center m-t-20">
               <li>
-                <button type="button" class="add-action" @click="showNav({flowId, inside: operation.id})">
+                <button type="button" class="add-action" @click="showNav({flowId, inside: operation.id, type:'ADD_TRIGGER'})">
                   <fa :icon="['fas', 'plus']" class="add-action-icon" />
                 </button>
               </li>
