@@ -8,7 +8,7 @@
         Data available inside pipeline
       </p>
       <ul v-if="pipelineData && pipelineData.length" class="available-operations">
-        <tree-view :data="pipelineData" :options="{maxDepth: 3}"></tree-view>
+        <tree-view :data="pipelineData" :options="{maxDepth: 3}" />
       </ul>
       <div v-else>
         <fa :icon="['fas','circle-info']" /> No result found available in pipeline

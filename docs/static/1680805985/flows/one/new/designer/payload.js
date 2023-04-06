@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/flows/one/new/designer", {data:[{}],fetch:{},mutations:[]});
