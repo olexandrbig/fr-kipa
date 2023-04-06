@@ -16,7 +16,14 @@
           <td>{{ failed.length }}</td>
         </tr>
       </table>
-      <button v-if="pending.length" class="btn btn-default m-t-10 m-b-10" type="button" @click="debug({...options, force: true})">
+      <button
+        v-if="pending.length"
+        v-shortkey.once="['enter']"
+        class="btn btn-default m-t-10 m-b-10"
+        type="button"
+        @shortkey="debug({...options, force: true})"
+        @click="debug({...options, force: true})"
+      >
         <span>Resume</span>
       </button>
       <button v-else class="btn btn-primary m-t-10 m-b-10 disabled" type="button" disabled="disabled">

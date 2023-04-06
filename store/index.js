@@ -55,8 +55,9 @@ export const state = () => ({
   activeView: 'm1:PRODUCT:VERSIONS',
   operationsModel: {},
   operationCache: {},
-  navVisible: true,
-  navParams: {}
+  navVisible: '',
+  navParams: {},
+  pipelineData: []
 })
 
 export const getters = {
@@ -68,6 +69,12 @@ export const getters = {
   },
   availableOperations (state) {
     return state.availableOperations
+  },
+  appOperations (state) {
+    return state.appOperations
+  },
+  pipelineData (state) {
+    return state.pipelineData
   },
   operationsModel (state) {
     return state.operationsModel ? state.operationsModel : { properties: [] }
@@ -284,7 +291,11 @@ export const actions = {
     commit('SET_NAV_PARAMS', {})
   },
   showNav ({ commit }, data) {
-    commit('SET_NAV_VISIBLE', true)
+    let newValue
+    if (data && data.type) {
+      newValue = data.type
+    }
+    commit('SET_NAV_VISIBLE', newValue)
     commit('SET_NAV_PARAMS', data)
   },
   toggleBreakpoint ({ commit }, data) {

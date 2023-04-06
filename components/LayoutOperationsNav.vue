@@ -5,6 +5,9 @@
         <button class="btn btn-primary pull-right" type="button" @click="addOrUpdateFLow()">
           Save to <span v-if="currentFlow && currentFlow.properties && currentFlow.properties.name">{{ currentFlow.properties.name }}</span><span v-else>flow</span>
         </button>
+        <button class="btn btn-primary pull-right m-r-3" type="button" @click="showNav({type:'VIEW_DATA'})">
+          View data
+        </button>
         <div v-if="!debugPending.length">
           <button class="btn btn-default pull-right m-r-3" type="button" @click="debug({data: activeOperations})">
             <span>Debug-run</span>
@@ -28,15 +31,18 @@
         </ul>
         <ul class="operation-features text-center">
           <li>
-            <button v-shortkey.once="['tab']" type="button" class="add-action" @shortkey="showNav({flowId})" @click="showNav({flowId})">
+            <button v-shortkey.once="['tab']" type="button" class="add-action" @shortkey="showNav({flowId, type:'ADD_TRIGGER'})" @click="showNav({flowId, type:'ADD_TRIGGER'})">
               <fa :icon="['fas', 'plus']" class="add-action-icon" />
             </button>
           </li>
         </ul>
       </div>
     </aside>
-    <LayoutSideNav>
+    <LayoutSideNav type="ADD_TRIGGER">
       <AddTrigger />
+    </LayoutSideNav>
+    <LayoutSideNav type="VIEW_DATA">
+      <ViewData />
     </LayoutSideNav>
   </div>
 </template>
@@ -47,13 +53,15 @@ import { Utils } from '@/services/Utils'
 import NestedDraggable from '~/components/NestedDraggable.vue'
 import LayoutSideNav from '~/components/LayoutSideNav.vue'
 import AddTrigger from '~/components/AddTrigger.vue'
+import ViewData from '~/components/ViewData.vue'
 
 export default {
   name: 'LayoutOperationsNav',
   components: {
     NestedDraggable,
     LayoutSideNav,
-    AddTrigger
+    AddTrigger,
+    ViewData
   },
   data () {
     return {

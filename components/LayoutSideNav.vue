@@ -14,6 +14,12 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'LayoutSiteNav',
+  props: {
+    type: {
+      type: String,
+      default: null
+    }
+  },
   data () {
     return {
       navClass: ''
@@ -21,7 +27,7 @@ export default {
   },
   computed: {
     navVisible () {
-      return this.$store.state.navVisible
+      return this.$store.state.navVisible === this.type
     }
   },
   methods: {

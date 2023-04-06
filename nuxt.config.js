@@ -49,7 +49,8 @@ export default {
     { src: '~/plugins/vue-shortkey', mode: 'client' },
     { src: '~/plugins/vuedraggable' },
     { src: '~/plugins/codemirror', mode: 'client' },
-    { src: '~/plugins/vue-tags-input', mode: 'client' }
+    { src: '~/plugins/vue-tags-input', mode: 'client' },
+    { src: '~/plugins/vue-json-tree-view', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -69,7 +70,7 @@ export default {
           'faTasks', 'faBalanceScale', 'faBoxesStacked', 'faThLarge', 'faPencilRuler', 'faFlag', 'faWind', 'faDirections',
           'faFolderTree', 'faSliders', 'faAtom', 'faRotateLeft', 'faCircleInfo', 'faTag', 'faTags', 'faEllipsisVertical',
           'faArrowDownLong', 'faSitemap', 'faPenNib', 'faRepeat', 'faKey', 'faServer', 'faGlobe', 'faTriangleExclamation',
-          'faShuffle', 'faCalendarDays']
+          'faShuffle', 'faCalendarDays', 'faFolder']
       },
       {
         set: '@fortawesome/free-brands-svg-icons',
