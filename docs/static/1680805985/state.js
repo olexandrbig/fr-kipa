@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a,b){return {staticAssetsBase:"https:\u002F\u002Folexandrbig.github.io\u002Ffr-kipa\u002Fstatic\u002F1680805985",layout:"default",error:a,state:a,serverRendered:false,routePath:b,config:{_app:{basePath:"\u002Ffr-kipa\u002F",assetsPath:b,cdnURL:"https:\u002F\u002Folexandrbig.github.io\u002Ffr-kipa\u002F"},content:{dbHash:"83d9b4e1"}}}}(null,"\u002F"));

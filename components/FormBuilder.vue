@@ -74,7 +74,7 @@
               @change="updateTags(property.name)"
             >
             <button class="btn btn-primary" type="button" @click="removeItem(index)">
-              <fa :icon="['fas', 'xmark']" /> Remove
+              <fa :icon="['fas', 'xmark']" />
             </button>
           </div>
         </div>
