@@ -62,6 +62,28 @@
           {{ enumValue }}
         </option>
       </select>
+      <div v-if="property.type === 'LIST_STRING'">
+        <div v-if="tags && tags.length">
+          <div v-for="(item, index) in tags" :key="item" class="input-group m-b-10">
+            <input
+              v-model="tags[index]"
+              class="form-control"
+              :placeholder="`${property.description}${(!property.isOptional?' *':'')}`"
+              :required="!property.isOptional"
+              type="text"
+              @change="updateTags(property.name)"
+            >
+            <button class="btn btn-primary" type="button" @click="removeItem(index)">
+              <fa :icon="['fas', 'xmark']" /> Remove
+            </button>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-block btn-primary" type="button" @click="addItem()">
+            <fa :icon="['fas', 'plus']" /> Add
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -89,6 +111,8 @@ export default {
   data: () => ({
     currentTab: '',
     formData: {},
+    tag: '',
+    tags: [],
     cmOptions: {
       mode: 'text/x-groovy',
       tabSize: 4,
@@ -114,9 +138,22 @@ export default {
     ...mapActions({
       updateStore: 'updateStore'
     }),
+    addItem () {
+      this.tags.push('')
+    },
+    removeItem (index) {
+      this.tags.splice(index, 1)
+    },
+    updateTags (name) {
+      this.formData[name] = this.tags
+      this.updateStore({ entryId: this.entry, value: this.formData })
+    },
     initDefault (property) {
       if (property && this.formData && !this.formData[property.name]) {
         this.formData[property.name] = this.formData && this.formData[property.name] ? this.formData[property.name] : property.defaultValue
+        if (property.type === 'LIST_STRING') {
+          this.tags = Utils.getObjectCopy(this.formData[property.name])
+        }
       }
     },
     fieldsMapped () {
@@ -136,3 +173,13 @@ export default {
   }
 }
 </script>
+<style>
+.input-group {
+  display: flex;
+  align-content: stretch;
+}
+
+.input-group > input {
+  flex: 1 0;
+}
+</style>

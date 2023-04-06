@@ -60,6 +60,10 @@ html {
 .btn:hover {
   opacity: 0.9;
 }
+.btn-block{
+  display: block;
+  width: 100%;
+}
 .btn.btn-default {
   color: #fff;
   text-decoration: none;
