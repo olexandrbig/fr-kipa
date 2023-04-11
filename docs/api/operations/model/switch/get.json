@@ -17,7 +17,7 @@
     {
       "id": "9ce69b54-1c4b-4797-a087-e1ff46836c07",
       "name": "variable",
-      "type": "STRING",
+      "type": "PIPELINE_PATH_STRING",
       "isOptional": true,
       "description": "Variable"
     },

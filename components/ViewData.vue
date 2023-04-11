@@ -8,7 +8,7 @@
         Data available inside pipeline
       </p>
       <ul v-if="pipelineData && pipelineData.length" class="available-operations">
-        <tree-view :data="pipelineData" :options="{maxDepth: 3}" />
+        <json-view :data="pipelineData" :max-depth="3" @selected="pickItem" />
       </ul>
       <div v-else>
         <fa :icon="['fas','circle-info']" /> No result found available in pipeline
@@ -31,8 +31,12 @@ export default {
   },
   methods: {
     ...mapActions({
-      addOperation: 'addOperation'
-    })
+      addOperation: 'addOperation',
+      selectInPipiline: 'selectInPipiline'
+    }),
+    pickItem (data) {
+      this.selectInPipiline(data.path)
+    }
   }
 }
 </script>

@@ -84,6 +84,13 @@
           </button>
         </div>
       </div>
+      <client-only v-if="property.type === 'PIPELINE_PATH_STRING'">
+        <PipelineSelector
+          :value.sync="formData[property.name]"
+          :form-data="formData"
+          :entry-id="entry"
+        />
+      </client-only>
     </div>
   </div>
 </template>
@@ -91,9 +98,13 @@
 <script>
 import { mapActions } from 'vuex'
 import { Utils } from '@/services/Utils'
+import PipelineSelector from '~/components/PipelineSelector.vue'
 
 export default {
   name: 'FormBuilder',
+  components: {
+    PipelineSelector
+  },
   props: {
     fields: {
       type: Array,
