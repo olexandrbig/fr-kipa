@@ -57,7 +57,8 @@ export const state = () => ({
   operationCache: {},
   navVisible: '',
   navParams: {},
-  pipelineData: []
+  pipelineData: [],
+  selectedPipelineData: ''
 })
 
 export const getters = {
@@ -66,6 +67,9 @@ export const getters = {
   },
   navParams (state) {
     return state.navParams
+  },
+  selectedPipelineData (state) {
+    return state.selectedPipelineData
   },
   availableOperations (state) {
     return state.availableOperations
@@ -189,6 +193,9 @@ export const mutations = {
     } else {
       state.activeBreakpoints.push(data)
     }
+  },
+  SET_SELECTED_PIPELINE (state, data) {
+    state.selectedPipelineData = data
   }
 }
 
@@ -304,6 +311,9 @@ export const actions = {
   isActiveBreakpoint ({ commit, state }, data) {
     const current = state.activeBreakpoints
     return current.includes(data)
+  },
+  selectInPipiline ({ commit, state }, data) {
+    commit('SET_SELECTED_PIPELINE', data)
   }
 }
 

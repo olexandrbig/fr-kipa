@@ -50,7 +50,7 @@ export default {
     { src: '~/plugins/vuedraggable' },
     { src: '~/plugins/codemirror', mode: 'client' },
     { src: '~/plugins/vue-tags-input', mode: 'client' },
-    { src: '~/plugins/vue-json-tree-view', mode: 'client' }
+    { src: '~/plugins/vue-json-component', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
