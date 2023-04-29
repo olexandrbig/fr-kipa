@@ -284,14 +284,15 @@ export const actions = {
   },
   reorderAppOperations ({ commit, state }, { value, parent }) {
     if (parent !== 'root' && state.appOperations) {
-      state.appOperations = state.appOperations.map((tab) => {
-        treeWalk(tab, value, parent)
-        return tab
+      const list = JSON.parse(JSON.stringify(state.appOperations)).map((tab, index) => {
+        const item = tab
+        treeWalk(item, value, parent)
+        return item
       })
+      commit('SET_ACTIVE_OPERATIONS', list)
     } else if (parent === 'root' && state.appOperations) {
-      state.appOperations = value
+      commit('SET_ACTIVE_OPERATIONS', JSON.parse(JSON.stringify(value)))
     }
-    // this.$toast.success('Operations re-ordered')
   },
   closeNav ({ commit }) {
     commit('SET_NAV_VISIBLE', false)
@@ -314,6 +315,18 @@ export const actions = {
   },
   selectInPipiline ({ commit, state }, data) {
     commit('SET_SELECTED_PIPELINE', data)
+  },
+  dropOperations ({ commit, state }, { value, parent }) {
+    if (parent !== 'root' && state.appOperations) {
+      const list = JSON.parse(JSON.stringify(state.appOperations)).map((tab, index) => {
+        const item = tab
+        treeWalk(item, value, parent)
+        return item
+      })
+      commit('SET_ACTIVE_OPERATIONS', list)
+    } else if (parent === 'root' && state.appOperations) {
+      commit('SET_ACTIVE_OPERATIONS', JSON.parse(JSON.stringify(value)))
+    }
   }
 }
 

@@ -99,7 +99,7 @@ export default {
     },
     activeOperations: {
       get () {
-        return this.$store.state.appOperations
+        return JSON.parse(JSON.stringify(this.$store.state.appOperations))
       }
     }
   },

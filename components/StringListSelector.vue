@@ -40,11 +40,17 @@ export default {
     },
     formData: {
       type: Object,
-      required: false
+      required: false,
+      default: () => {
+        return {}
+      }
     },
     property: {
       type: Object,
-      required: false
+      required: false,
+      default: () => {
+        return {}
+      }
     }
   },
   data () {
