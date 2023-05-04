@@ -6239,7 +6239,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.15.0, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5:
+lodash@^4.15.0, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.3, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -10270,14 +10270,6 @@ vue-json-component@^0.4.1:
   resolved "https://registry.yarnpkg.com/vue-json-component/-/vue-json-component-0.4.1.tgz#a21d4ddaeec6358c614a96d8f3fac6716666d92b"
   integrity sha512-8Tw4C5LJOT09BRKjQx8F5itheP7UIeZtUUJvWnSltb0UFQZSrXw/4B32z3pelWo38MtoglaSmFTYpyxFIWWNRg==
 
-vue-json-tree-view@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/vue-json-tree-view/-/vue-json-tree-view-2.1.6.tgz#a153ac1b18432b8671c65930f545ce134e38cf2d"
-  integrity sha512-gs7VDd1dC5SFQmyMdIq3O0w2IsITZfzyNFe6lsTeQwhFkh0nwWxhKWrS6opNmdOYFYmy52D9DVto78v8mF7IXQ==
-  dependencies:
-    lodash "^4.17.4"
-    vue "^2.5.16"
-
 vue-loader@^15.9.7:
   version "15.9.8"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.9.8.tgz#4b0f602afaf66a996be1e534fb9609dc4ab10e61"
@@ -10361,7 +10353,7 @@ vue-underscore@^0.1.4:
   dependencies:
     underscore "^1.8.3"
 
-vue@^2.5.16, vue@^2.6.10:
+vue@^2.6.10:
   version "2.7.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.7.14.tgz#3743dcd248fd3a34d421ae456b864a0246bafb17"
   integrity sha512-b2qkFyOM0kwqWFuQmgd4o+uHGU7T+2z3T+WQp8UBjADfEv2n4FEMffzBmCKNP0IGzOEEfYjvtcC62xaSKeQDrQ==
