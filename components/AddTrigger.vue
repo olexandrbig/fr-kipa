@@ -27,7 +27,7 @@
             v-for="operation in availableOperations"
             :key="operation.id"
             class="available-operation pointer"
-            @click="addOperation({operation, after: navParams.after, inside: navParams.inside})"
+            @click="addOperation({operation, after: navParams.after, inside: navParams.inside, switchCase: navParams.switchCase})"
           >
             <div class="operation-item">
               <div class="operation-title">

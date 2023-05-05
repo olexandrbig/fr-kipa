@@ -1,12 +1,12 @@
 <template>
   <draggable
-    :value="internalVal"
+    :value="value"
     v-bind="dragOptions"
     ghost-class="moving-card"
     @input="emitter"
   >
     <li
-      v-for="(operation, index) in internalVal"
+      v-for="(operation, index) in value"
       :key="operation.id"
       :class="isActiveViewClass(operation.id)"
       class="operation-feature"
@@ -57,22 +57,56 @@
           <span class="operation-next">
             <fa :icon="['fas', 'arrow-down-long']" />
             <span class="operation-next-add">
-              <button type="button" class="add-action" @click="showNav({flowId, after:index+1, inside: parent, type:'ADD_TRIGGER'})">
+              <button
+                type="button"
+                class="add-action"
+                @click="showNav({flowId, after:index+1, inside: parent, type:'ADD_TRIGGER'})"
+              >
                 <fa :icon="['fas', 'plus']" class="add-action-icon" />
               </button>
             </span>
           </span>
-          <div v-if="operation.key === 'loop' || operation.key === 'switch' || operation.key === 'exceptionhandler'">
+          <div v-if="operation.key === 'loop' || operation.key === 'exceptionhandler'">
             <div class="sub-operations m-t-10">
               <NestedDraggable v-model="operation.operations" :parent="operation.id" :parenti="index" />
             </div>
             <ul class="operation-features text-center m-t-20">
               <li>
-                <button type="button" class="add-action" @click="showNav({flowId, inside: operation.id, type:'ADD_TRIGGER'})">
+                <button
+                  type="button"
+                  class="add-action"
+                  @click="showNav({flowId, inside: operation.id, type:'ADD_TRIGGER'})"
+                >
                   <fa :icon="['fas', 'plus']" class="add-action-icon" />
                 </button>
               </li>
             </ul>
+          </div>
+          <div v-if="operation.key === 'switch'">
+            <div v-for="(switchCase, index) in operation.properties.values" :key="switchCase">
+              <div class="operation-item m-t-10 pointer">
+                <div class="operation-title relative">
+                  <span class="feature-icon"><fa :icon="['fas', categoryToIcon(operation.category)]" /></span>
+                  <span class="text-ellipsis">{{ switchCase }}</span>
+                </div>
+                <div>
+                  <div class="sub-operations m-t-10">
+                    <NestedDraggable v-model="operation.cases[switchCase]" :parent="operation.id" :parenti="index" />
+                  </div>
+                  <ul class="operation-features text-center m-t-20">
+                    <li>
+                      <button
+                        type="button"
+                        class="add-action"
+                        @click="showNav({flowId, inside: operation.id, switchCase, type:'ADD_TRIGGER'})"
+                      >
+                        <fa :icon="['fas', 'plus']" class="add-action-icon" />
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </nuxt-link>
@@ -105,7 +139,6 @@ export default {
   },
   data () {
     return {
-      internalVal: null,
       activeMenus: [],
       dragOptions: {
         // animation: 300,
@@ -135,15 +168,6 @@ export default {
     },
     activeModuleCode () {
       return this.$store.state.activeModule
-    }
-  },
-  watch: {
-    value: {
-      handler (val) {
-        this.internalVal = val
-      },
-      deep: true,
-      immediate: true
     }
   },
   methods: {
@@ -201,7 +225,7 @@ export default {
   opacity: 0.5 !important;
 }
 
-.operation-breakpoint{
+.operation-breakpoint {
   position: absolute;
   left: -23px;
   top: 44px;
@@ -213,19 +237,22 @@ export default {
   cursor: pointer;
 }
 
-.operation-breakpoint.active-breakpoint{
+.operation-breakpoint.active-breakpoint {
   background: #cf4747;
   border-color: #000000;
 }
-.operation-breakpoint.current-breakpoint{
+
+.operation-breakpoint.current-breakpoint {
   background: #FEBA49;
   border-color: #FEBA49;
 }
-.operation-breakpoint.completed-breakpoint{
+
+.operation-breakpoint.completed-breakpoint {
   background: #2a94a2;
   border-color: #2a94a2;
 }
-.operation-breakpoint.failed-breakpoint{
+
+.operation-breakpoint.failed-breakpoint {
   background: #cf4747;
   border-color: #FEBA49;
 }
@@ -311,7 +338,7 @@ export default {
   display: inline-block;
 }
 
-.operation-feature.active > a >  .operation-item,
+.operation-feature.active > a > .operation-item,
 .operation-subfeature.active > .operation-item {
   background: #eeeeee;
   color: #1155cb !important;
