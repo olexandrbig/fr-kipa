@@ -114,7 +114,7 @@ export const mutations = {
   SET_AVAILABLE_OPERATIONS (state, list) {
     state.availableOperations = list || []
   },
-  ADD_ACTIVE_OPERATION (state, { operation, after, inside }) {
+  ADD_ACTIVE_OPERATION (state, { operation, after, inside, switchCase }) {
     const total = state.appOperations.length
     const item = Utils.getObjectCopy(operation)
     item.id = uuidv4()
@@ -126,8 +126,19 @@ export const mutations = {
         if (!target.operations) {
           target.operations = []
         }
-        const subTotal = target.operations.length
-        target.operations.splice((after || subTotal), 0, item)
+        if (!switchCase) {
+          const subTotal = target.operations.length
+          target.operations.splice((after || subTotal), 0, item)
+        } else {
+          if (switchCase && !target.cases) {
+            target.cases = {}
+          }
+          if (switchCase && (target.cases && !target.cases[switchCase])) {
+            target.cases[switchCase] = []
+          }
+          const subTotal = target.cases[switchCase].length
+          target.cases[switchCase].splice((after || subTotal), 0, item)
+        }
       } else {
         state.appOperations.splice((after || total), 0, item)
       }
@@ -200,8 +211,8 @@ export const mutations = {
 }
 
 export const actions = {
-  addOperation ({ commit, state }, { operation, after, inside }) {
-    commit('ADD_ACTIVE_OPERATION', { operation, after, inside })
+  addOperation ({ commit, state }, { operation, after, inside, switchCase }) {
+    commit('ADD_ACTIVE_OPERATION', { operation, after, inside, switchCase })
   },
   removeOperation ({ commit, state }, operationId) {
     commit('REMOVE_ACTIVE_OPERATION', operationId)
